@@ -1,0 +1,136 @@
+* performance
+
+Radio Mycelium workshop and opening performance:
+
+Seventeen participants will form an inter-species, human-mycelial
+radio performance network, activating the molecular Mycelium Network
+Society installation and instantiating an active mycelial/mushroom
+audio networked circuit.
+
+Within the mushroom molecule structure seventeen transmission devices
+are pre-installed which operate according to local mycelial conditions
+and transmit small-scale material change information across wide-band
+radio frequencies. These devices will interface with local humidity,
+temperature and radio signals within the growing mycelial bodies,
+sometimes creating rich signals, sometimes blocking or jamming signals
+within a very close space, parasitically riding on local space
+electromagnetic emissions.
+
+Prior to the performance, seventeen sound artists will take part in an
+open workshop building DIY radio receivers and sculptural antennae,
+testing the reception of signals and interfacing with open examples of
+the Lingzhi growing mushroom. Throughout the workshop a fungal
+dramaturgy will be developed for the opening performance, comprising
+acts which are dominated by certain received sets of signals.
+
+During the performance, the seventeen artists will work with spatially
+defined radio signals, and moving radio receivers within the
+constraints of an eight channel sound system which allows for precise
+localisation of sound signals. Artists will also play with their own
+approaches to handheld Lingzhi fungi which will serve as audio and
+full spectrum instruments. The performance is a collaboration between
+electronic sensibilities and the extra human realms of radio frequency
+and Lingzhi.
+
+* tech needs
+
+tech needs:
+
+For installation:
+
+Seventeen sensor/transmitter/jammers will be installed - one in each
+of the atoms forming the molecule. These devices (custom made
+electronics and circuit boards) will examine small-scale material
+changes within the mycelial atoms and transmit this information across
+wide-band radio frequencies, for later audio spatialisation as part of
+the installation. 
+
+8x FM radio receivers/receiver modules in the space 
+
+8x mid-range active monitors (Genelec 8040)
+
+PC and 12 channel soundcard (RME Hammerfall)
+
+Eight channel analogue audio mixer
+
+
+For performance:
+
+Opening performance will re-work the transmissions from the
+molecule/17 transmission devices within the space by 17 local sound
+artists.
+
+32 channel analogue audio mixer
+
+17x FM radio receivers
+
+PA - 2xsubs and 4x mid-range D&B or L.Acoustics with all cables
+
+* design notes
+
+- pcb thickness 1.2mm
+
+* TODO: 
+
+- test import svg in pcbnew: this works following: https://andrehessling.de/2016/09/13/getting-a-custom-board-outline-from-an-svg-file-into-kicad/
+
+: pstoedit -dt -f "dxf:-polyaslines -mm" myc_outline3.eps myc_outline3.dxf
+
+- how we connect power and signals between boards - sketch this out
+
+say power/gnd/3.3v/audio1/audio2/ so 5 lines across lower part of each module to be connected
+
+POWER/GND/audio-micro_in/micro audio out/.../pwm with jumper also
+
+... but for micro we also need to break out/across with CLK, SDO, SDI, CS = SPI
+
+and for humidity = ADC or I2C or SPI?
+
+5v connection in...
+
+- different signals: micro-output pwm, input sample/or straight eg. mems micro etc ...
+- what are the possible signals
+- changing transmission capacitance
+- connections to mycelium - also in base
+- any special footprints - for sensors
+- basic schematic
+
+* what sensors/other devices/electronics we will use?
+
+opamp from microcontroller...
+
+combine some of these and use jumpers or different ADC sample options
+
+1- for temperature we use breakout: MAX31865 - 8 pin break 5V - or with humidity
+
+2- MEMs mic: kicad footprints for INMP504 -3.3v/reflow, HLGA packagings
+ 
+3- humidity: moisture/resistance - in the air, 4-in the mushroom (resistance bridge/ADC)?
+
+5 humidity: SHT15-pricey, SI7021-DFN/cheap, HIH6130-soic/medium**ORDERED-6131, BME280-tricky/medium, - these ones also do temp/what accuracy?  HIH4030-5v/easy/medium/ADC 
+
+6- RF retransmission = antenna into micro-sampled ADC/ antenna amp as in detektor
+
+7- theremin like oscillator: http://www.instructables.com/id/Make-Your-Own-Simple-Theremin/ 4093/op-amp
+
+http://interface.khm.de/index.php/lab/interfaces-advanced/theremin-as-a-capacitive-sensing-device/
+
+8- light/spectrometer (light source/detector) - offboard for insertion into mushroom - photodiode(voltage?) and white LED?
+
+as well as basic disruptors//timed signal disrupters/FET - modulated by mushroom itself
+
+live coding of signals as code
+
+* transmitter
+
+- breakout for changing capacitance
+- audio in
+- wire wound coil!
+
+2n2222A -SMD**ORDERED // BC546B // BC547
+
+* generic micro/sd board
+
+sd card holder footprint/order - which one we used as pcb footprint - check!
+
+WURTH 693072010801 
