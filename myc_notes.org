@@ -1,3 +1,120 @@
+* new notes/log
+** 1/7- 2/7
+
+- sdr tuning doesn't seem to match or pick up radio transmission // also how to tune across or do interesting stuff with this?
+
+- trimmer across coil works fine...
+
+- use HIH 4030 for humidity rather than DHT 22 (temp and humidity there but seems quite static)
+
+https://learn.sparkfun.com/tutorials/hih-4030-humidity-sensor-hookup-guide?_ga=2.135316018.2085594342.1530547889-891593741.1493728855
+
+- 4093 theremin for HF maybe/stripped down for FM section
+
+TODO: 
+
+HIH6131-021-001 Honeywell Board Mount Humidity Sensors (mouser) to test
+
+MAX2606 transmitter tests, but we need inductor
+
+74xx/4093 transmission sections also
+
+* receivers// with arduino/pi
+
+- GRV I2C FM :: Arduino - Grove I2C FM Receiver - reichelt
+
+based on RDA5807M. 
+
+arduino: http://wiki.seeedstudio.com/Grove-I2C_FM_Receiver/
+
+RDA5807xx chip is a clone of the TEA5767
+
+https://www.element14.com/community/blogs/sasg/2014/01/19/controlling-the-rda5807sp-fm-radio-receiver-with-the-raspberry-pi
+
+http://www.raspberry-pi-geek.com/Archive/2016/16/Remote-controlled-Arduino-FM-radio
+
+- SI4825-A10-CS Silicon Labs RF Receiver - mouser 
+
+see https://www.mouser.de/datasheet/2/368/Si4825-A10-276730.pdf and used in KOMA:
+
+https://koma-elektronik.com/new/wp-content/uploads/2017/07/KOMA-Elektronik-FieldKit-PR1-Schematics.pdf
+
+but question of i2c also
+
+* design notes
+
+- pcb thickness 1.2mm
+
+* TODO: 
+
+- test import svg in pcbnew: this works following: https://andrehessling.de/2016/09/13/getting-a-custom-board-outline-from-an-svg-file-into-kicad/
+
+: pstoedit -dt -f "dxf:-polyaslines -mm" myc_outline3.eps myc_outline3.dxf
+
+- how we connect power and signals between boards - sketch this out
+
+say power/gnd/3.3v/audio1/audio2/ so 5 lines across lower part of each module to be connected
+
+POWER/GND/audio-micro_in/micro audio out/.../pwm with jumper also
+
+... but for micro we also need to break out/across with CLK, SDO, SDI, CS = SPI
+
+and for humidity = ADC or I2C or SPI? ADC
+
+5v connection in...
+
+- different signals: micro-output pwm, input sample/or straight eg. mems micro etc ...
+- what are the possible signals
+- changing transmission capacitance
+- connections to mycelium - also in base
+- any special footprints - for sensors
+- basic schematic
+
+* what sensors/other devices/electronics we will use?
+
+opamp from microcontroller...
+
+combine some of these and use jumpers or different ADC sample options
+
+1- for temperature we use breakout: MAX31865 - 8 pin break 5V 
+
+2- MEMs mic: kicad footprints for INMP504 -3.3v/reflow, HLGA packagings
+ 
+NMP504ACEZ-R7 TDK MEMS Microphones - mouser
+
+3- humidity: moisture/resistance - in the air, 4-in the mushroom (resistance bridge/ADC)?
+
+5 humidity: SHT15-pricey, SI7021-DFN/cheap,
+HIH6130-soic/medium**ORDERED-6131, BME280-tricky/medium, - these ones
+also do temp/what accuracy?  HIH4030-5v/easy/medium/ADC
+
+6- RF retransmission = antenna amp as in detektor -> ADC (so is not floating)
+
+7- theremin like oscillator: http://www.instructables.com/id/Make-Your-Own-Simple-Theremin/ 4093/op-amp
+
+http://interface.khm.de/index.php/lab/interfaces-advanced/theremin-as-a-capacitive-sensing-device/
+
+8- light/spectrometer (light source/detector) - offboard for insertion into mushroom - photodiode(voltage?) and white LED?
+
+as well as basic disruptors//timed signal disrupters/FET - modulated by mushroom itself
+
+live coding of signals as code
+
+* transmitter
+
+- breakout for changing capacitance
+- audio in
+- wire wound coil!
+- switch on and off with FET?
+
+2n2222A -SMD**ORDERED // BC546B // BC547
+
+* generic micro/sd board
+
+sd card holder footprint/order - which one we used as pcb footprint - check!
+
+WURTH 693072010801 
+
 * performance
 
 Radio Mycelium workshop and opening performance:
@@ -65,72 +182,3 @@ artists.
 17x FM radio receivers
 
 PA - 2xsubs and 4x mid-range D&B or L.Acoustics with all cables
-
-* design notes
-
-- pcb thickness 1.2mm
-
-* TODO: 
-
-- test import svg in pcbnew: this works following: https://andrehessling.de/2016/09/13/getting-a-custom-board-outline-from-an-svg-file-into-kicad/
-
-: pstoedit -dt -f "dxf:-polyaslines -mm" myc_outline3.eps myc_outline3.dxf
-
-- how we connect power and signals between boards - sketch this out
-
-say power/gnd/3.3v/audio1/audio2/ so 5 lines across lower part of each module to be connected
-
-POWER/GND/audio-micro_in/micro audio out/.../pwm with jumper also
-
-... but for micro we also need to break out/across with CLK, SDO, SDI, CS = SPI
-
-and for humidity = ADC or I2C or SPI?
-
-5v connection in...
-
-- different signals: micro-output pwm, input sample/or straight eg. mems micro etc ...
-- what are the possible signals
-- changing transmission capacitance
-- connections to mycelium - also in base
-- any special footprints - for sensors
-- basic schematic
-
-* what sensors/other devices/electronics we will use?
-
-opamp from microcontroller...
-
-combine some of these and use jumpers or different ADC sample options
-
-1- for temperature we use breakout: MAX31865 - 8 pin break 5V - or with humidity
-
-2- MEMs mic: kicad footprints for INMP504 -3.3v/reflow, HLGA packagings
- 
-3- humidity: moisture/resistance - in the air, 4-in the mushroom (resistance bridge/ADC)?
-
-5 humidity: SHT15-pricey, SI7021-DFN/cheap, HIH6130-soic/medium**ORDERED-6131, BME280-tricky/medium, - these ones also do temp/what accuracy?  HIH4030-5v/easy/medium/ADC 
-
-6- RF retransmission = antenna into micro-sampled ADC/ antenna amp as in detektor
-
-7- theremin like oscillator: http://www.instructables.com/id/Make-Your-Own-Simple-Theremin/ 4093/op-amp
-
-http://interface.khm.de/index.php/lab/interfaces-advanced/theremin-as-a-capacitive-sensing-device/
-
-8- light/spectrometer (light source/detector) - offboard for insertion into mushroom - photodiode(voltage?) and white LED?
-
-as well as basic disruptors//timed signal disrupters/FET - modulated by mushroom itself
-
-live coding of signals as code
-
-* transmitter
-
-- breakout for changing capacitance
-- audio in
-- wire wound coil!
-
-2n2222A -SMD**ORDERED // BC546B // BC547
-
-* generic micro/sd board
-
-sd card holder footprint/order - which one we used as pcb footprint - check!
-
-WURTH 693072010801 

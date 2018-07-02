@@ -703,4 +703,23 @@ F 3 "" H 900 2300 50  0001 C CNN
 $EndComp
 Text Notes 7050 3350 0    60   ~ 0
 follower/buffer from out?
+$Comp
+L CTRIM C10
+U 1 1 5B3AA468
+P 2400 1450
+F 0 "C10" H 2516 1496 50  0000 L CNN
+F 1 "10pF-50pF" H 2516 1405 50  0000 L CNN
+F 2 "" H 2400 1450 50  0001 C CNN
+F 3 "" H 2400 1450 50  0001 C CNN
+	1    2400 1450
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2400 1800 2400 1600
+Connection ~ 2400 1800
+Wire Wire Line
+	2100 1450 2100 1300
+Wire Wire Line
+	2100 1300 2400 1300
+Connection ~ 2100 1450
 $EndSCHEMATC
