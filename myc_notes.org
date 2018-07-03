@@ -15,7 +15,7 @@ TODO:
 
 HIH6131-021-001 Honeywell Board Mount Humidity Sensors (mouser) to test
 
-MAX2606 transmitter tests, but we need inductor
+MAX2606 transmitter tests, but we need inductor SMD also? 390 nH? - can we tune with voltage (maybe leave 2606)!
 
 74xx/4093 transmission sections also
 
