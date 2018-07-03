@@ -1,4 +1,4 @@
-update=Mon 16 Apr 2018 13:44:34 CEST
+update=Tue 03 Jul 2018 23:07:19 CEST
 version=1
 last_client=kicad
 [pcbnew]
@@ -58,3 +58,4 @@ LibName26=opto
 LibName27=atmel
 LibName28=contrib
 LibName29=valves
+LibName30=Logic_CMOS_4000
