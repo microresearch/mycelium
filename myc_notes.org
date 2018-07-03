@@ -13,15 +13,17 @@ https://learn.sparkfun.com/tutorials/hih-4030-humidity-sensor-hookup-guide?_ga=2
 
 TODO: 
 
-HIH6131-021-001 Honeywell Board Mount Humidity Sensors (mouser) to test
+test levels into FM transmitter
 
-MAX2606 transmitter tests, but we need inductor SMD also? 390 nH? - can we tune with voltage (maybe leave 2606)!
+HIH6131-021-001 Honeywell Board Mount Humidity Sensors (mouser) to test - 3.3V!
+
++MAX2606 transmitter tests, but we need inductor SMD also? 390 nH? - can we tune with voltage (maybe leave 2606)!+
 
 74xx/4093 transmission sections also
 
 * receivers// with arduino/pi
 
-- GRV I2C FM :: Arduino - Grove I2C FM Receiver - reichelt
+** GRV I2C FM Arduino - Grove I2C FM Receiver - reichelt
 
 based on RDA5807M. 
 
