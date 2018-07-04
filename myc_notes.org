@@ -21,6 +21,64 @@ HIH6131-021-001 Honeywell Board Mount Humidity Sensors (mouser) to test - 3.3V!
 
 74xx/4093 transmission sections also
 
+** 4/7
+
+- add lowpass -68R->signal in ->
+
+                              |
+                            100N
+                              |
+                              VGND
+
+
+- wormedvoice pwm output as model (just make upload from makefile to flash to arduino there/at least in code)
+
+- 7404 transmission works: http://www.rf-kits.com/schematics/SimpleFmTransmitter.pdf
+
+- ADD optional pre-emphasis and de-emphasis??? passive
+
+https://ham.stackexchange.com/questions/9163/pre-emphasis-measurement
+
+http://www.techlib.com/area_50/Readers/Karen/radio.htm
+
+- i2c grove receiver:
+
+working with GROVE: library at: https://github.com/mathertel/Radio/
+
+can only tune across so fast and then is always tuning jump
+
+we use debugscan and lowest delay there is (300)
+
+see also https://github.com/lucsmall/Arduino-RDA5807M/blob/master/A20150415RDA5807FMTuner.ino
+
+- think about using AC/555 into mushroom and measure this using atmega instead of bridge?
+
+http://www.emesystems.com/OLDSITE/OL2mhos.htm
+
+and then count pulses - so on atmega input should be ??? also maybe raw 555 signal
+
+i don;t think we need pullup
+
+INT0 is PD2
+
+- discard MEMS
+
+- HIH6131 in: https://github.com/benwis/SparkFun-Kicad-Libraries - uses MOSI?SCK and not ADC
+
+ref also: https://hackaday.io/project/2117/logs?sort=oldest
+
+- P-MOSFET? smd - SOT23 or SOT223 ??? SI2309, NXP2301P (GSD) - we use this?
+
+- added xtal for 16MHZ?
+
+** 6/5 +
+
+- test RF amp
+- test pre-emph and transmitter
+- test 555 thing
+- possible two transistor transmitter
+
+
 * receivers// with arduino/pi
 
 ** GRV I2C FM Arduino - Grove I2C FM Receiver - reichelt
