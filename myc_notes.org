@@ -67,7 +67,7 @@ INT0 is PD2
 
 ref also: https://hackaday.io/project/2117/logs?sort=oldest
 
-- P-MOSFET? smd - SOT23 or SOT223 ??? SI2309, NXP2301P (GSD) - we use this?
+- P-MOSFET? smd - SOT23 or SOT223 ??? SI2309, NXP2301P-reichelt (GSD) - we use this?
 
 - added xtal for 16MHZ?
 
