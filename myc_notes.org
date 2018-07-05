@@ -71,13 +71,40 @@ ref also: https://hackaday.io/project/2117/logs?sort=oldest
 
 - added xtal for 16MHZ?
 
-** 6/5 +
+** 5/7 +
 
 - test RF amp
 - test pre-emph and transmitter
 - test 555 thing
 - possible two transistor transmitter
 
+- checking schematic:
+
+*** micro:
+
+checked as is microSD which differs from SD, we need to add temp SPI: ADDED - hardware spi with CS on pin PB1
+
+- where is the microsd code we use always for atmega skrying?
+
+=  /root/projects/archived/bordeaux/new_skry
+
+in sd_raw stuff there we have SS pin configured
+
+*** sensor: 
+
+check HIH6131 SS? - check if is spi or i2c? we have 6131-021 which is i2c - software i2c so... changed to use just SDA and SCL
+
+ref: https://playground.arduino.cc/Main/HoneywellHumidIconTMDigitalHumidity-TemperatureSensors
+
+- AD5933 we used ages ago could be interesting?
+
+*** rf board
+
+- checked PMOS FET
+
+** 6/7
+
+re-check all schematics and DRC and re-check connections which look wired in but prompt DRC
 
 * receivers// with arduino/pi
 
