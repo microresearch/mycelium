@@ -969,21 +969,7 @@ Wire Wire Line
 Wire Wire Line
 	3200 1700 3400 1700
 Wire Wire Line
-	3200 1900 3400 1900
-Wire Wire Line
 	3300 1150 3300 1900
-$Comp
-L MCP602 U3
-U 2 1 5B3E10F6
-P 3700 1800
-F 0 "U3" H 4041 1846 50  0000 L CNN
-F 1 "MCP602" H 4041 1755 50  0000 L CNN
-F 2 "" H 3700 1800 50  0001 C CNN
-F 3 "" H 3700 1800 50  0001 C CNN
-	2    3700 1800
-	1    0    0    -1  
-$EndComp
-Connection ~ 4100 1800
 Wire Wire Line
 	3850 1400 3850 1100
 Wire Wire Line
@@ -1128,50 +1114,9 @@ Wire Wire Line
 	3000 1850 3000 1750
 Wire Wire Line
 	3000 2250 3000 2150
-$Comp
-L R R15
-U 1 1 5B3E6F08
-P 3200 2250
-F 0 "R15" H 3270 2296 50  0000 L CNN
-F 1 "4.7K" H 3050 2300 50  0000 L CNN
-F 2 "" V 3130 2250 50  0001 C CNN
-F 3 "" H 3200 2250 50  0001 C CNN
-	1    3200 2250
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	3200 2100 3200 1900
 Connection ~ 3300 1900
-$Comp
-L CP C15
-U 1 1 5B3E72EF
-P 3150 2600
-F 0 "C15" V 2895 2600 50  0000 C CNN
-F 1 "22uF" V 2986 2600 50  0000 C CNN
-F 2 "" H 3188 2450 50  0001 C CNN
-F 3 "" H 3150 2600 50  0001 C CNN
-	1    3150 2600
-	1    0    0    -1  
-$EndComp
-$Comp
-L GND #PWR045
-U 1 1 5B3E74B1
-P 3150 2850
-F 0 "#PWR045" H 3150 2600 50  0001 C CNN
-F 1 "GND" H 3155 2677 50  0000 C CNN
-F 2 "" H 3150 2850 50  0001 C CNN
-F 3 "" H 3150 2850 50  0001 C CNN
-	1    3150 2850
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	3150 2450 3200 2450
-Wire Wire Line
-	3200 2450 3200 2400
-Wire Wire Line
-	3150 2850 3150 2750
 Text Notes 1150 2500 0    60   ~ 0
-optional for mic. see values here:\nhttp://sound.whsites.net/project54.htm
+see values here:\nhttp://sound.whsites.net/project54.htm
 Wire Wire Line
 	2450 1750 2700 1750
 Connection ~ 2450 1450
@@ -1427,4 +1372,17 @@ Wire Wire Line
 	1750 1750 2250 1750
 Wire Wire Line
 	1700 750  2250 750 
+Wire Wire Line
+	3300 1900 3400 1900
+$Comp
+L MCP602 U?
+U 1 1 5B3FE275
+P 3700 1800
+F 0 "U?" H 4041 1846 50  0000 L CNN
+F 1 "MCP602" H 4041 1755 50  0000 L CNN
+F 2 "" H 3700 1800 50  0001 C CNN
+F 3 "" H 3700 1800 50  0001 C CNN
+	1    3700 1800
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC

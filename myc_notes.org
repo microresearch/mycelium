@@ -106,6 +106,13 @@ ref: https://playground.arduino.cc/Main/HoneywellHumidIconTMDigitalHumidity-Temp
 
 re-check all schematics and DRC and re-check connections which look wired in but prompt DRC
 
+- tested pre-emph working and op07 rf amp working... (maybe larger amp there)
+
+- no to ad620 but maybe use ad5933 as potential breakout (5v and SDA/SCL) - i2c comms only ADDED to breakout
+
+(for that breakout add op-amps for vin and vout as in eval board, plus precision 3v as in last design/walker)
+
+
 * receivers// with arduino/pi
 
 ** GRV I2C FM Arduino - Grove I2C FM Receiver - reichelt
