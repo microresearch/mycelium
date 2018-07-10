@@ -100,8 +100,7 @@ ref: https://playground.arduino.cc/Main/HoneywellHumidIconTMDigitalHumidity-Temp
 
 *** rf board
 
-- checked PMOS FET
-
+- checked PMOS FET (nxp2301= SOT23 (TO-236AB) )
 ** 6/7
 
 re-check all schematics and DRC and re-check connections which look wired in but prompt DRC
@@ -112,6 +111,21 @@ re-check all schematics and DRC and re-check connections which look wired in but
 
 (for that breakout add op-amps for vin and vout as in eval board, plus precision 3v as in last design/walker)
 
+** 10/7
+
+- added 5v/Vcc and GND in to sensor board
+
+re-checking 
+
+- micro: fixed caps, fixed temp breakout, ss on micro-sd is fine, checked int0 for 555 pulse...
+
+- fm: u3b is half of theremin, added incoming volume trimmer
+
+- sensor: added pullup for 555
+
+netlist:
+
+Add trimmers and variable cap, check sot23s and SO8N footprints...
 
 * receivers// with arduino/pi
 
