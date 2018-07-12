@@ -125,7 +125,17 @@ re-checking
 
 netlist:
 
-Add trimmers and variable cap, check sot23s and SO8N footprints...
+Add trimmers and variable cap, *check sot23s and SO8N footprints...*
+
+** 12/13//7
+
+- Added trimmers and variable cap but we need to change for: http://cdn-reichelt.de/documents/datenblatt/B400/BI-SERIE-23.pdf - 23B!
+
+DONE - checked all parts
+
+- remember after we change cvpcb netlist to generate/save netlist in eeschema
+
+- move power to sensor board as is too crowded and then re-check sizes? - we need to make bigger
 
 * receivers// with arduino/pi
 

@@ -1,4 +1,4 @@
-update=Thu 05 Jul 2018 00:29:15 CEST
+update=Thu 12 Jul 2018 11:34:11 CEST
 version=1
 last_client=kicad
 [pcbnew]
@@ -63,3 +63,13 @@ LibName31=Logic_CMOS_4000
 LibName32=Logic_74xgxx
 LibName33=Logic_74xx
 LibName34=/root/SparkFun-Kicad-Libraries/SparkFun-AnalogIC
+[schematic_editor]
+version=1
+PageLayoutDescrFile=
+PlotDirectoryName=
+SubpartIdSeparator=0
+SubpartFirstId=65
+NetFmtName=
+SpiceAjustPassiveValues=0
+LabSize=60
+ERC_TestSimilarLabels=1
