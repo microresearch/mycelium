@@ -167,6 +167,8 @@ but question of i2c also
 
 - test import svg in pcbnew: this works following: https://andrehessling.de/2016/09/13/getting-a-custom-board-outline-from-an-svg-file-into-kicad/
 
+convert to eps in inkscape...
+
 : pstoedit -dt -f "dxf:-polyaslines -mm" myc_outline3.eps myc_outline3.dxf
 
 - how we connect power and signals between boards - sketch this out
