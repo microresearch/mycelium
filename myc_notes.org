@@ -101,6 +101,7 @@ ref: https://playground.arduino.cc/Main/HoneywellHumidIconTMDigitalHumidity-Temp
 *** rf board
 
 - checked PMOS FET (nxp2301= SOT23 (TO-236AB) )
+
 ** 6/7
 
 re-check all schematics and DRC and re-check connections which look wired in but prompt DRC

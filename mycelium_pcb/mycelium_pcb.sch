@@ -995,4 +995,6 @@ Text Notes 5600 3900 0    60   ~ 0
 3.3V reg\n
 Text Notes 6750 4050 0    60   ~ 0
 move this to sensor page
+Text Notes 7650 3700 0    60   ~ 0
+added 3.3v on pcb for 5933\n
 $EndSCHEMATC

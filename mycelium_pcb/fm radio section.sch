@@ -196,7 +196,7 @@ L C C3
 U 1 1 5B3BDCFF
 P 4800 2050
 F 0 "C3" H 4915 2096 50  0000 L CNN
-F 1 "10nF" H 4915 2005 50  0000 L CNN
+F 1 "1nF" H 4915 2005 50  0000 L CNN
 F 2 "Capacitors_SMD:C_0805_HandSoldering" H 4838 1900 50  0001 C CNN
 F 3 "" H 4800 2050 50  0001 C CNN
 	1    4800 2050
@@ -260,7 +260,7 @@ $EndComp
 Text Notes 8550 700  0    79   ~ 16
 FM transmission + amp + 4093 + 74xx
 Text Notes 1250 4400 0    60   ~ 12
-4093 as theremin and as straight HF
+4093 as theremin and as straight HF (only one side)
 Text Notes 6250 4550 0    60   ~ 12
 7404 as transmitter
 $Comp
@@ -1069,7 +1069,7 @@ L R R16
 U 1 1 5B3E4F71
 P 3350 2250
 F 0 "R16" H 3420 2296 50  0000 L CNN
-F 1 "680R" H 3420 2205 50  0000 L CNN
+F 1 "1K5" H 3420 2205 50  0000 L CNN
 F 2 "Resistors_SMD:R_0805_HandSoldering" V 3280 2250 50  0001 C CNN
 F 3 "" H 3350 2250 50  0001 C CNN
 	1    3350 2250
@@ -1416,4 +1416,6 @@ Wire Wire Line
 	2100 1600 2300 1600
 Wire Wire Line
 	2300 1950 2300 1900
+Text Notes 5000 3050 0    60   ~ 0
+pins are wrong for smd 2n2222 - corrected on pcb
 $EndSCHEMATC
