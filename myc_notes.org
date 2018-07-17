@@ -136,7 +136,19 @@ DONE - checked all parts
 
 - remember after we change cvpcb netlist to generate/save netlist in eeschema
 
-- move power to sensor board as is too crowded and then re-check sizes? - we need to make bigger
+- move power to sensor board as is too crowded and then re-check sizes? - we need to make biggerDONE
+
+** 18/7
+
+- working on pcb... fixed pins of SOT23 2n2222 on PCB, checked FET again, all checked. TODO: zones, vias and final parts check
+
+- 5933 will need 3.3v supply (added - but ref needs 5v??) but not sure if we can sensibly decode on atmega in time...
+
+- double up with new earthboot board with ad620 and 5933
+
+- where was 5933 code? psyche.pde.bac
+
+see also: https://github.com/mjmeli/arduino-ad5933
 
 * receivers// with arduino/pi
 

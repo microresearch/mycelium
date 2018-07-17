@@ -59,13 +59,13 @@
     (mod_edge_width 0.15)
     (mod_text_size 1 1)
     (mod_text_width 0.15)
-    (pad_size 1.7 1.7)
-    (pad_drill 1)
+    (pad_size 1 8)
+    (pad_drill 0)
     (pad_to_mask_clearance 0.2)
     (aux_axis_origin 0 0)
     (visible_elements 7FFFFFFF)
     (pcbplotparams
-      (layerselection 0x000c0_ffffffff)
+      (layerselection 0x010c0_ffffffff)
       (usegerberextensions false)
       (excludeedgelayer true)
       (linewidth 0.050000)
@@ -446,11 +446,11 @@
     (fp_line (start -2.75 5.249999) (end 2.75 5.25) (layer F.CrtYd) (width 0.05))
     (fp_line (start 2.75 5.25) (end 2.75 -5.249999) (layer F.CrtYd) (width 0.05))
     (fp_line (start 2.75 -5.249999) (end -2.75 -5.25) (layer F.CrtYd) (width 0.05))
-    (pad 1 smd rect (at 0 0 66) (size 1 8) (layers F.Cu)
+    (pad 1 smd rect (at 0 0 66) (size 1 8) (layers F.Cu F.Mask)
       (net 13 VCC))
   )
 
-  (module Wire_Pads:SolderWirePad_single_SMD_5x10mm (layer F.Cu) (tedit 5B4D1222) (tstamp 5B584B59)
+  (module Wire_Pads:SolderWirePad_single_SMD_5x10mm (layer F.Cu) (tedit 5B4E6624) (tstamp 5B584B59)
     (at 40.6273 71.4756 114)
     (descr "Wire Pad, Square, SMD Pad,  5mm x 10mm,")
     (tags "MesurementPoint Square SMDPad 5mmx10mm ")
@@ -466,7 +466,7 @@
     (fp_line (start 2.75 5.25) (end 2.75 -5.249999) (layer F.CrtYd) (width 0.05))
     (fp_line (start -2.75 5.249999) (end 2.75 5.25) (layer F.CrtYd) (width 0.05))
     (fp_line (start -2.75 -5.25) (end -2.75 5.249999) (layer F.CrtYd) (width 0.05))
-    (pad 1 smd rect (at 0 0 114) (size 1 8) (layers F.Cu)
+    (pad 1 smd rect (at 0 0 114) (size 1 8) (layers F.Cu F.Mask)
       (net 13 VCC))
   )
 
@@ -522,7 +522,7 @@
     (fp_line (start -2.75 5.25) (end 2.75 5.25) (layer F.CrtYd) (width 0.05))
     (fp_line (start 2.75 5.25) (end 2.75 -5.25) (layer F.CrtYd) (width 0.05))
     (fp_line (start 2.75 -5.25) (end -2.75 -5.25) (layer F.CrtYd) (width 0.05))
-    (pad 1 smd rect (at 0 0 114) (size 1 8) (layers F.Cu)
+    (pad 1 smd rect (at 0 0 114) (size 1 8) (layers F.Cu F.Mask)
       (net 10 +5V))
   )
 
@@ -542,7 +542,7 @@
     (fp_line (start -2.75 5.25) (end 2.75 5.25) (layer F.CrtYd) (width 0.05))
     (fp_line (start 2.75 5.25) (end 2.75 -5.25) (layer F.CrtYd) (width 0.05))
     (fp_line (start 2.75 -5.25) (end -2.75 -5.25) (layer F.CrtYd) (width 0.05))
-    (pad 1 smd rect (at 0 0 114) (size 1 8) (layers F.Cu)
+    (pad 1 smd rect (at 0 0 114) (size 1 8) (layers F.Cu F.Mask)
       (net 8 +3V3))
   )
 
@@ -562,7 +562,7 @@
     (fp_line (start -2.75 5.25) (end 2.75 5.249999) (layer F.CrtYd) (width 0.05))
     (fp_line (start 2.75 5.249999) (end 2.75 -5.25) (layer F.CrtYd) (width 0.05))
     (fp_line (start 2.75 -5.25) (end -2.75 -5.249999) (layer F.CrtYd) (width 0.05))
-    (pad 1 smd rect (at 0 0 66) (size 1 8) (layers F.Cu)
+    (pad 1 smd rect (at 0 0 66) (size 1 8) (layers F.Cu F.Mask)
       (net 12 /PWM_LP_OUT))
   )
 
@@ -2281,7 +2281,7 @@
     (fp_line (start -2.75 5.25) (end 2.75 5.25) (layer F.CrtYd) (width 0.05))
     (fp_line (start 2.75 5.25) (end 2.75 -5.25) (layer F.CrtYd) (width 0.05))
     (fp_line (start 2.75 -5.25) (end -2.75 -5.25) (layer F.CrtYd) (width 0.05))
-    (pad 1 smd rect (at 0 0 114) (size 1 8) (layers F.Cu)
+    (pad 1 smd rect (at 0 0 114) (size 1 8) (layers F.Cu F.Mask)
       (net 1 GND))
   )
 
@@ -2301,7 +2301,7 @@
     (fp_line (start -2.75 5.25) (end 2.75 5.25) (layer F.CrtYd) (width 0.05))
     (fp_line (start 2.75 5.25) (end 2.75 -5.25) (layer F.CrtYd) (width 0.05))
     (fp_line (start 2.75 -5.25) (end -2.75 -5.25) (layer F.CrtYd) (width 0.05))
-    (pad 1 smd rect (at 0 0 114) (size 1 8) (layers F.Cu)
+    (pad 1 smd rect (at 0 0 114) (size 1 8) (layers F.Cu F.Mask)
       (net 38 /SDA))
   )
 
@@ -2321,7 +2321,7 @@
     (fp_line (start 2.75 5.25) (end 2.75 -5.25) (layer F.CrtYd) (width 0.05))
     (fp_line (start -2.75 5.25) (end 2.75 5.25) (layer F.CrtYd) (width 0.05))
     (fp_line (start -2.75 -5.25) (end -2.75 5.25) (layer F.CrtYd) (width 0.05))
-    (pad 1 smd rect (at 0 0 114) (size 1 8) (layers F.Cu)
+    (pad 1 smd rect (at 0 0 114) (size 1 8) (layers F.Cu F.Mask)
       (net 55 /MUSH_555))
   )
 
@@ -2341,7 +2341,7 @@
     (fp_line (start -2.75 5.25) (end 2.75 5.25) (layer F.CrtYd) (width 0.05))
     (fp_line (start 2.75 5.25) (end 2.75 -5.25) (layer F.CrtYd) (width 0.05))
     (fp_line (start 2.75 -5.25) (end -2.75 -5.25) (layer F.CrtYd) (width 0.05))
-    (pad 1 smd rect (at 0 0 66) (size 1 8) (layers F.Cu)
+    (pad 1 smd rect (at 0 0 66) (size 1 8) (layers F.Cu F.Mask)
       (net 10 +5V))
   )
 
@@ -2361,7 +2361,7 @@
     (fp_line (start 2.75 5.25) (end 2.75 -5.25) (layer F.CrtYd) (width 0.05))
     (fp_line (start -2.75 5.25) (end 2.75 5.25) (layer F.CrtYd) (width 0.05))
     (fp_line (start -2.75 -5.25) (end -2.75 5.25) (layer F.CrtYd) (width 0.05))
-    (pad 1 smd rect (at 0 0 66) (size 1 8) (layers F.Cu)
+    (pad 1 smd rect (at 0 0 66) (size 1 8) (layers F.Cu F.Mask)
       (net 1 GND))
   )
 
@@ -2394,7 +2394,7 @@
     (fp_line (start 2.75 5.25) (end 2.75 -5.25) (layer F.CrtYd) (width 0.05))
     (fp_line (start -2.75 5.25) (end 2.75 5.25) (layer F.CrtYd) (width 0.05))
     (fp_line (start -2.75 -5.25) (end -2.75 5.25) (layer F.CrtYd) (width 0.05))
-    (pad 1 smd rect (at 0 0 114) (size 1 8) (layers F.Cu)
+    (pad 1 smd rect (at 0 0 114) (size 1 8) (layers F.Cu F.Mask)
       (net 13 VCC))
   )
 
@@ -2414,7 +2414,7 @@
     (fp_line (start 2.75 5.25) (end 2.75 -5.25) (layer F.CrtYd) (width 0.05))
     (fp_line (start -2.75 5.25) (end 2.75 5.25) (layer F.CrtYd) (width 0.05))
     (fp_line (start -2.75 -5.25) (end -2.75 5.25) (layer F.CrtYd) (width 0.05))
-    (pad 1 smd rect (at 0 0 114) (size 1 8) (layers F.Cu)
+    (pad 1 smd rect (at 0 0 114) (size 1 8) (layers F.Cu F.Mask)
       (net 1 GND))
   )
 
@@ -2434,7 +2434,7 @@
     (fp_line (start 2.75 5.25) (end 2.75 -5.25) (layer F.CrtYd) (width 0.05))
     (fp_line (start -2.75 5.25) (end 2.75 5.25) (layer F.CrtYd) (width 0.05))
     (fp_line (start -2.75 -5.25) (end -2.75 5.25) (layer F.CrtYd) (width 0.05))
-    (pad 1 smd rect (at 0 0 114) (size 1 8) (layers F.Cu)
+    (pad 1 smd rect (at 0 0 114) (size 1 8) (layers F.Cu F.Mask)
       (net 56 "/fm radio/PWM_LF_OUTT"))
   )
 
@@ -2493,7 +2493,7 @@
     (fp_line (start 2.75 5.25) (end 2.75 -5.25) (layer F.CrtYd) (width 0.05))
     (fp_line (start -2.75 5.25) (end 2.75 5.25) (layer F.CrtYd) (width 0.05))
     (fp_line (start -2.75 -5.25) (end -2.75 5.25) (layer F.CrtYd) (width 0.05))
-    (pad 1 smd rect (at 0 0 66) (size 1 8) (layers F.Cu)
+    (pad 1 smd rect (at 0 0 66) (size 1 8) (layers F.Cu F.Mask)
       (net 57 "/fm radio/HF_OUTT"))
   )
 
@@ -2526,7 +2526,7 @@
     (fp_line (start -2.75 5.25) (end 2.75 5.25) (layer F.CrtYd) (width 0.05))
     (fp_line (start 2.75 5.25) (end 2.75 -5.25) (layer F.CrtYd) (width 0.05))
     (fp_line (start 2.75 -5.25) (end -2.75 -5.25) (layer F.CrtYd) (width 0.05))
-    (pad 1 smd rect (at 0 0 114) (size 1 8) (layers F.Cu)
+    (pad 1 smd rect (at 0 0 114) (size 1 8) (layers F.Cu F.Mask)
       (net 39 /SCL))
   )
 
@@ -2546,7 +2546,7 @@
     (fp_line (start 2.75 5.249999) (end 2.75 -5.25) (layer F.CrtYd) (width 0.05))
     (fp_line (start -2.75 5.25) (end 2.75 5.249999) (layer F.CrtYd) (width 0.05))
     (fp_line (start -2.75 -5.249999) (end -2.75 5.25) (layer F.CrtYd) (width 0.05))
-    (pad 1 smd rect (at 0 0 66) (size 1 8) (layers F.Cu)
+    (pad 1 smd rect (at 0 0 66) (size 1 8) (layers F.Cu F.Mask)
       (net 59 /RF_EN))
   )
 
@@ -2566,7 +2566,7 @@
     (fp_line (start 2.75 5.25) (end 2.75 -5.25) (layer F.CrtYd) (width 0.05))
     (fp_line (start -2.75 5.25) (end 2.75 5.25) (layer F.CrtYd) (width 0.05))
     (fp_line (start -2.75 -5.25) (end -2.75 5.25) (layer F.CrtYd) (width 0.05))
-    (pad 1 smd rect (at 0 0 114) (size 1 8) (layers F.Cu)
+    (pad 1 smd rect (at 0 0 114) (size 1 8) (layers F.Cu F.Mask)
       (net 60 "/fm radio/RF_EN"))
   )
 
@@ -2586,7 +2586,7 @@
     (fp_line (start -2.75 5.25) (end 2.75 5.25) (layer F.CrtYd) (width 0.05))
     (fp_line (start 2.75 5.25) (end 2.75 -5.25) (layer F.CrtYd) (width 0.05))
     (fp_line (start 2.75 -5.25) (end -2.75 -5.25) (layer F.CrtYd) (width 0.05))
-    (pad 1 smd rect (at 0 0 66) (size 1 8) (layers F.Cu)
+    (pad 1 smd rect (at 0 0 66) (size 1 8) (layers F.Cu F.Mask)
       (net 1 GND))
   )
 
@@ -2606,7 +2606,7 @@
     (fp_line (start -2.75 5.25) (end 2.75 5.25) (layer F.CrtYd) (width 0.05))
     (fp_line (start 2.75 5.25) (end 2.75 -5.25) (layer F.CrtYd) (width 0.05))
     (fp_line (start 2.75 -5.25) (end -2.75 -5.25) (layer F.CrtYd) (width 0.05))
-    (pad 1 smd rect (at 0 0 66) (size 1 8) (layers F.Cu)
+    (pad 1 smd rect (at 0 0 66) (size 1 8) (layers F.Cu F.Mask)
       (net 61 "/fm radio/555_OUTT"))
   )
 
@@ -2665,7 +2665,7 @@
     (fp_line (start -2.75 5.25) (end 2.75 5.249999) (layer F.CrtYd) (width 0.05))
     (fp_line (start 2.75 5.249999) (end 2.75 -5.25) (layer F.CrtYd) (width 0.05))
     (fp_line (start 2.75 -5.25) (end -2.75 -5.249999) (layer F.CrtYd) (width 0.05))
-    (pad 1 smd rect (at 0 0 66) (size 1 8) (layers F.Cu)
+    (pad 1 smd rect (at 0 0 66) (size 1 8) (layers F.Cu F.Mask)
       (net 13 VCC))
   )
 
@@ -2685,7 +2685,7 @@
     (fp_line (start 2.75 5.25) (end 2.75 -5.25) (layer F.CrtYd) (width 0.05))
     (fp_line (start -2.75 5.25) (end 2.75 5.25) (layer F.CrtYd) (width 0.05))
     (fp_line (start -2.75 -5.25) (end -2.75 5.25) (layer F.CrtYd) (width 0.05))
-    (pad 1 smd rect (at 0 0 66) (size 1 8) (layers F.Cu)
+    (pad 1 smd rect (at 0 0 66) (size 1 8) (layers F.Cu F.Mask)
       (net 8 +3V3))
   )
 
@@ -2705,7 +2705,7 @@
     (fp_line (start 2.75 5.249999) (end 2.75 -5.25) (layer F.CrtYd) (width 0.05))
     (fp_line (start -2.75 5.25) (end 2.75 5.249999) (layer F.CrtYd) (width 0.05))
     (fp_line (start -2.75 -5.249999) (end -2.75 5.25) (layer F.CrtYd) (width 0.05))
-    (pad 1 smd rect (at 0 0 66) (size 1 8) (layers F.Cu)
+    (pad 1 smd rect (at 0 0 66) (size 1 8) (layers F.Cu F.Mask)
       (net 1 GND))
   )
 
@@ -2725,7 +2725,7 @@
     (fp_line (start 2.75 5.249999) (end 2.75 -5.25) (layer F.CrtYd) (width 0.05))
     (fp_line (start -2.75 5.25) (end 2.75 5.249999) (layer F.CrtYd) (width 0.05))
     (fp_line (start -2.75 -5.249999) (end -2.75 5.25) (layer F.CrtYd) (width 0.05))
-    (pad 1 smd rect (at 0 0 66) (size 1 8) (layers F.Cu)
+    (pad 1 smd rect (at 0 0 66) (size 1 8) (layers F.Cu F.Mask)
       (net 62 /sensorboard/SDA))
   )
 
@@ -2745,7 +2745,7 @@
     (fp_line (start 2.75 5.249999) (end 2.75 -5.25) (layer F.CrtYd) (width 0.05))
     (fp_line (start -2.75 5.25) (end 2.75 5.249999) (layer F.CrtYd) (width 0.05))
     (fp_line (start -2.75 -5.249999) (end -2.75 5.25) (layer F.CrtYd) (width 0.05))
-    (pad 1 smd rect (at 0 0 66) (size 1 8) (layers F.Cu)
+    (pad 1 smd rect (at 0 0 66) (size 1 8) (layers F.Cu F.Mask)
       (net 63 /sensorboard/SCL))
   )
 
@@ -2765,7 +2765,7 @@
     (fp_line (start -2.75 5.25) (end 2.75 5.249999) (layer F.CrtYd) (width 0.05))
     (fp_line (start 2.75 5.249999) (end 2.75 -5.25) (layer F.CrtYd) (width 0.05))
     (fp_line (start 2.75 -5.25) (end -2.75 -5.249999) (layer F.CrtYd) (width 0.05))
-    (pad 1 smd rect (at 0 0 66) (size 1 8) (layers F.Cu)
+    (pad 1 smd rect (at 0 0 66) (size 1 8) (layers F.Cu F.Mask)
       (net 64 /sensorboard/MUSH_555))
   )
 
@@ -2785,7 +2785,7 @@
     (fp_line (start -2.75 5.25) (end 2.75 5.25) (layer F.CrtYd) (width 0.05))
     (fp_line (start 2.75 5.25) (end 2.75 -5.25) (layer F.CrtYd) (width 0.05))
     (fp_line (start 2.75 -5.25) (end -2.75 -5.25) (layer F.CrtYd) (width 0.05))
-    (pad 1 smd rect (at 0 0 114) (size 1 8) (layers F.Cu)
+    (pad 1 smd rect (at 0 0 114) (size 1 8) (layers F.Cu F.Mask)
       (net 1 GND))
   )
 
@@ -2805,7 +2805,7 @@
     (fp_line (start -2.75 5.249999) (end 2.75 5.25) (layer F.CrtYd) (width 0.05))
     (fp_line (start 2.75 5.25) (end 2.75 -5.249999) (layer F.CrtYd) (width 0.05))
     (fp_line (start 2.75 -5.249999) (end -2.75 -5.25) (layer F.CrtYd) (width 0.05))
-    (pad 1 smd rect (at 0 0 114) (size 1 8) (layers F.Cu)
+    (pad 1 smd rect (at 0 0 114) (size 1 8) (layers F.Cu F.Mask)
       (net 29 /sensorboard/HF_OUTT))
   )
 
@@ -2825,7 +2825,7 @@
     (fp_line (start 2.75 5.25) (end 2.75 -5.249999) (layer F.CrtYd) (width 0.05))
     (fp_line (start -2.75 5.249999) (end 2.75 5.25) (layer F.CrtYd) (width 0.05))
     (fp_line (start -2.75 -5.25) (end -2.75 5.249999) (layer F.CrtYd) (width 0.05))
-    (pad 1 smd rect (at 0 0 114) (size 1 8) (layers F.Cu)
+    (pad 1 smd rect (at 0 0 114) (size 1 8) (layers F.Cu F.Mask)
       (net 64 /sensorboard/MUSH_555))
   )
 
