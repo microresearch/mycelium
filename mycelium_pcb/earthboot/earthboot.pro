@@ -1,4 +1,4 @@
-update=Wed 18 Jul 2018 20:57:29 CEST
+update=Thu 19 Jul 2018 01:21:12 CEST
 version=1
 last_client=eeschema
 [pcbnew]
@@ -56,3 +56,13 @@ LibName24=/root/rsync2016/kicadstuff/op27
 LibName25=/root/projects/myc/mycelium_pcb/ADR423
 LibName26=power
 LibName27=device
+[schematic_editor]
+version=1
+PageLayoutDescrFile=
+PlotDirectoryName=
+SubpartIdSeparator=0
+SubpartFirstId=65
+NetFmtName=Pcbnew
+SpiceAjustPassiveValues=0
+LabSize=60
+ERC_TestSimilarLabels=1

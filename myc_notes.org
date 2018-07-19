@@ -138,7 +138,7 @@ DONE - checked all parts
 
 - move power to sensor board as is too crowded and then re-check sizes? - we need to make biggerDONE
 
-** 18/7
+** 17/7
 
 - working on pcb... fixed pins of SOT23 2n2222 on PCB, checked FET again, all checked. TODO: zones, vias and final parts check
 
@@ -149,6 +149,14 @@ DONE - checked all parts
 - where was 5933 code? psyche.pde.bac
 
 see also: https://github.com/mjmeli/arduino-ad5933
+
+** 18/7
+
+- for ad620/eeg and 5933 earthboot/myc board:
+
+-- no idea where eeg circuit is from but is simple ac coupled amp
+
+-- see also: https://www.instructables.com/id/Body-Composition-using-BIA/
 
 * receivers// with arduino/pi
 

@@ -52,8 +52,8 @@ F 3 "" H 2050 4700 50  0001 C CNN
 	1    2050 4700
 	1    0    0    -1  
 $EndComp
-Text Notes 1500 3850 0    60   ~ 0
-ad620 with op amps as in dark int
+Text Notes 1050 3950 0    60   ~ 0
+ad620 with op amps as in dark int (no idea where this was from?)
 Text Notes 6550 800  0    60   ~ 0
 5933 with internal clock, reg ADR423 and op-amps as in breakout and in eval board
 $Comp
@@ -441,7 +441,7 @@ U 1 1 5B4F9212
 P 4650 6800
 F 0 "J5" H 4718 6846 50  0000 L CNN
 F 1 "GS2" H 4718 6755 50  0000 L CNN
-F 2 "Housings_SSOP:SSOP-16_3.9x4.9mm_Pitch0.635mm" V 4724 6800 50  0001 C CNN
+F 2 "Resistors_SMD:R_0805" V 4724 6800 50  0001 C CNN
 F 3 "" H 4650 6800 50  0001 C CNN
 	1    4650 6800
 	1    0    0    -1  
@@ -735,8 +735,6 @@ Wire Wire Line
 Wire Wire Line
 	2100 5850 2100 6000
 Wire Wire Line
-	3150 5750 3050 5750
-Wire Wire Line
 	2950 5250 3500 5250
 Wire Wire Line
 	2950 5000 2950 5250
@@ -760,8 +758,6 @@ Wire Wire Line
 	1350 5700 1350 5650
 Wire Wire Line
 	1950 5050 1950 5000
-Wire Wire Line
-	2650 5450 2650 5400
 Wire Wire Line
 	1950 4400 1950 4300
 Connection ~ 4950 4800
@@ -803,12 +799,12 @@ Wire Wire Line
 $Comp
 L OP27 U1
 U 2 1 5B50034F
-P 3000 5750
-F 0 "U1" H 3541 5803 60  0000 L CNN
-F 1 "OP27" H 3541 5697 60  0000 L CNN
-F 2 "SMD_Packages:SOIC-8-N" H 3000 5750 60  0001 C CNN
-F 3 "" H 3000 5750 60  0001 C CNN
-	2    3000 5750
+P 4800 5800
+F 0 "U1" H 5341 5853 60  0000 L CNN
+F 1 "OP27" H 5341 5747 60  0000 L CNN
+F 2 "SMD_Packages:SOIC-8-N" H 4800 5800 60  0001 C CNN
+F 3 "" H 4800 5800 60  0001 C CNN
+	2    4800 5800
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
@@ -1189,8 +1185,6 @@ F 3 "" H 8300 5400 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	7950 5750 8200 5750
-Text Label 8200 5750 0    60   ~ 0
-620_OUT
 Wire Wire Line
 	7950 5700 7950 5750
 Wire Wire Line
@@ -1201,10 +1195,42 @@ Wire Wire Line
 	7950 5400 8300 5400
 Wire Wire Line
 	7950 5500 8050 5500
-Text Label 8050 5500 0    60   ~ 0
-SCL
 Wire Wire Line
 	7950 5600 8000 5600
-Text Label 8000 5600 0    60   ~ 0
+Text Notes 6650 1700 0    60   ~ 0
+check power here
+Text Notes 8300 1800 0    60   ~ 0
+checked!
+Text Notes 4350 3650 0    60   ~ 0
+checked!
+Text Label 8200 5750 0    60   ~ 0
 SDA
+Text Label 8000 5600 0    60   ~ 0
+SCL
+Text Label 8050 5500 0    60   ~ 0
+620_OUT
+$Comp
+L OP27 U7
+U 1 1 5B50A594
+P 3000 5750
+F 0 "U7" H 3541 5803 60  0000 L CNN
+F 1 "OP27" H 3541 5697 60  0000 L CNN
+F 2 "SMD_Packages:SOIC-8-N" H 3000 5750 60  0001 C CNN
+F 3 "" H 3000 5750 60  0001 C CNN
+	1    3000 5750
+	1    0    0    -1  
+$EndComp
+$Comp
+L VDDA #PWR030
+U 1 1 5B50AACE
+P 2900 5250
+F 0 "#PWR030" H 2900 5100 50  0001 C CNN
+F 1 "VDDA" H 2917 5423 50  0000 C CNN
+F 2 "" H 2900 5250 50  0001 C CNN
+F 3 "" H 2900 5250 50  0001 C CNN
+	1    2900 5250
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2900 5350 2900 5250
 $EndSCHEMATC
