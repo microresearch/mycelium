@@ -160,6 +160,15 @@ see also: https://github.com/mjmeli/arduino-ad5933
 
 -- see also: https://www.instructables.com/id/Body-Composition-using-BIA/
 
+** 19/7
+
+- for earthboot board soldermask stuff - exported svg with triangle
+  masks, into gimp (1000dpi) and overlaid prima materia circle and
+  inverted it out (?), exported to tiff and import to layer/footprint
+  with kicad bitmap tool.
+
+
+
 * receivers// with arduino/pi
 
 ** GRV I2C FM Arduino - Grove I2C FM Receiver - reichelt
