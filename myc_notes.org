@@ -88,6 +88,8 @@ checked as is microSD which differs from SD, we need to add temp SPI: ADDED - ha
 
 =  /root/projects/archived/bordeaux/new_skry
 
+ref design is in Downloads
+
 in sd_raw stuff there we have SS pin configured
 
 *** sensor: 

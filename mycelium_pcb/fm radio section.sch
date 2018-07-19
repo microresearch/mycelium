@@ -551,19 +551,6 @@ Wire Wire Line
 	2500 6500 2650 6500
 Wire Wire Line
 	2650 6500 2650 5700
-$Comp
-L CONN_01X01 J17
-U 1 1 5B3C8AE9
-P 1250 5350
-F 0 "J17" H 1169 5125 50  0000 C CNN
-F 1 "CONN_01X01" H 1250 5200 50  0000 C CNN
-F 2 "Wire_Pads:SolderWirePad_single_1mmDrill" H 1250 5350 50  0001 C CNN
-F 3 "" H 1250 5350 50  0001 C CNN
-	1    1250 5350
-	-1   0    0    1   
-$EndComp
-Wire Wire Line
-	1450 5500 1450 5350
 Text Notes 1000 5500 0    60   ~ 0
 ANT
 $Comp
@@ -1418,4 +1405,17 @@ Wire Wire Line
 	2300 1950 2300 1900
 Text Notes 5000 3050 0    60   ~ 0
 pins are wrong for smd 2n2222 - corrected on pcb
+Wire Wire Line
+	1450 5500 1450 5350
+$Comp
+L CONN_01X01 J17
+U 1 1 5B3C8AE9
+P 1250 5350
+F 0 "J17" H 1169 5125 50  0000 C CNN
+F 1 "CONN_01X01" H 1250 5200 50  0000 C CNN
+F 2 "Wire_Pads:SolderWirePad_single_1mmDrill" H 1250 5350 50  0001 C CNN
+F 3 "" H 1250 5350 50  0001 C CNN
+	1    1250 5350
+	-1   0    0    1   
+$EndComp
 $EndSCHEMATC
