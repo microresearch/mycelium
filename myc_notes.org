@@ -156,7 +156,7 @@ see also: https://github.com/mjmeli/arduino-ad5933
 
 - for ad620/eeg and 5933 earthboot/myc board:
 
--- no idea where eeg circuit is from but is simple ac coupled amp
+-- +no idea where+ eeg circuit is from but is simple ac coupled amp: Tom Collura's Brainmaster EEG schematics//20013608.txt
 
 -- see also: https://www.instructables.com/id/Body-Composition-using-BIA/
 
@@ -167,6 +167,13 @@ see also: https://github.com/mjmeli/arduino-ad5933
   inverted it out (?), exported to tiff and import to layer/footprint
   with kicad bitmap tool.
 
+** 20/7
+
+- extended 5933 to 6.2mm (inside dimensions), for order ADR423 is
+  SOIC8 so works out, and added jumper for 2v to ref of AD620 all on
+  earthboot board (so can use ad620 with no filtering) - note that
+  otherwise we are down to low freq response for earthboot so we have
+  slow input
 
 
 * receivers// with arduino/pi
