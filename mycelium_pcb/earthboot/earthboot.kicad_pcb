@@ -2,7 +2,7 @@
 
   (general
     (thickness 1.6)
-    (drawings 4)
+    (drawings 5)
     (tracks 368)
     (zones 0)
     (modules 44)
@@ -34,7 +34,7 @@
   )
 
   (setup
-    (last_trace_width 0.4)
+    (last_trace_width 0.25)
     (user_trace_width 0.4)
     (user_trace_width 0.55)
     (user_trace_width 0.6)
@@ -1815,6 +1815,9 @@
     )
   )
 
+  (gr_text "5933 is 5.6mm across as per data sheet RECHECK!" (at 120.015 54.864) (layer Dwgs.User)
+    (effects (font (size 1.5 1.5) (thickness 0.3)))
+  )
   (gr_line (start 78.4098 152.6286) (end 53.4035 22.5806) (angle 90) (layer Edge.Cuts) (width 0.15))
   (gr_line (start 103.0732 22.606) (end 78.4098 152.6286) (angle 90) (layer Edge.Cuts) (width 0.15))
   (gr_line (start 53.5178 22.5933) (end 103.124 22.5933) (angle 90) (layer Edge.Cuts) (width 0.15))
