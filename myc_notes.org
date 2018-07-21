@@ -175,6 +175,12 @@ see also: https://github.com/mjmeli/arduino-ad5933
   otherwise we are down to low freq response for earthboot so we have
   slow input
 
+** 21/7
+
+- added jumper on radio board so we can power without micro/fet control
+
+- changed 7404 transmitter so that we can also jumper or control power from FET
+
 
 * receivers// with arduino/pi
 
