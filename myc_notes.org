@@ -181,6 +181,12 @@ see also: https://github.com/mjmeli/arduino-ad5933
 
 - changed 7404 transmitter so that we can also jumper or control power from FET
 
+** 23/7
+
+- added zones and vias (split zone on earthboot board), checked, checked gerbers, re-check and order
+
+- myc: all 1.2mm thick, 75x84mm
+- earthboot: 1.2mm, 51x130mm
 
 * receivers// with arduino/pi
 

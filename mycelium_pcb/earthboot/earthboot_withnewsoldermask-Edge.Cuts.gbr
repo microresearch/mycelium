@@ -1,0 +1,22 @@
+G04 #@! TF.GenerationSoftware,KiCad,Pcbnew,no-vcs-found*
+G04 #@! TF.CreationDate,2018-07-23T22:45:22+02:00*
+G04 #@! TF.ProjectId,earthboot_withnewsoldermask,6561727468626F6F745F776974686E65,rev?*
+G04 #@! TF.SameCoordinates,Original
+G04 #@! TF.FileFunction,Profile,NP*
+%FSLAX46Y46*%
+G04 Gerber Fmt 4.6, Leading zero omitted, Abs format (unit mm)*
+G04 Created by KiCad (PCBNEW no-vcs-found) date Mon Jul 23 22:45:22 2018*
+%MOMM*%
+%LPD*%
+G01*
+G04 APERTURE LIST*
+%ADD10C,0.150000*%
+G04 APERTURE END LIST*
+D10*
+X78409800Y-152628600D02*
+X53403500Y-22580600D01*
+X103073200Y-22606000D02*
+X78409800Y-152628600D01*
+X53517800Y-22593300D02*
+X103124000Y-22593300D01*
+M02*
