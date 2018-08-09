@@ -41,6 +41,8 @@ https://ham.stackexchange.com/questions/9163/pre-emphasis-measurement
 
 http://www.techlib.com/area_50/Readers/Karen/radio.htm
 
+http://sound.whsites.net/project54.htm THIS ONE!
+
 - i2c grove receiver:
 
 working with GROVE: library at: https://github.com/mathertel/Radio/

@@ -2,7 +2,7 @@
 
   (general
     (thickness 1.6)
-    (drawings 23)
+    (drawings 24)
     (tracks 282)
     (zones 0)
     (modules 39)
@@ -1388,6 +1388,9 @@
     )
   )
 
+  (gr_text "mush caps not polarised" (at 36.449 81.5213) (layer Dwgs.User)
+    (effects (font (size 1.5 1.5) (thickness 0.3)))
+  )
   (gr_text "6131 is 3.3v\n" (at 77.6986 100.6348) (layer Dwgs.User)
     (effects (font (size 1.5 1.5) (thickness 0.3)))
   )
@@ -1414,7 +1417,7 @@
     (effects (font (size 1.5 1.5) (thickness 0.3)))
   )
   (dimension 75.3872 (width 0.3) (layer Dwgs.User)
-    (gr_text "75.387 mm" (at 59.44362 21.675101) (layer Dwgs.User) (tstamp 5B563BA5)
+    (gr_text "75.387 mm" (at 59.44362 21.675101) (layer Dwgs.User) (tstamp 5B56F88F)
       (effects (font (size 1.5 1.5) (thickness 0.3)))
     )
     (feature1 (pts (xy 97.13722 40.9067) (xy 97.13722 20.325101)))
