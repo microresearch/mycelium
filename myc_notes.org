@@ -190,6 +190,22 @@ see also: https://github.com/mjmeli/arduino-ad5933
 - myc: all 1.2mm thick, 75x84mm
 - earthboot: 1.2mm, 51x130mm
 
+** 13/8
+
+- boards arrived, test PSU-TESTED 
+
+- test atmega8 programming/basic tones-DONE, with HIH(where?), test
+  transistor radio with fet switch and basic opsDONE, test sd card read/write
+
+- programmed and flashed with usb hub and cable red to rightest part of adapter...
+
+- we have to hack mosfet with additional 2n2222a and 2x 1k resistors
+  (one across S and G, one to our switch signal) as in example
+  circuit - pin 3 emitter to gate of NX2301, pin1 base 1k to switch,
+  pin 3 to GND (wired)...
+
+code is based on wormed voice...
+
 * receivers// with arduino/pi
 
 ** GRV I2C FM Arduino - Grove I2C FM Receiver - reichelt
