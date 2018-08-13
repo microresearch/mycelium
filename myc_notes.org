@@ -206,6 +206,21 @@ see also: https://github.com/mjmeli/arduino-ad5933
 
 code is based on wormed voice...
 
+- MAX31865-SPI // adapt from adafruit library /// HIH moisture SPI too
+
+so we need SPI functionality: http://www.tinkerer.eu/AVRLib/SPI/
+
+HIH: https://github.com/ArsenioDev/HIH6131-SPI/blob/master/SPIHumidity2.ino
+
+https://playground.arduino.cc/Main/HoneywellHumidIconTMDigitalHumidity-TemperatureSensors
+
+what others: 5933, adc for CO2, for light, mushroom and maybe ad620 on board
+
+and what generates pwm - wavetables, frequencies, reread SD, live codings...
+
+SD read/write: code is: /root/projects/archived/bordeaux/new_skry
+
+
 * receivers// with arduino/pi
 
 ** GRV I2C FM Arduino - Grove I2C FM Receiver - reichelt
@@ -267,9 +282,9 @@ combine some of these and use jumpers or different ADC sample options
 
 1- for temperature we use breakout: MAX31865 - 8 pin break 5V 
 
-2- MEMs mic: kicad footprints for INMP504 -3.3v/reflow, HLGA packagings
++2- MEMs mic: kicad footprints for INMP504 -3.3v/reflow, HLGA packagings+
  
-NMP504ACEZ-R7 TDK MEMS Microphones - mouser
++NMP504ACEZ-R7 TDK MEMS Microphones - mouser+
 
 3- humidity: moisture/resistance - in the air, 4-in the mushroom (resistance bridge/ADC)?
 

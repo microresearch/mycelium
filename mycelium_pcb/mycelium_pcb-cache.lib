@@ -1,11 +1,11 @@
 EESchema-LIBRARY Version 2.4
 #encoding utf-8
 #
-# mycelium_pcb-rescue_+3.3V
+# mycelium_pcb-rescue_+3.3V-power
 #
-DEF mycelium_pcb-rescue_+3.3V #PWR 0 0 Y Y 1 F P
+DEF mycelium_pcb-rescue_+3.3V-power #PWR 0 0 Y Y 1 F P
 F0 "#PWR" 0 -150 50 H I C CNN
-F1 "mycelium_pcb-rescue_+3.3V" 0 140 50 H V C CNN
+F1 "mycelium_pcb-rescue_+3.3V-power" 0 140 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW
@@ -16,11 +16,11 @@ X +3V3 1 0 0 0 U 50 50 1 1 W N
 ENDDRAW
 ENDDEF
 #
-# mycelium_pcb-rescue_+5V
+# mycelium_pcb-rescue_+5V-power
 #
-DEF mycelium_pcb-rescue_+5V #PWR 0 0 Y Y 1 F P
+DEF mycelium_pcb-rescue_+5V-power #PWR 0 0 Y Y 1 F P
 F0 "#PWR" 0 -150 50 H I C CNN
-F1 "mycelium_pcb-rescue_+5V" 0 140 50 H V C CNN
+F1 "mycelium_pcb-rescue_+5V-power" 0 140 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW
@@ -31,11 +31,11 @@ X +5V 1 0 0 0 U 50 50 1 1 W N
 ENDDRAW
 ENDDEF
 #
-# mycelium_pcb-rescue_74HC04
+# mycelium_pcb-rescue_74HC04-Logic_74xx
 #
-DEF mycelium_pcb-rescue_74HC04 U 0 40 Y Y 7 L N
+DEF mycelium_pcb-rescue_74HC04-Logic_74xx U 0 40 Y Y 7 L N
 F0 "U" 0 50 50 H V C CNN
-F1 "mycelium_pcb-rescue_74HC04" 0 -50 50 H V C CNN
+F1 "mycelium_pcb-rescue_74HC04-Logic_74xx" 0 -50 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 $FPLIST
@@ -66,11 +66,11 @@ X GND 7 0 -500 200 U 50 50 7 0 W
 ENDDRAW
 ENDDEF
 #
-# mycelium_pcb-rescue_ATMEGA168A-AU
+# mycelium_pcb-rescue_ATMEGA168A-AU-atmel
 #
-DEF mycelium_pcb-rescue_ATMEGA168A-AU U 0 40 Y Y 1 F N
+DEF mycelium_pcb-rescue_ATMEGA168A-AU-atmel U 0 40 Y Y 1 F N
 F0 "U" -750 1250 50 H V L BNN
-F1 "mycelium_pcb-rescue_ATMEGA168A-AU" 400 -1400 50 H V L BNN
+F1 "mycelium_pcb-rescue_ATMEGA168A-AU-atmel" 400 -1400 50 H V L BNN
 F2 "Housings_QFP:TQFP-32_7x7mm_Pitch0.8mm" 0 0 50 H I C CIN
 F3 "" 0 0 50 H I C CNN
 $FPLIST
@@ -136,11 +136,11 @@ X E 3 100 -200 100 U 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
-# mycelium_pcb-rescue_C
+# mycelium_pcb-rescue_C-device
 #
-DEF mycelium_pcb-rescue_C C 0 10 N Y 1 F N
+DEF mycelium_pcb-rescue_C-device C 0 10 N Y 1 F N
 F0 "C" 25 100 50 H V L CNN
-F1 "mycelium_pcb-rescue_C" 25 -100 50 H V L CNN
+F1 "mycelium_pcb-rescue_C-device" 25 -100 50 H V L CNN
 F2 "" 38 -150 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 $FPLIST
@@ -204,11 +204,11 @@ X P6 6 -200 -250 150 R 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
-# mycelium_pcb-rescue_CP
+# mycelium_pcb-rescue_CP-device
 #
-DEF mycelium_pcb-rescue_CP C 0 10 N Y 1 F N
+DEF mycelium_pcb-rescue_CP-device C 0 10 N Y 1 F N
 F0 "C" 25 100 50 H V L CNN
-F1 "mycelium_pcb-rescue_CP" 25 -100 50 H V L CNN
+F1 "mycelium_pcb-rescue_CP-device" 25 -100 50 H V L CNN
 F2 "" 38 -150 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 $FPLIST
@@ -227,11 +227,11 @@ X ~ 2 0 -150 110 U 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
-# mycelium_pcb-rescue_CTRIM
+# mycelium_pcb-rescue_CTRIM-device
 #
-DEF mycelium_pcb-rescue_CTRIM C 0 10 N N 1 F N
+DEF mycelium_pcb-rescue_CTRIM-device C 0 10 N N 1 F N
 F0 "C" 60 -80 50 H V C CNN
-F1 "mycelium_pcb-rescue_CTRIM" 120 -140 50 H V C CNN
+F1 "mycelium_pcb-rescue_CTRIM-device" 120 -140 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW
@@ -245,11 +245,11 @@ X ~ 2 0 -150 120 U 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
-# mycelium_pcb-rescue_C_Small
+# mycelium_pcb-rescue_C_Small-device
 #
-DEF mycelium_pcb-rescue_C_Small C 0 10 N N 1 F N
+DEF mycelium_pcb-rescue_C_Small-device C 0 10 N N 1 F N
 F0 "C" 10 70 50 H V L CNN
-F1 "mycelium_pcb-rescue_C_Small" 10 -80 50 H V L CNN
+F1 "mycelium_pcb-rescue_C_Small-device" 10 -80 50 H V L CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 $FPLIST
@@ -263,11 +263,11 @@ X ~ 2 0 -100 80 U 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
-# mycelium_pcb-rescue_Conn_01x02
+# mycelium_pcb-rescue_Conn_01x02-Connector
 #
-DEF mycelium_pcb-rescue_Conn_01x02 J 0 40 Y N 1 F N
+DEF mycelium_pcb-rescue_Conn_01x02-Connector J 0 40 Y N 1 F N
 F0 "J" 0 100 50 H V C CNN
-F1 "mycelium_pcb-rescue_Conn_01x02" 0 -200 50 H V C CNN
+F1 "mycelium_pcb-rescue_Conn_01x02-Connector" 0 -200 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 $FPLIST
@@ -287,11 +287,11 @@ X Pin_2 2 -200 -100 150 R 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
-# mycelium_pcb-rescue_Conn_01x08
+# mycelium_pcb-rescue_Conn_01x08-Connector
 #
-DEF mycelium_pcb-rescue_Conn_01x08 J 0 40 Y N 1 F N
+DEF mycelium_pcb-rescue_Conn_01x08-Connector J 0 40 Y N 1 F N
 F0 "J" 0 400 50 H V C CNN
-F1 "mycelium_pcb-rescue_Conn_01x08" 0 -500 50 H V C CNN
+F1 "mycelium_pcb-rescue_Conn_01x08-Connector" 0 -500 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 $FPLIST
@@ -323,11 +323,11 @@ X Pin_8 8 -200 -400 150 R 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
-# mycelium_pcb-rescue_Crystal_Small
+# mycelium_pcb-rescue_Crystal_Small-device
 #
-DEF mycelium_pcb-rescue_Crystal_Small Y 0 40 N N 1 F N
+DEF mycelium_pcb-rescue_Crystal_Small-device Y 0 40 N N 1 F N
 F0 "Y" 0 100 50 H V C CNN
-F1 "mycelium_pcb-rescue_Crystal_Small" 0 -100 50 H V C CNN
+F1 "mycelium_pcb-rescue_Crystal_Small-device" 0 -100 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 $FPLIST
@@ -342,11 +342,11 @@ X 2 2 100 0 50 L 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
-# mycelium_pcb-rescue_GND
+# mycelium_pcb-rescue_GND-power
 #
-DEF mycelium_pcb-rescue_GND #PWR 0 0 Y Y 1 F P
+DEF mycelium_pcb-rescue_GND-power #PWR 0 0 Y Y 1 F P
 F0 "#PWR" 0 -250 50 H I C CNN
-F1 "mycelium_pcb-rescue_GND" 0 -150 50 H V C CNN
+F1 "mycelium_pcb-rescue_GND-power" 0 -150 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW
@@ -355,11 +355,11 @@ X GND 1 0 0 0 D 50 50 1 1 W N
 ENDDRAW
 ENDDEF
 #
-# mycelium_pcb-rescue_HEF4093B
+# mycelium_pcb-rescue_HEF4093B-Logic_CMOS_4000
 #
-DEF mycelium_pcb-rescue_HEF4093B U 0 40 Y Y 5 L N
+DEF mycelium_pcb-rescue_HEF4093B-Logic_CMOS_4000 U 0 40 Y Y 5 L N
 F0 "U" 0 50 50 H V C CNN
-F1 "mycelium_pcb-rescue_HEF4093B" 0 -50 50 H V C CNN
+F1 "mycelium_pcb-rescue_HEF4093B-Logic_CMOS_4000" 0 -50 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 $FPLIST
@@ -444,11 +444,11 @@ X ~ 13 -300 -100 170 R 50 50 4 2 I I
 ENDDRAW
 ENDDEF
 #
-# mycelium_pcb-rescue_HIH6131
+# mycelium_pcb-rescue_HIH6131-SparkFun-AnalogIC
 #
-DEF mycelium_pcb-rescue_HIH6131 M 0 40 Y Y 1 L N
+DEF mycelium_pcb-rescue_HIH6131-SparkFun-AnalogIC M 0 40 Y Y 1 L N
 F0 "M" -400 420 50 H V L BNN
-F1 "mycelium_pcb-rescue_HIH6131" -400 -500 50 H V L BNN
+F1 "mycelium_pcb-rescue_HIH6131-SparkFun-AnalogIC" -400 -500 50 H V L BNN
 F2 "SOIC8" 30 150 20 H I C CNN
 F3 "" 0 0 60 H I C CNN
 $FPLIST
@@ -470,11 +470,11 @@ X VDD 8 -600 300 200 R 40 40 1 1 B
 ENDDRAW
 ENDDEF
 #
-# mycelium_pcb-rescue_Jumper_NO_Small
+# mycelium_pcb-rescue_Jumper_NO_Small-device
 #
-DEF mycelium_pcb-rescue_Jumper_NO_Small JP 0 30 N N 1 F N
+DEF mycelium_pcb-rescue_Jumper_NO_Small-device JP 0 30 N N 1 F N
 F0 "JP" 0 80 50 H V C CNN
-F1 "mycelium_pcb-rescue_Jumper_NO_Small" 10 -60 50 H V C CNN
+F1 "mycelium_pcb-rescue_Jumper_NO_Small-device" 10 -60 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW
@@ -485,11 +485,11 @@ X 2 2 100 0 40 L 50 50 0 1 P
 ENDDRAW
 ENDDEF
 #
-# mycelium_pcb-rescue_L
+# mycelium_pcb-rescue_L-device
 #
-DEF mycelium_pcb-rescue_L L 0 40 N N 1 F N
+DEF mycelium_pcb-rescue_L-device L 0 40 N N 1 F N
 F0 "L" -50 0 50 V V C CNN
-F1 "mycelium_pcb-rescue_L" 75 0 50 V V C CNN
+F1 "mycelium_pcb-rescue_L-device" 75 0 50 V V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 $FPLIST
@@ -508,11 +508,11 @@ X 2 2 0 -150 50 U 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
-# mycelium_pcb-rescue_LED_Small
+# mycelium_pcb-rescue_LED_Small-device
 #
-DEF mycelium_pcb-rescue_LED_Small D 0 10 N N 1 F N
+DEF mycelium_pcb-rescue_LED_Small-device D 0 10 N N 1 F N
 F0 "D" -50 125 50 H V L CNN
-F1 "mycelium_pcb-rescue_LED_Small" -175 -100 50 H V L CNN
+F1 "mycelium_pcb-rescue_LED_Small-device" -175 -100 50 H V L CNN
 F2 "" 0 0 50 V I C CNN
 F3 "" 0 0 50 V I C CNN
 $FPLIST
@@ -529,11 +529,11 @@ X A 2 100 0 70 L 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
-# mycelium_pcb-rescue_LM1117-3.3
+# mycelium_pcb-rescue_LM1117-3.3-regul
 #
-DEF mycelium_pcb-rescue_LM1117-3.3 U 0 10 Y Y 1 F N
+DEF mycelium_pcb-rescue_LM1117-3.3-regul U 0 10 Y Y 1 F N
 F0 "U" -150 125 50 H V C CNN
-F1 "mycelium_pcb-rescue_LM1117-3.3" 0 125 50 H V L CNN
+F1 "mycelium_pcb-rescue_LM1117-3.3-regul" 0 125 50 H V L CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 $FPLIST
@@ -550,11 +550,11 @@ X VI 3 -300 0 100 R 50 50 1 1 W
 ENDDRAW
 ENDDEF
 #
-# mycelium_pcb-rescue_LMC555xM
+# mycelium_pcb-rescue_LMC555xM-linear
 #
-DEF mycelium_pcb-rescue_LMC555xM U 0 20 Y Y 1 F N
+DEF mycelium_pcb-rescue_LMC555xM-linear U 0 20 Y Y 1 F N
 F0 "U" -400 350 50 H V L CNN
-F1 "mycelium_pcb-rescue_LMC555xM" 100 350 50 H V L CNN
+F1 "mycelium_pcb-rescue_LMC555xM-linear" 100 350 50 H V L CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 $FPLIST
@@ -576,11 +576,11 @@ X DIS 7 500 0 150 L 50 50 1 1 I
 ENDDRAW
 ENDDEF
 #
-# mycelium_pcb-rescue_MCP602
+# mycelium_pcb-rescue_MCP602-linear
 #
-DEF mycelium_pcb-rescue_MCP602 U 0 20 Y Y 2 F N
+DEF mycelium_pcb-rescue_MCP602-linear U 0 20 Y Y 2 F N
 F0 "U" 0 200 50 H V L CNN
-F1 "mycelium_pcb-rescue_MCP602" 0 -200 50 H V L CNN
+F1 "mycelium_pcb-rescue_MCP602-linear" 0 -200 50 H V L CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 $FPLIST
@@ -609,11 +609,11 @@ X ~ 7 300 0 100 L 50 50 2 1 O
 ENDDRAW
 ENDDEF
 #
-# mycelium_pcb-rescue_Micro_SD_Card
+# mycelium_pcb-rescue_Micro_SD_Card-Connector
 #
-DEF mycelium_pcb-rescue_Micro_SD_Card J 0 40 Y Y 1 F N
+DEF mycelium_pcb-rescue_Micro_SD_Card-Connector J 0 40 Y Y 1 F N
 F0 "J" -650 600 50 H V C CNN
-F1 "mycelium_pcb-rescue_Micro_SD_Card" 650 600 50 H V R CNN
+F1 "mycelium_pcb-rescue_Micro_SD_Card-Connector" 650 600 50 H V R CNN
 F2 "" 1150 300 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW
@@ -639,11 +639,11 @@ X SHIELD 9 800 -600 150 L 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
-# mycelium_pcb-rescue_OP07
+# mycelium_pcb-rescue_OP07-linear
 #
-DEF mycelium_pcb-rescue_OP07 U 0 20 Y Y 1 F N
+DEF mycelium_pcb-rescue_OP07-linear U 0 20 Y Y 1 F N
 F0 "U" 50 250 50 H V L CNN
-F1 "mycelium_pcb-rescue_OP07" 50 150 50 H V L CNN
+F1 "mycelium_pcb-rescue_OP07-linear" 50 150 50 H V L CNN
 F2 "" 50 50 50 H I C CNN
 F3 "" 50 150 50 H I C CNN
 $FPLIST
@@ -664,11 +664,11 @@ X ~ 8 100 -300 250 U 50 50 1 1 I
 ENDDRAW
 ENDDEF
 #
-# mycelium_pcb-rescue_POT_TRIM
+# mycelium_pcb-rescue_POT_TRIM-device
 #
-DEF mycelium_pcb-rescue_POT_TRIM RV 0 40 Y N 1 F N
+DEF mycelium_pcb-rescue_POT_TRIM-device RV 0 40 Y N 1 F N
 F0 "RV" -175 0 50 V V C CNN
-F1 "mycelium_pcb-rescue_POT_TRIM" -100 0 50 V V C CNN
+F1 "mycelium_pcb-rescue_POT_TRIM-device" -100 0 50 V V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 $FPLIST
@@ -684,11 +684,11 @@ X 3 3 0 -150 50 U 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
-# mycelium_pcb-rescue_Q_PMOS_GSD
+# mycelium_pcb-rescue_Q_PMOS_GSD-device
 #
-DEF mycelium_pcb-rescue_Q_PMOS_GSD Q 0 0 Y N 1 F N
+DEF mycelium_pcb-rescue_Q_PMOS_GSD-device Q 0 0 Y N 1 F N
 F0 "Q" 200 50 50 H V L CNN
-F1 "mycelium_pcb-rescue_Q_PMOS_GSD" 200 -50 50 H V L CNN
+F1 "mycelium_pcb-rescue_Q_PMOS_GSD-device" 200 -50 50 H V L CNN
 F2 "" 200 100 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW
@@ -716,11 +716,11 @@ X D 3 100 200 100 D 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
-# mycelium_pcb-rescue_R
+# mycelium_pcb-rescue_R-device
 #
-DEF mycelium_pcb-rescue_R R 0 0 N Y 1 F N
+DEF mycelium_pcb-rescue_R-device R 0 0 N Y 1 F N
 F0 "R" 80 0 50 V V C CNN
-F1 "mycelium_pcb-rescue_R" 0 0 50 V V C CNN
+F1 "mycelium_pcb-rescue_R-device" 0 0 50 V V C CNN
 F2 "" -70 0 50 V I C CNN
 F3 "" 0 0 50 H I C CNN
 $FPLIST
@@ -734,11 +734,11 @@ X ~ 2 0 -150 50 U 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
-# mycelium_pcb-rescue_VCC
+# mycelium_pcb-rescue_VCC-power
 #
-DEF mycelium_pcb-rescue_VCC #PWR 0 0 Y Y 1 F P
+DEF mycelium_pcb-rescue_VCC-power #PWR 0 0 Y Y 1 F P
 F0 "#PWR" 0 -150 50 H I C CNN
-F1 "mycelium_pcb-rescue_VCC" 0 150 50 H V C CNN
+F1 "mycelium_pcb-rescue_VCC-power" 0 150 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW

@@ -17,7 +17,7 @@ $EndDescr
 Text Notes 4900 -200 0    118  ~ 0
 3x PCB: transmission, sensor, logging/micro
 $Comp
-L power:GND #PWR01
+L mycelium_pcb-rescue:GND-power #PWR01
 U 1 1 5AD49680
 P 2550 3650
 F 0 "#PWR01" H 2550 3400 50  0001 C CNN
@@ -30,7 +30,7 @@ $EndComp
 Text Notes 2650 900  0    60   ~ 0
 power, micro and sd card holder + breakout for temp at top + ADC breakouts and bridge
 $Comp
-L atmel:ATMEGA168A-AU U1
+L mycelium_pcb-rescue:ATMEGA168A-AU-atmel U1
 U 1 1 5AD4ADD0
 P 3600 2500
 F 0 "U1" H 3650 3867 50  0000 C CNN
@@ -41,7 +41,7 @@ F 3 "" H 3600 2500 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Connector:Micro_SD_Card J8
+L mycelium_pcb-rescue:Micro_SD_Card-Connector J8
 U 1 1 5AD4B106
 P 6550 1850
 F 0 "J8" H 6500 2567 50  0000 C CNN
@@ -53,7 +53,7 @@ F 4 "710-693072010801 (mouser)" H 6550 1850 50  0001 C CNN "Notes"
 	1    0    0    -1  
 $EndComp
 $Comp
-L device:C C6
+L mycelium_pcb-rescue:C-device C6
 U 1 1 5AD4B2C9
 P 2400 1650
 F 0 "C6" H 2515 1696 50  0000 L CNN
@@ -64,7 +64,7 @@ F 3 "" H 2400 1650 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L device:R R4
+L mycelium_pcb-rescue:R-device R4
 U 1 1 5AD4B7CE
 P 4900 3000
 F 0 "R4" H 4970 3046 50  0000 L CNN
@@ -75,7 +75,7 @@ F 3 "" H 4900 3000 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:GND #PWR02
+L mycelium_pcb-rescue:GND-power #PWR02
 U 1 1 5AD4BB0F
 P 2550 2350
 F 0 "#PWR02" H 2550 2100 50  0001 C CNN
@@ -86,7 +86,7 @@ F 3 "" H 2550 2350 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:GND #PWR03
+L mycelium_pcb-rescue:GND-power #PWR03
 U 1 1 5AD4BB3C
 P 2400 1850
 F 0 "#PWR03" H 2400 1600 50  0001 C CNN
@@ -97,7 +97,7 @@ F 3 "" H 2400 1850 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:+3.3V #PWR04
+L mycelium_pcb-rescue:+3.3V-power #PWR04
 U 1 1 5AD4BC57
 P 2450 1300
 F 0 "#PWR04" H 2450 1150 50  0001 C CNN
@@ -108,7 +108,7 @@ F 3 "" H 2450 1300 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:GND #PWR05
+L mycelium_pcb-rescue:GND-power #PWR05
 U 1 1 5AD4BE45
 P 5400 2300
 F 0 "#PWR05" H 5400 2050 50  0001 C CNN
@@ -119,7 +119,7 @@ F 3 "" H 5400 2300 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:+3.3V #PWR06
+L mycelium_pcb-rescue:+3.3V-power #PWR06
 U 1 1 5AD4BE72
 P 5350 1500
 F 0 "#PWR06" H 5350 1350 50  0001 C CNN
@@ -158,7 +158,7 @@ Wire Wire Line
 Wire Wire Line
 	2450 1400 2550 1400
 $Comp
-L power:+3.3V #PWR07
+L mycelium_pcb-rescue:+3.3V-power #PWR07
 U 1 1 5AD4CCFD
 P 5000 2800
 F 0 "#PWR07" H 5000 2650 50  0001 C CNN
@@ -181,7 +181,7 @@ Connection ~ 2700 3650
 Text Notes 6050 2650 0    60   ~ 0
 prog header\n
 $Comp
-L power:GND #PWR08
+L mycelium_pcb-rescue:GND-power #PWR08
 U 1 1 5AD4D1F7
 P 5650 2750
 F 0 "#PWR08" H 5650 2500 50  0001 C CNN
@@ -236,7 +236,7 @@ Connection ~ 2550 1400
 Wire Wire Line
 	2400 1800 2400 1850
 $Comp
-L device:C C7
+L mycelium_pcb-rescue:C-device C7
 U 1 1 5AD4DE3B
 P 2550 2150
 F 0 "C7" H 2665 2196 50  0000 L CNN
@@ -253,7 +253,7 @@ Wire Wire Line
 Wire Wire Line
 	2550 2350 2550 2300
 $Comp
-L device:L L2
+L mycelium_pcb-rescue:L-device L2
 U 1 1 5AD4E164
 P 2100 1650
 F 0 "L2" H 2153 1696 50  0000 L CNN
@@ -266,7 +266,7 @@ F 4 "81-BLM18BD252SN1D (mouser)" H 2100 1650 50  0001 C CNN "Notes"
 $EndComp
 Connection ~ 2400 1500
 $Comp
-L device:C C5
+L mycelium_pcb-rescue:C-device C5
 U 1 1 5AD4E366
 P 2200 1950
 F 0 "C5" H 2315 1996 50  0000 L CNN
@@ -277,7 +277,7 @@ F 3 "" H 2200 1950 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:GND #PWR09
+L mycelium_pcb-rescue:GND-power #PWR09
 U 1 1 5AD4E3B4
 P 2200 2200
 F 0 "#PWR09" H 2200 1950 50  0001 C CNN
@@ -304,7 +304,7 @@ F 3 "" H 6100 3050 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:+3.3V #PWR010
+L mycelium_pcb-rescue:+3.3V-power #PWR010
 U 1 1 5AD532AB
 P 5600 3450
 F 0 "#PWR010" H 5600 3300 50  0001 C CNN
@@ -341,7 +341,7 @@ $EndSheet
 Text Notes 3750 4950 0    60   ~ 0
 temp breakout - pins=8
 $Comp
-L power:+3.3V #PWR014
+L mycelium_pcb-rescue:+3.3V-power #PWR014
 U 1 1 5B3C0788
 P 4400 5900
 F 0 "#PWR014" H 4400 5750 50  0001 C CNN
@@ -352,7 +352,7 @@ F 3 "" H 4400 5900 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:GND #PWR015
+L mycelium_pcb-rescue:GND-power #PWR015
 U 1 1 5B3C0939
 P 4400 5600
 F 0 "#PWR015" H 4400 5350 50  0001 C CNN
@@ -383,7 +383,7 @@ HIH6131 is 3.3v!
 Text Notes 3300 3950 0    60   ~ 0
 out to low pass
 $Comp
-L device:R R1
+L mycelium_pcb-rescue:R-device R1
 U 1 1 5B3D50FB
 P 3650 4150
 F 0 "R1" H 3720 4196 50  0000 L CNN
@@ -396,7 +396,7 @@ $EndComp
 Wire Wire Line
 	3200 4150 3500 4150
 $Comp
-L device:C C11
+L mycelium_pcb-rescue:C-device C11
 U 1 1 5B3D5103
 P 3950 4300
 F 0 "C11" H 4065 4346 50  0000 L CNN
@@ -407,7 +407,7 @@ F 3 "" H 3950 4300 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:GND #PWR016
+L mycelium_pcb-rescue:GND-power #PWR016
 U 1 1 5B3D510A
 P 3950 4550
 F 0 "#PWR016" H 3950 4300 50  0001 C CNN
@@ -508,7 +508,7 @@ F 3 "" H 10500 1400 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:GND #PWR017
+L mycelium_pcb-rescue:GND-power #PWR017
 U 1 1 5B3F72A7
 P 9100 1250
 F 0 "#PWR017" H 9100 1000 50  0001 C CNN
@@ -519,7 +519,7 @@ F 3 "" H 9100 1250 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:+3.3V #PWR018
+L mycelium_pcb-rescue:+3.3V-power #PWR018
 U 1 1 5B3F72E2
 P 9100 1050
 F 0 "#PWR018" H 9100 900 50  0001 C CNN
@@ -530,7 +530,7 @@ F 3 "" H 9100 1050 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:+5V #PWR019
+L mycelium_pcb-rescue:+5V-power #PWR019
 U 1 1 5B3F731D
 P 9100 800
 F 0 "#PWR019" H 9100 650 50  0001 C CNN
@@ -551,7 +551,7 @@ Wire Wire Line
 Wire Wire Line
 	8950 1450 9100 1450
 $Comp
-L power:+5V #PWR020
+L mycelium_pcb-rescue:+5V-power #PWR020
 U 1 1 5B3F7E03
 P 8100 3250
 F 0 "#PWR020" H 8100 3100 50  0001 C CNN
@@ -564,7 +564,7 @@ $EndComp
 Wire Wire Line
 	7950 3250 8100 3250
 $Comp
-L power:GND #PWR021
+L mycelium_pcb-rescue:GND-power #PWR021
 U 1 1 5B3F7EA3
 P 8250 3150
 F 0 "#PWR021" H 8250 2900 50  0001 C CNN
@@ -635,7 +635,7 @@ SPARE_ADC
 Text Label 4800 2450 0    60   ~ 0
 SPARE_ADC
 $Comp
-L power:+5V #PWR022
+L mycelium_pcb-rescue:+5V-power #PWR022
 U 1 1 5B3FBD52
 P 10000 800
 F 0 "#PWR022" H 10000 650 50  0001 C CNN
@@ -646,7 +646,7 @@ F 3 "" H 10000 800 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:GND #PWR023
+L mycelium_pcb-rescue:GND-power #PWR023
 U 1 1 5B3FBDDC
 P 10000 1000
 F 0 "#PWR023" H 10000 750 50  0001 C CNN
@@ -680,7 +680,7 @@ Wire Wire Line
 Text Label 4800 1400 0    60   ~ 0
 RF_EN
 $Comp
-L device:Crystal_Small Y1
+L mycelium_pcb-rescue:Crystal_Small-device Y1
 U 1 1 5B4166A2
 P 4750 2050
 F 0 "Y1" V 4796 1962 50  0000 R CNN
@@ -691,7 +691,7 @@ F 3 "" H 4750 2050 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L device:C_Small C24
+L mycelium_pcb-rescue:C_Small-device C24
 U 1 1 5B416855
 P 5000 1950
 F 0 "C24" H 5092 1996 50  0000 L CNN
@@ -702,7 +702,7 @@ F 3 "" H 5000 1950 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L device:C_Small C25
+L mycelium_pcb-rescue:C_Small-device C25
 U 1 1 5B416AAE
 P 5150 1950
 F 0 "C25" H 5242 1996 50  0000 L CNN
@@ -728,7 +728,7 @@ Wire Wire Line
 	4900 1850 5000 1850
 Connection ~ 4750 1950
 $Comp
-L power:GND #PWR024
+L mycelium_pcb-rescue:GND-power #PWR024
 U 1 1 5B416C6E
 P 5050 2050
 F 0 "#PWR024" H 5050 1800 50  0001 C CNN
@@ -767,7 +767,7 @@ Wire Wire Line
 Text Label 9100 1600 0    60   ~ 0
 SCL
 $Comp
-L device:LED_Small D1
+L mycelium_pcb-rescue:LED_Small-device D1
 U 1 1 5B41BA82
 P 2200 3450
 F 0 "D1" V 2246 3382 50  0000 R CNN
@@ -781,7 +781,7 @@ Wire Wire Line
 	2200 3650 2200 3550
 Connection ~ 2550 3650
 $Comp
-L power:+3.3V #PWR025
+L mycelium_pcb-rescue:+3.3V-power #PWR025
 U 1 1 5B41BD57
 P 2200 2950
 F 0 "#PWR025" H 2200 2800 50  0001 C CNN
@@ -792,7 +792,7 @@ F 3 "" H 2200 2950 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L device:R R23
+L mycelium_pcb-rescue:R-device R23
 U 1 1 5B41BD9E
 P 2200 3150
 F 0 "R23" H 2270 3196 50  0000 L CNN
@@ -845,7 +845,7 @@ Wire Wire Line
 Wire Wire Line
 	10000 800  10300 800 
 $Comp
-L Connector:Conn_01x08 J2
+L mycelium_pcb-rescue:Conn_01x08-Connector J2
 U 1 1 5B3FC557
 P 7750 2950
 F 0 "J2" H 7670 2325 50  0000 C CNN
@@ -864,7 +864,7 @@ Wire Wire Line
 Text Label 8150 2550 0    60   ~ 0
 SDA
 $Comp
-L Connector:Conn_01x08 J10
+L mycelium_pcb-rescue:Conn_01x08-Connector J10
 U 1 1 5B453A8F
 P 3950 5500
 F 0 "J10" H 3870 4875 50  0000 C CNN
@@ -899,7 +899,7 @@ Wire Wire Line
 Wire Wire Line
 	6000 3600 6100 3600
 $Comp
-L power:GND #PWR013
+L mycelium_pcb-rescue:GND-power #PWR013
 U 1 1 5AD542D3
 P 6550 4000
 F 0 "#PWR013" H 6550 3750 50  0001 C CNN
@@ -910,7 +910,7 @@ F 3 "" H 6550 4000 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:+5V #PWR012
+L mycelium_pcb-rescue:+5V-power #PWR012
 U 1 1 5AD54210
 P 6000 3600
 F 0 "#PWR012" H 6000 3450 50  0001 C CNN
@@ -921,7 +921,7 @@ F 3 "" H 6000 3600 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:+3.3V #PWR011
+L mycelium_pcb-rescue:+3.3V-power #PWR011
 U 1 1 5AD53D70
 P 7000 3550
 F 0 "#PWR011" H 7000 3400 50  0001 C CNN
@@ -932,7 +932,7 @@ F 3 "" H 7000 3550 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L device:CP C9
+L mycelium_pcb-rescue:CP-device C9
 U 1 1 5AD53C3F
 P 7000 3750
 F 0 "C9" V 6745 3750 50  0000 C CNN
@@ -943,7 +943,7 @@ F 3 "" H 7000 3750 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L device:CP C8
+L mycelium_pcb-rescue:CP-device C8
 U 1 1 5AD53B7D
 P 6100 3750
 F 0 "C8" V 5845 3750 50  0000 C CNN
@@ -954,7 +954,7 @@ F 3 "" H 6100 3750 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L regul:LM1117-3.3 U2
+L mycelium_pcb-rescue:LM1117-3.3-regul U2
 U 1 1 5AD534E1
 P 6550 3600
 F 0 "U2" H 6550 3842 50  0000 C CNN
