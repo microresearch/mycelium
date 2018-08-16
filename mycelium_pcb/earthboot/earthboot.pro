@@ -1,4 +1,4 @@
-update=Tue 24 Jul 2018 11:42:55 CEST
+update=Wed 15 Aug 2018 17:10:49 CEST
 version=1
 last_client=eeschema
 [pcbnew]
@@ -25,37 +25,6 @@ version=1
 NetIExt=net
 [general]
 version=1
-[eeschema]
-version=1
-LibDir=/root/kicad-library/library
-[eeschema/libraries]
-LibName1=earthboot-rescue
-LibName2=adc-dac
-LibName3=memory
-LibName4=xilinx
-LibName5=microcontrollers
-LibName6=dsp
-LibName7=microchip
-LibName8=analog_switches
-LibName9=motorola
-LibName10=texas
-LibName11=intel
-LibName12=audio
-LibName13=interface
-LibName14=digital-audio
-LibName15=philips
-LibName16=cypress
-LibName17=siliconi
-LibName18=opto
-LibName19=atmel
-LibName20=contrib
-LibName21=Connector
-LibName22=analog_devices
-LibName23=/root/projects/myc/mycelium_pcb/AD5933
-LibName24=/root/rsync2016/kicadstuff/op27
-LibName25=/root/projects/myc/mycelium_pcb/ADR423
-LibName26=power
-LibName27=device
 [schematic_editor]
 version=1
 PageLayoutDescrFile=
@@ -66,3 +35,6 @@ NetFmtName=
 SpiceAjustPassiveValues=0
 LabSize=60
 ERC_TestSimilarLabels=1
+[eeschema]
+version=1
+LibDir=
