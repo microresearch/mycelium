@@ -1,15 +1,17 @@
 //myc sd card read/write and tone/noise generation from sensors for radio transmission
 
-// TODO: test basic tone out and switch on/off radio, test HIH code,
+// TODO: test basic tone out and switch on/off radio-DONE, test HIH code,
 // test MAX31865 code and other adc sensors, test sd card read and write,
 // code for generating interesting stuff
+
+// we need serial out for testings!
 
 // license:GPL-2.0+
 // copyright-holders: Martin Howse
 
-// based on wormed.c for voices
+// based on wormed.c for voices, check also microbd
 
-#define F_CPU 16000000UL 
+//#define F_CPU 16000000UL 
 
 #include <stdio.h>
 #include <stdint.h>
@@ -23,6 +25,38 @@
 #include <avr/sleep.h>
 #include <avr/wdt.h>
 #include <avr/pgmspace.h>
+#include <inttypes.h>
+//#include <compat/twi.h>
+
+#include "i2c_master.h"
+
+#define hih6131w  0x4E  //write mode - 0x27 <<1
+#define hih6131r  0x4F  //read mode
+
+#ifdef UDR0
+#define UBRRH UBRR0H
+#define UBRRL UBRR0L
+#define UDR UDR0
+
+#define UCSRA UCSR0A
+#define UDRE UDRE0
+#define RXC RXC0
+
+#define UCSRB UCSR0B
+#define RXEN RXEN0
+#define TXEN TXEN0
+#define RXCIE RXCIE0
+
+#define UCSRC UCSR0C
+#define URSEL 
+#define UCSZ0 UCSZ00
+#define UCSZ1 UCSZ01
+#define UCSRC_SELECT 0
+#else
+#define UCSRC_SELECT (1 << URSEL)
+#endif
+
+
 //#include "waves.h"
 
 
@@ -35,6 +69,32 @@
 
 uint8_t synthPeriod, sample, rate, counter;
 
+#define UART_BAUD_CALC(UART_BAUD_RATE,F_OSC) ((F_OSC)/((UART_BAUD_RATE)*16l)-1)
+
+void delay(int ms){
+	while(ms){
+		_delay_ms(0.96);
+		ms--;
+	}
+}
+
+void serial_init(int baudrate){
+  UBRRH = (uint8_t)(UART_BAUD_CALC(baudrate,F_CPU)>>8);
+  UBRRL = (uint8_t)UART_BAUD_CALC(baudrate,F_CPU); /* set baud rate */
+  UCSRB = (1<<RXEN) | (1<<TXEN); /* enable receiver and transmitter */
+  UCSRC |=(3<<UCSZ0);   /* asynchronous 8N1 */
+}
+
+static int uart_putchar(char c, FILE *stream);
+
+static FILE mystdout = FDEV_SETUP_STREAM(uart_putchar, NULL,_FDEV_SETUP_WRITE);
+
+static int uart_putchar(char c, FILE *stream)
+{
+  loop_until_bit_is_set(UCSRA, UDRE);
+  UDR = c;
+  return 0;
+}
 
 ISR(TIMER1_COMPA_vect) {
   static uint8_t nextPwm, noisy;
@@ -91,7 +151,13 @@ void init_all() {
   synthPeriod=0x50; 
   sei();
 
-  adc_init();
+  serial_init(9600);
+  stdout = &mystdout;
+  //  adc_init(); // fix i2c pins but that's not it...
+  printf("TESTING1 9600\r\n");
+
+  // how do we set up HIH sensor?
+  i2c_init(); 
 }
 
 unsigned char adcread(unsigned char channel){
@@ -115,18 +181,74 @@ unsigned int adcread10(short channel){
   return(ADresult);
 }
 
+unsigned short humN;
+unsigned short tempN;
+
+void THSense(void) {
+unsigned char humL;
+unsigned char humH;
+unsigned short hum;
+unsigned char tempL;
+unsigned char tempH;
+unsigned short temp;
+
+/*
+// TWI measurement request (slave ADDR = 0x27)
+SLA_ADDR=0x27;
+TWI_sendcommand((SLA_ADDR<<1),TWI_W);
+// Stop command
+TWI_stop();
+_delay_us(200);
+TWI_repstart((SLA_ADDR<<1),TWI_R);
+TWI_readdata(4,&hum[0]);
+Hbyte=((hum[0]&0x3F)<<8)|(hum[1]);
+// humidity % RH
+humidity=(Hbyte/16383.0)*100.0;
+_delay_ms(200);
+ */
+ 
+  i2c_start(hih6131w);               // measurement request
+  i2c_stop();                             // set stop condition = release bus
+  _delay_ms(1000);
+
+  i2c_start(hih6131r);               // set device address and read mode
+
+  humH = i2c_read_ack();                   // read one byte from EEPRO M
+  humL = i2c_read_ack();
+  tempH = i2c_read_ack();
+  tempL = i2c_read_nack();
+  i2c_stop();
+
+  hum = (humH << 8) + humL;
+  temp = (tempH << 8) + tempL;
+  hum = (hum << 2);
+  hum = (hum >> 2);
+  temp = (temp >> 2);
+  humN = (hum/16382.0) * 100;
+  tempN = ((temp/16382.0) * 165) - 40;
+
+
+}
+
 void main() {
 
   init_all();
   while(1){
     // turn on and off FET for one second PB0 - in reverse high=off
-    cbi(DDRB,0); // 
+    /*    cbi(DDRB,0);  
     cbi(PORTB,0);
     _delay_ms(500);
-    sbi(DDRB,0); // 
+    sbi(DDRB,0); 
     sbi(PORTB,0);
     _delay_ms(500);        
-    synthPeriod++;
+    synthPeriod++;*/
+
+    // tests for HIH
+    THSense();
+    printf("TEMP: %d HUM: %d\r\n", tempN, humN);
+    _delay_ms(1000);
+    
+    
   }
 }
 
