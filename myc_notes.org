@@ -194,7 +194,7 @@ see also: https://github.com/mjmeli/arduino-ad5933
 
 - boards arrived, test PSU-TESTED 
 
-- test atmega8 programming/basic tones-DONE, with HIH(where?), test
+- test atmega8 programming/basic tones-DONE, with HIH-DONE, test
   transistor radio with fet switch and basic opsDONE, test sd card read/write
 
 - programmed and flashed with usb hub and cable red to rightest part of adapter...
@@ -204,7 +204,7 @@ see also: https://github.com/mjmeli/arduino-ad5933
   circuit - pin 3 emitter to gate of NX2301, pin1 base 1k to switch,
   pin 3 to GND (wired)...
 
-code is based on wormed voice...
+code is based on wormed voice//microBD
 
 - MAX31865-SPI // adapt from adafruit library /// HIH moisture SPI too
 
@@ -219,6 +219,20 @@ what others: 5933, adc for CO2, for light, mushroom and maybe ad620 on board
 and what generates pwm - wavetables, frequencies, reread SD, live codings...
 
 SD read/write: code is: /root/projects/archived/bordeaux/new_skry
+
+** 21/8
+
+- where was 5933 code which was not for Arduino: main.c in /root/projects/archived/bordeaux/new_skry (along with SD code)
+
+- for myc - tested serial fine, now HIH=i2c TODO-working
+
+- SD card basic open/record - need to do playback - we could just use raw read/write access
+
+at the moment with SDHC enabled we have size issues - fixed by removing FAT etc...
+
+- MAX3xxx temp
+
+- other sensors/AD5933
 
 
 * receivers// with arduino/pi
