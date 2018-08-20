@@ -20,13 +20,14 @@ DOXYGEN := doxygen
 CFLAGS := -Wall -pedantic -mmcu=$(MCU) -std=c99 -Os -DF_OSC=8000000 -DF_CPU=$(MCU_FREQ)
 
 FUSEH = 0xdf
-FUSEL = 0xe2
+FUSEL = 0xff
 
-fuse:
-	avrdude -y -c usbasp -p $(MCU_AVRDUDE) -F -U hfuse:w:$(FUSEH):m -U lfuse:w:$(FUSEL):m
 
 
 all: $(HEX)
+
+fuse:
+	avrdude -y -c usbasp -p $(MCU_AVRDUDE) -F -U hfuse:w:$(FUSEH):m -U lfuse:w:$(FUSEL):m
 
 clean:
 	rm -f $(HEX) $(OUT) $(MAP) $(OBJECTS)

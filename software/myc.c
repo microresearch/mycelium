@@ -16,17 +16,14 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
-#include <math.h>
 #include <avr/io.h>
-#include <avr/eeprom.h>
 #include <avr/interrupt.h>
-#include <avr/pgmspace.h>
 #include <util/delay.h>
-#include <avr/sleep.h>
-#include <avr/wdt.h>
 #include <avr/pgmspace.h>
 #include <inttypes.h>
-//#include <compat/twi.h>
+
+#include "sd_raw.h"
+#include "sd_raw_config.h"
 
 #include "i2c_master.h"
 
@@ -87,14 +84,27 @@ void serial_init(int baudrate){
 
 static int uart_putchar(char c, FILE *stream);
 
-static FILE mystdout = FDEV_SETUP_STREAM(uart_putchar, NULL,_FDEV_SETUP_WRITE);
+//static FILE mystdout = FDEV_SETUP_STREAM(uart_putchar, NULL,_FDEV_SETUP_WRITE);
 
 static int uart_putchar(char c, FILE *stream)
 {
   loop_until_bit_is_set(UCSRA, UDRE);
   UDR = c;
   return 0;
-}
+  }
+
+/**
+ * Send a string to the serial port.
+ */
+/*void PutStrNl (char *data, bool newLine)
+{
+    while (*data) PutChr(*data++);
+    if (newLine)
+    {
+        PutChr('\r');    // optional
+        PutChr('\n');
+    }
+    }*/
 
 ISR(TIMER1_COMPA_vect) {
   static uint8_t nextPwm, noisy;
@@ -131,7 +141,7 @@ void init_all() {
 // PB1 is temp_cs and rest of temp as usual setup MAX31865 (port library)
   
   DDRD=0x08;  // PD3
-  DDRB=0x01; // PB0  
+  DDRB|=0x01; // PB0 and for SD card  
 
   //  PORTB=0x01; // set up to allow RF OUT...
   
@@ -151,10 +161,10 @@ void init_all() {
   synthPeriod=0x50; 
   sei();
 
-  serial_init(9600);
-  stdout = &mystdout;
+  //  serial_init(9600);
+  //  stdout = &mystdout;
   //  adc_init(); // fix i2c pins but that's not it...
-  printf("TESTING1 9600\r\n");
+  //  printf("TESTING1 9600\r\n");
 
   // how do we set up HIH sensor?
   i2c_init(); 
@@ -227,12 +237,50 @@ _delay_ms(200);
   humN = (hum/16382.0) * 100;
   tempN = ((temp/16382.0) * 165) - 40;
 
-
 }
 
+unsigned char rx_buffer[8]; // for sd-card
+
 void main() {
+  char buffer[7]="MONK000";
+  unsigned char not=0; unsigned int lenny;
 
   init_all();
+
+  while(1){    // outer loop for SD-cardery
+        if(!sd_raw_init())
+      {
+	//	printf("NO raw");
+	continue;
+      }
+
+    struct partition_struct* partition = partition_open(sd_raw_read,
+							sd_raw_read_interval,
+							sd_raw_write,
+							sd_raw_write_interval,
+							0
+							);
+
+    if(!partition)
+      {
+	/* If the partition did not open, assume the storage device
+	 * is a "superfloppy", i.e. has no MBR.
+	 */
+	partition = partition_open(sd_raw_read,
+				   sd_raw_read_interval,
+				   sd_raw_write,
+				   sd_raw_write_interval,
+				   -1
+				   );
+	if(!partition)
+	  {
+	    //	printf("NO part");
+	    continue;          
+	  }
+      }
+
+    printf("OPENED");
+    
   while(1){
     // turn on and off FET for one second PB0 - in reverse high=off
     /*    cbi(DDRB,0);  
@@ -243,12 +291,21 @@ void main() {
     _delay_ms(500);        
     synthPeriod++;*/
 
+      int32_t offset=0;
+    
     // tests for HIH
-    THSense();
-    printf("TEMP: %d HUM: %d\r\n", tempN, humN);
+      THSense();
+    //    printf("TEMP: %d HUM: %d\r\n", tempN, humN);
     _delay_ms(1000);
-    
-    
-  }
-}
 
+    //    lenny+=sprintf(rx_buffer+lenny,"%d,%d\n",tempN, humN);
+    rx_buffer[lenny+1]=0;
+
+    // but we want to playback values...
+
+    ////////////////////////////////    
+  }
+
+  }
+  return 0;
+}
