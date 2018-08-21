@@ -1,4 +1,6 @@
 /*************************************************** 
+Adapted by Martin Howse for bare Atmega168
+
   This is a library for the Adafruit PT100/P1000 RTD Sensor w/MAX31865
 
   Designed specifically to work with the Adafruit RTD Sensor
