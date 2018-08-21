@@ -220,7 +220,7 @@ and what generates pwm - wavetables, frequencies, reread SD, live codings...
 
 SD read/write: code is: /root/projects/archived/bordeaux/new_skry
 
-** 21/8
+** 20/8
 
 - where was 5933 code which was not for Arduino: main.c in /root/projects/archived/bordeaux/new_skry (along with SD code)
 
@@ -233,6 +233,19 @@ at the moment with SDHC enabled we have size issues - fixed by removing FAT etc.
 - MAX3xxx temp
 
 - other sensors/AD5933
+
+* 21/8
+
+- MAX31865 code (simply ported from adafruit) is working - fixed so works with SD card... DONE
+- 555 on INT0 countings DONE
+
+
+- other sensors/AD5933
+
+- test rest of hardware side of things...
+
+- waterproofing tests...
+
 
 
 * receivers// with arduino/pi

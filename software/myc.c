@@ -88,6 +88,13 @@ void delay(int ms){
 	}
 }
 
+uint32_t fiver=0;
+
+ISR (INT0_vect) // this is 555 interrupt counter
+{
+  fiver++;
+}
+
 void serial_init(int baudrate){
   UBRRH = (uint8_t)(UART_BAUD_CALC(baudrate,F_CPU)>>8);
   UBRRL = (uint8_t)UART_BAUD_CALC(baudrate,F_CPU); /* set baud rate */
@@ -169,7 +176,6 @@ void init_all() {
   OCR1A = F_CPU / FS;
   TIMSK1 = _BV(OCIE1A);  
   synthPeriod=0x50; 
-  sei();
 
   serial_init(9600);
   stdout = &mystdout;
@@ -181,6 +187,13 @@ void init_all() {
 
   // for MAX31865
   MAX31865_init(MAX31865_2WIRE);
+
+  // 555 is on INT0 - set up here - we don't need pullup as we have on board...
+
+  EICRA |= (1 << ISC01);    // on rising edge
+  EIMSK |= (1 << INT0);     // Turns on INT0
+    
+  sei();
   
 }
 
@@ -290,9 +303,14 @@ void main() {
     synthPeriod++;*/
     
     // tests for HIH
-      THSense();
+    //      THSense();
     //    printf("TEMP: %d HUM: %d\r\n", tempN, humN);
+
+    // test the 555 - working it seems
     _delay_ms(1000);
+    uint32_t fivee=fiver;
+    printf("555 count: %d\r\n", fivee);
+    
 
     // write to sd-card RAW
 
@@ -304,11 +322,12 @@ void main() {
 	offset++;
         if (offset>SIZEY) offset=0; 
 
+	fiver=0; // zero the 555
     // test for MAX31865:
     //    Serial.print("Temperature = "); Serial.println(max.temperature(RNOMINAL, RREF));
-    tempy=temperature(RNOMINAL, RREF); // working but not with sdcard
-    int temper=(int)(tempy*100.0);
-    printf("MAX temp %d\r\n", temper);
+	//    tempy=temperature(RNOMINAL, RREF); // working but not with sdcard
+	//    int temper=(int)(tempy*100.0);
+	//    printf("MAX temp %d\r\n", temper);
     ////////////////////////////////    
   }
 
