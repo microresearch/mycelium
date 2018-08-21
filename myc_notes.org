@@ -1,3 +1,42 @@
+* type fo mycel radio module
+
+transmitters: transistor(switchable), HC04
+
+with input to trans or HC04 from:
+
+- micro with humidity, MAXtemp, CO2, light(TODO), 555 in, ADC mushroom, ADC from AD620 earthboot(TEST), 5933 from earthboot (8 options)
+- 555 out
+- 4093/theremin out
+- OP07 RF out
+
+- 4093 HF as standalone transmitter
+
+and option to just use micro to switch on/off transmitter
+
+* other TODO for TAIPEI
+
+- distributed PSU so we don't short all if there is a problem
+- receiver modules
+- soundcard setup and tests
+
+* workshop plan
+
+http://stwst48x4.stwst.at/radio_mns_workshop  Mycelial Radio Activation
+
+Sa, 8. Sept, 2018, 11:00 - 17:00
+at STWST48x4, Linz, Austria
+
+- Intro to interspecies communications, project ideas, radio platform
+- building and interfacing to mushrooms - simple circuits, 04, theremin, transistor
+- playing with this and further ideas
+- ideas for a score
+- tasting and burning
+- final micro ritual/performance
+
+** materials
+
+
+
 * new notes/log
 ** 1/7- 2/7
 
@@ -234,7 +273,7 @@ at the moment with SDHC enabled we have size issues - fixed by removing FAT etc.
 
 - other sensors/AD5933
 
-* 21/8
+** 21/8
 
 - MAX31865 code (simply ported from adafruit) is working - fixed so works with SD card... DONE
 - 555 on INT0 countings DONE
@@ -245,7 +284,6 @@ at the moment with SDHC enabled we have size issues - fixed by removing FAT etc.
 - test rest of hardware side of things...
 
 - waterproofing tests...
-
 
 
 * receivers// with arduino/pi
@@ -274,7 +312,7 @@ but question of i2c also
 
 - pcb thickness 1.2mm
 
-* TODO: 
+* TODO/DONE: 
 
 - test import svg in pcbnew: this works following: https://andrehessling.de/2016/09/13/getting-a-custom-board-outline-from-an-svg-file-into-kicad/
 
