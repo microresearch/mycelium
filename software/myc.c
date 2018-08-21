@@ -12,7 +12,12 @@
 
 // TODO: MAX31865-X, 555 interrupt on INT0, adc sensors (light sensor to build)
 
-// live codings, timings etc.
+// live codings, timings of on/off FET
+
+// also noise from wormed.c, shift register work
+
+// write to SD/ read back in loop: 1 day with 1sec delay = 24hrx60minx60sec=86400 values - playback rates...
+//2000000000; 2e9 2gb - 23k days
 
 // license:GPL-2.0+
 // copyright-holders: Martin Howse
