@@ -1,4 +1,4 @@
-* type fo mycel radio module
+* type of mycel radio modules
 
 transmitters: transistor(switchable), HC04
 
@@ -11,7 +11,7 @@ with input to trans or HC04 from:
 
 - 4093 HF as standalone transmitter
 
-and option to just use micro to switch on/off transmitter
+and additional option to always just use micro to switch on/off transmitter either according to score or with environmental conditions
 
 * other TODO for TAIPEI
 
@@ -26,15 +26,23 @@ http://stwst48x4.stwst.at/radio_mns_workshop  Mycelial Radio Activation
 Sa, 8. Sept, 2018, 11:00 - 17:00
 at STWST48x4, Linz, Austria
 
-- Intro to interspecies communications, project ideas, radio platform
-- building and interfacing to mushrooms - simple circuits, 04, theremin, transistor
+- Intro to interspecies communications, project ideas, radio platform // reader re-launch
+- building and interfacing to mushrooms - simple circuits, 04, theremin?, transistor
 - playing with this and further ideas
-- ideas for a score
-- tasting and burning
+- reception
+- ideas for a score/translations
+- tasting and burning/tea
 - final micro ritual/performance
 
 ** materials
 
+- dried lingzhi for tea
+- copper wires
+- arduinos and receiver modules
+- vinyl cutter and copper?
+
+
+** tech rider
 
 
 * new notes/log
@@ -278,12 +286,36 @@ at the moment with SDHC enabled we have size issues - fixed by removing FAT etc.
 - MAX31865 code (simply ported from adafruit) is working - fixed so works with SD card... DONE
 - 555 on INT0 countings DONE
 
+////
 
-- other sensors/AD5933
+- test other sensors/AD5933: CO2, light, ADC mushroom, ADC from AD620 earthboot(TEST), 5933 from earthboot
 
-- test rest of hardware side of things...
+- test rest of hardware side of things:
+- 555 out
+- 4093/theremin out
+- OP07 RF out
+- 4093 HF as standalone transmitter
+- HC04 transmitter
 
 - waterproofing tests...
+
+- ideas for score and programming
+
+** 22/8
+
+GRV I2C FM Arduino - Grove I2C FM Receiver - reichelt based on RDA5807M. 
+
+voltage is either 3.3v or 5v test code for arduino in software based on: https://hackaday.io/project/9009-arduino-radio-with-rds
+
+see also:
+
+https://funprojects.blog/tag/rda5807/
+
+http://cdn-reichelt.de/documents/datenblatt/A300/107020006_01.pdf
+
+http://wiki.seeedstudio.com/Grove-I2C_FM_Receiver/
+
+question of antenna?
 
 
 * receivers// with arduino/pi
@@ -299,6 +331,10 @@ RDA5807xx chip is a clone of the TEA5767
 https://www.element14.com/community/blogs/sasg/2014/01/19/controlling-the-rda5807sp-fm-radio-receiver-with-the-raspberry-pi
 
 http://www.raspberry-pi-geek.com/Archive/2016/16/Remote-controlled-Arduino-FM-radio
+
+voltage is either 3.3v or 5v
+
+test code for arduino in software
 
 - SI4825-A10-CS Silicon Labs RF Receiver - mouser 
 
