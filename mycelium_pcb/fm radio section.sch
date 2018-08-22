@@ -460,7 +460,6 @@ F 3 "" H 1700 6850 50  0001 C CNN
 	1    1700 6850
 	0    1    1    0   
 $EndComp
-Connection ~ 1550 6550
 Wire Wire Line
 	1850 6850 2150 6850
 Wire Wire Line
@@ -705,7 +704,7 @@ $Comp
 L mycelium_pcb-rescue:74HC04-Logic_74xx U5
 U 1 1 5B3D7575
 P 5350 4900
-F 0 "U5" H 5350 5217 50  0000 C CNN
+F 0 "U5" H 5400 5000 50  0000 C CNN
 F 1 "74HC04" H 5350 5100 50  0000 C CNN
 F 2 "SMD_Packages:SOIC-14_N" H 5350 4900 50  0001 C CNN
 F 3 "" H 5350 4900 50  0001 C CNN

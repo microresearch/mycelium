@@ -4,7 +4,7 @@ transmitters: transistor(switchable), HC04
 
 with input to trans or HC04 from:
 
-- micro with humidity, MAXtemp, CO2, light(TODO), 555 in, ADC mushroom, ADC from AD620 earthboot(TEST), 5933 from earthboot (8 options)
+- micro with humidity, MAXtemp, CO2, 555 in, ADC mushroom, ADC from AD620 earthboot(TEST), 5933 from earthboot (7 options)
 - 555 out
 - 4093/theremin out
 - OP07 RF out
@@ -12,6 +12,8 @@ with input to trans or HC04 from:
 - 4093 HF as standalone transmitter
 
 and additional option to always just use micro to switch on/off transmitter either according to score or with environmental conditions
+
+[no light option...]
 
 * other TODO for TAIPEI
 
@@ -27,7 +29,7 @@ Sa, 8. Sept, 2018, 11:00 - 17:00
 at STWST48x4, Linz, Austria
 
 - Intro to interspecies communications, project ideas, radio platform // reader re-launch
-- building and interfacing to mushrooms - simple circuits, 04, theremin?, transistor
+- building and interfacing to mushrooms - simple circuits, 04, theremin, transistor
 - playing with this and further ideas
 - reception
 - ideas for a score/translations
@@ -36,13 +38,39 @@ at STWST48x4, Linz, Austria
 
 ** materials
 
+- printed reader
 - dried lingzhi for tea
-- copper wires
-- arduinos and receiver modules
-- vinyl cutter and copper?
+- copper wires 0.8mm and 1mm
+- several arduinos, cables and receiver modules
+- audio cables
+- vinyl cutter
+- radio receivers
+- copper sheets, thin boards, copper sticky sheets, basic wire, solder, croc clips, 
+- parts boxes just in case...
+
+- 8x 9v batteries
+
+- tools-solder iron, multimeter
+- mycelium modules, sensors, *power supply* and breakout, programmer and cable
+
+- candles and for heating, laser and light pickup
+
+what to order/buy: thin copper boards, parts, power supply 5v ???, copper sheets (mod), croc clips, batteries, parts:
+
+- parts: battery clips, 04: HC04, 10u, 4.7K, 47k, 1k, 2.5k, 33pfx2,
+  10pf, 2.5k trimmer, theremin transmit: 4093, 15k, 100pf,
+  transistor-based:2n2222, 470R, 27K, 10K, 1N, wire 0.8, 1mm
+
 
 
 ** tech rider
+
+- tables, chairs, table lights, paper or whiteboard for diagrams,
+  power strips offering say 10 outlets
+
+- 8 channel analogue mixer, powered monitor speaker, 6x minijack to jack cables, 2x jack cables
+
+- 6x good soldering irons with stands, 3 pairs scissors, 3 wire cutters, 1 pliers, 2x gluegun and gluesticks, 3x craft knives
 
 
 * new notes/log
@@ -288,7 +316,7 @@ at the moment with SDHC enabled we have size issues - fixed by removing FAT etc.
 
 ////
 
-- test other sensors/AD5933: CO2, light, ADC mushroom, ADC from AD620 earthboot(TEST), 5933 from earthboot
+- test other sensors/AD5933: CO2, ADC mushroom, ADC from AD620 earthboot(TEST), 5933 from earthboot
 
 - test rest of hardware side of things:
 - 555 out
