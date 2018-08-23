@@ -4,8 +4,8 @@ transmitters: transistor(switchable), HC04
 
 with input to trans or HC04 from:
 
-- micro with humidity, MAXtemp, CO2, 555 in, ADC mushroom, ADC from AD620 earthboot(TEST), 5933 from earthboot (7 options)
-- 555 out
+- micro with humidity, MAXtemp, CO2, 555 in, ADC mushroom, ADC from AD620 earthboot(TESTED), 5933 from earthboot (7 options)
+- 555 out TESTED
 - 4093/theremin out
 - OP07 RF out
 
@@ -67,7 +67,7 @@ thin copper boardsX, parts, *several power supply 5v for arduino and modules*, c
 
 - parts: battery clips-3xaaaX, 04: HC04 (note 5v only)x, 
 
-check: 4.7K, 47k, 1k, 2.5k, 470R, 27K, 10K, 15K
+check: 4.7KX, 47k, 1k, 2.5k, 470R, 27K, 10KX, 15K
 
 check: 33pfx2, 10pf, 100pf, 1N, 10u
 
@@ -338,7 +338,7 @@ at the moment with SDHC enabled we have size issues - fixed by removing FAT etc.
 - test other sensors/AD5933: CO2, ADC mushroom, ADC from AD620 earthboot(TEST), 5933 from earthboot
 
 - test rest of hardware side of things:
-- 555 out
+- 555 out - TESTED
 - 4093/theremin out
 - OP07 RF out
 - 4093 HF as standalone transmitter
