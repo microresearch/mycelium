@@ -15,6 +15,12 @@ and additional option to always just use micro to switch on/off transmitter eith
 
 [no light option...]
 
+** sound strategies...
+
+- white noise, wormed voice oscillations, shift register with leaks, test tone transmits - regularity driven
+
+minimal...
+
 * other TODO for TAIPEI
 
 - distributed PSU so we don't short all if there is a problem
@@ -55,11 +61,22 @@ at STWST48x4, Linz, Austria
 
 - candles and for heating, laser and light pickup
 
-what to order/buy: thin copper boards, parts, power supply 5v ???, copper sheets (mod), croc clips, batteries, parts:
+what to order/buy: 
 
-- parts: battery clips, 04: HC04, 10u, 4.7K, 47k, 1k, 2.5k, 33pfx2,
-  10pf, 2.5k trimmer, theremin transmit: 4093, 15k, 100pf,
-  transistor-based:2n2222, 470R, 27K, 10K, 1N, wire 0.8, 1mm
+thin copper boardsX, parts, *several power supply 5v for arduino and modules*, copper sheets (mod), croc clipsX, batteries, parts:
+
+- parts: battery clips-3xaaaX, 04: HC04 (note 5v only)x, 
+
+check: 4.7K, 47k, 1k, 2.5k, 470R, 27K, 10K, 15K
+
+check: 33pfx2, 10pf, 100pf, 1N, 10u
+
+2.5k trimmerX, 
+
+theremin transmit: 4093x, 
+transistor-based:2n2222x, 
+
+wire 0.8, 1mmX
 
 
 
@@ -67,6 +84,8 @@ what to order/buy: thin copper boards, parts, power supply 5v ???, copper sheets
 
 - tables, chairs, table lights, paper or whiteboard for diagrams,
   power strips offering say 10 outlets
+
+- kettle, cups
 
 - 8 channel analogue mixer, powered monitor speaker, 6x minijack to jack cables, 2x jack cables
 
