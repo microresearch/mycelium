@@ -1,0 +1,111 @@
+Component	Description	Part	References	Value	Footprint	Quantity Per PCB	Datasheet	Notes
+
+1	Unpolarized capacitor	C	C11 C12	100nF	C_0805	2 H		
+2	Unpolarized capacitor	C	C5 C6 C7 C22 C26 C28 C31 C33	100nF	C_0805_HandSoldering	8 H
+
+3	Unpolarized capacitor	C	C13 C14	100pF	C_0805	2 X		
+
+4	Unpolarized capacitor	C	C1 C27	10nF	C_0805_HandSoldering	2 H		
+
+5	Unpolarized capacitor	C	C23	10pF	C_0805_HandSoldering	1 H		
+
+6	Trimmable capacitor	CTRIM	C4	10pF-50pF	C_Trimmer_Murata_TZC3	1		TZC03 30P (reich)X
+7	Unpolarized capacitor	C	C10	10pf or replace conns	C_0805	1 H		
+
+8	Polarised capacitor	CP	C8 C9 C19	10uF	CP_Tantalum_Case-A_EIA-3216-18_Hand	3 H		
+
+9	Unpolarized capacitor	C	C17	1nF	C_0805	1		H
+10	Unpolarized capacitor	C	C3	1nF	C_0805_HandSoldering	1 H		
+11	Polarised capacitor	CP	C2	1uF	CP_Tantalum_Case-A_EIA-3216-18_Hand	1 H
+
+12	Unpolarized capacitor	C	C29 C30	2.2uF	CP_Tantalum_Case-A_EIA-3216-18_Hand	2 (mouser)		
+13	Polarised capacitor	CP	C32	2.2uF	CP_Tantalum_Case-A_EIA-3216-18_Hand	1 		
+
+14	Polarised capacitor	CP	C34	220nF	C_0805_HandSoldering	1 X		
+
+15	Unpolarized capacitor	C_Small	C24 C25	22pF	C_0805_HandSoldering	2 H		
+
+16	Unpolarized capacitor	C	C18	330nF	C_0805	1 X		
+17	Unpolarized capacitor	C	C20 C21	33pF	C_0805_HandSoldering	2		
+18	Unpolarized capacitor	C	C16	4.7nF	C_0805	1 X		
+
+
+
+19	LED, small symbol	LED_Small	D1	LED_Small	LED_0805_HandSoldering	1 - HAVE		
+
+
+20		CONN_01X01	J9 J24	ANTENNA	SolderWirePad_single_1mmDrill	2		
+21		CONN_01X01	J1 J3 J4	BREAKOUT	SolderWirePad_single_1mmDrill	3		
+22		CONN_01X01	J11 J12 J13 J14 J15 J16 J25 J26 J33 J34 J35 J36 J37 J38	BREAKOUT	SolderWirePad_single_SMD_5x10mm	14		
+23		CONN_01X01	J5 J6	CAP	SolderWirePad_single_1mmDrill	2		
+24		CONN_01X01	J17 J18	CONN_01X01	SolderWirePad_single_1mmDrill	2		
+25		CONN_01X06	J7	CONN_01X06	Socket_Strip_Straight_1x06_Pitch2.54mm	1		
+26	Generic connector, single row, 01x02	Conn_01x02	J22	Conn_01x02	Socket_Strip_Straight_1x02_Pitch2.54mm	1		
+27	Generic connector, single row, 01x08	Conn_01x08	J2 J10	Conn_01x08	Socket_Strip_Straight_1x08_Pitch2.54mm	2		
+28		CONN_01X01	J19 J20 J21 J23 J27 J28 J29 J39 J40 J41	EDGE	SolderWirePad_single_SMD_5x10mm	10		
+29		CONN_01X01	J31 J32	MUSH	SolderWirePad_single_1mmDrill	2
+
+
+
+30	Micro SD Card Socket	Micro_SD_Card	J8	Micro_SD_Card	microSD_Card_Receptacle_Wurth_693072010801	1	http://katalog.we-online.de/em/datasheet/693072010801.pdf	710-693072010801 (mouser) X
+
+31		CONN_01X01	J30	RFIN	SolderWirePad_single_1mmDrill	1		
+32	Jumper, normally open	Jumper_NO_Small	JP1 JP2 JP3 JP4 JP5	Jumper_NO_Small	R_0805_HandSoldering	5		
+33	Inductor	L	L1	COIL	INDUCTOR_V	1		0.8mmm handwound coil
+
+34	Inductor	L	L2	blocking	D_0603	1		81-BLM18BD252SN1D - have WORM
+35		HIH6131	M1	HIH6131	SOIC-8-N	1		HIH6131-021-001 (mouser) X
+
+36		BC547	Q1	2n2222	SOT-23_Handsoldering	1		2N 2222A SMD (reich) - X
+
+37	Transistor P-MOSFET with substrate diode (general)	Q_PMOS_GSD	Q2	Q_PMOS_GSD	SOT-23_Handsoldering	1		NXP2301P-reichelt -X
+
+38	Resistor	R	R2 R3 R27	100K	R_0805_HandSoldering	3 H		
+39	Resistor	R	R26	100R	R_0805_HandSoldering	1 H		
+40	Resistor	R	R4 R5 R7 R10 R11 R12 R13 R14 R15 R24 R25 R30 R31	10K	R_0805_HandSoldering	13 H		
+41	Resistor	R	R29	150K	R_0805_HandSoldering	1 H		
+42	Resistor	R	R9	15K	R_0805_HandSoldering	1 H		
+43	Resistor	R	R21 R22	1K	R_0805_HandSoldering	2 H		
+44	Resistor	R	R16	1K5	R_0805_HandSoldering	1 H		
+45	Resistor	R	R6	27K	R_0805_HandSoldering	1 H-WORM		
+46	Resistor	R	R23	330R	R_0805_HandSoldering	1 H		
+47	Resistor	R	R28	390R	R_0805_HandSoldering	1 X		
+48	Resistor	R	R18 R20	4.7K	R_0805_HandSoldering	2 H		
+49	Resistor	R	R8	470R	R_0805_HandSoldering	1 H		
+50	Resistor	R	R19	47K	R_0805_HandSoldering	1 H		
+51	Resistor	R	R17	6.8K	R_0805_HandSoldering	1 X		
+52	Resistor	R	R1	68R	R_0805_HandSoldering	1 X		
+
+53	Trim-Potentiometer	POT_TRIM	RV1 RV3	10K	Potentiometer_Trimmer-EVM3E	2		23B-2.0K (reich)X
+54	Trim-Potentiometer	POT_TRIM	RV2	2.5K	Potentiometer_Trimmer-EVM3E	1		23B-10.0k (reich) X
+
+55	hex inverter	74HC04	U5	74HC04	SOIC-14_N	1	http://www.nxp.com/documents/data_sheet/74HC_HCT04.pdf	X
+
+56	TQFP32, 16k Flash, 1kB SRAM, 512B EEPROM	ATMEGA168A-AU	U1	ATMEGA168A-AU	TQFP-32_7x7mm_Pitch0.8mm	1	http://www.atmel.com/images/atmel-8271-8-bit-avr-microcontroller-atmega48a-48pa-88a-88pa-168a-168pa-328-328p_datasheet.pdf - HAVE	
+
+57	Quad 2-Input NAND Schmitt Trigger, SOIC-14	HEF4093B	U4	HEF4093B	SSOP-14	1	https://assets.nexperia.com/documents/data-sheet/HEF4093B.pdfX
+
+58	800mA Low-Dropout Linear Regulator, 1.8V fixed output, TO-220/TO-252/TO-263/SOT-223	LM1117-3.3	U2	LM1117-3.3	TO-263-2	1	http://www.ti.com/lit/ds/symlink/lm1117.pdf - HAVE
+
+59	Timer, DIP-8/SOIC-8/SSOP-8	LMC555xM	U7	LMC555xM	SOIC-8-N	1	http://www.ti.com/lit/ds/symlink/lm555.pdf X	
+
+60	Dual Operational Amplifiers, DIP-8/SOIC-8/TSSOP-8/VSSOP-8	MCP602	U3	MCP602	SOIC-8-N	1	http://www.ti.com/lit/ds/symlink/lm358.pdf X
+
+61	Single Ultra-Low Offset Voltage Operational Amplifier, DIP-8/SOIC-8	OP07	U6	OP07	SOIC-8-N	1	http://www.analog.com/media/en/technical-documentation/data-sheets/OP07.pdf X	
+
+62	Two pin crystal, small symbol	Crystal_Small	Y1	16 MHz	Crystal_SMD_HC49-SD_HandSoldering	1 X		
+
+
+
+
+
+Component Groups:	62
+Component Count:	127
+Fitted Components:	127
+Number of PCBs:	1
+Total components:	127
+Schematic Version:	
+Schematic Date:	
+BoM Date:	Mon 06 Aug 2018 17:54:32 CEST
+Schematic Source:	/root/projects/myc/mycelium_pcb/mycelium_pcb.sch
+KiCad Version:	Eeschema (6.0.0-rc1-dev-233-g53236a383)

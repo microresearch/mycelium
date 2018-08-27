@@ -67,9 +67,9 @@ thin copper boardsX, parts, *several power supply 5v for arduino and modules*, c
 
 - parts: battery clips-3xaaaX, 04: HC04 (note 5v only)x, 
 
-check: 4.7KX, 47k, 1k, 2.5k, 470R, 27K, 10KX, 15K
+check: 4.7KX, 47kx, 1kx, 2.5kx, 470Rx, 27Kx, 10KX, 15Kx
 
-check: 33pfx2, 10pf, 100pf, 1N, 10u
+check: 33pfx2, 10pfx, 100pfx, 1Nx, 10ux
 
 2.5k trimmerX, 
 
