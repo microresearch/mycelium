@@ -17,7 +17,7 @@ OBJCOPY := avr-objcopy
 SIZE := avr-size -A
 DOXYGEN := doxygen
 
-CFLAGS := -Wall -pedantic -mmcu=$(MCU) -std=c99 -Os -DF_OSC=8000000 -DF_CPU=$(MCU_FREQ)
+CFLAGS := -Wall -pedantic -mmcu=$(MCU) -std=c99 -Os -DF_OSC=16000000 -DF_CPU=$(MCU_FREQ) 
 
 FUSEH = 0xdf
 FUSEL = 0xff

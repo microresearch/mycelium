@@ -1,28 +1,47 @@
-//myc sd card read/write and tone/noise generation from sensors for radio transmission
+// license:GPL-2.0+
+// copyright-holders: Martin Howse
 
-// TODO: test basic tone out and switch on/off radio-DONE, test HIH code-DONE,
-// test MAX31865 code and other adc sensors, test sd card read and write,
-// test 555 and interrupt (we need 555 on board)
-// code for generating interesting stuff
+// based on wormed.c for voices, also myc_microbd.c
+
+// white noise and filter/volume, wormed voice oscillations, shift register with leaks, test tone transmits - regularity driven
+// see also mozzi for filters maybe
+
+// live codings, timings of on/off FET
+
+// say measure temp and see how much we deviate from running average - running average window filter
+// loop and replay sd card values
+
+// also shift register work
+
+//////////////////////////////////////////////////////////////////////////
 
 // FET switch-X
 // HIH-X
 // basic tones-X
 // SD card raw read and write-X
-
-// TODO: MAX31865-X, 555 interrupt on INT0, adc sensors (light sensor to build)
-
-// live codings, timings of on/off FET
-
-// also noise from wormed.c, shift register work
+// ADCs: ADC0 is marked ADC_LIGHT
+// MAX31865-X, 555 interrupt on INT0-X
 
 // write to SD/ read back in loop: 1 day with 1sec delay = 24hrx60minx60sec=86400 values - playback rates...
 //2000000000; 2e9 2gb - 23k days
 
-// license:GPL-2.0+
-// copyright-holders: Martin Howse
+//////////////////////////////////////////////////////////////////////////
 
-// based on wormed.c for voices, check also microbd
+// define sensors: 
+//#define FIVEFIVE 1
+//#define HIH 1
+//#define MAX 1
+#define C02 1
+//#define ADC 1 // can be from earthboot or from mushroom
+//#define AD5933 1 // or we seperate that out in other file as code is quite long
+
+// define audio mode:
+
+// define FET mode: ??
+
+// define SDCARD:
+
+//#define SDCARD 1
 
 //#define F_CPU 16000000UL 
 
@@ -71,9 +90,7 @@
 #define UCSRC_SELECT (1 << URSEL)
 #endif
 
-
 //#include "waves.h"
-
 
 #define BV(bit) (1<<(bit)) // Byte Value => converts bit into a byte value. One at bit location.
 #define cbi(reg, bit) reg &= ~(BV(bit)) // Clears the corresponding bit in register reg
@@ -82,9 +99,30 @@
 
 #define FS 8000 // sample rate
 
-uint8_t synthPeriod, sample, rate, counter;
+uint8_t synthPeriod, sample, rate, counter, synthEnergy=128;
 
 #define UART_BAUD_CALC(UART_BAUD_RATE,F_OSC) ((F_OSC)/((UART_BAUD_RATE)*16l)-1)
+
+//////////////////////////////////////////////////////////////////////////
+
+ISR(TIMER1_COMPA_vect) {
+  static uint8_t nextPwm;
+  static uint8_t periodCounter;
+  static uint16_t synthRand = 1;
+  static int16_t nsq;
+  int16_t u0,u1;
+  
+  OCR2B = nextPwm;
+  sei();
+  synthRand = (synthRand >> 1) ^ ((synthRand & 1) ? 0xB800 : 0);
+  u1 = (synthRand & 1) ? synthEnergy : -synthEnergy;
+  //  nextPwm = (u1>>2)+0x80; // whitenoise from wormed voice - modulate synthEnergy
+  // we can also switch off fet for low energy parts
+  
+    nextPwm = 120 + synthPeriod * ((nsq++%synthPeriod)/(synthPeriod/2)); // square from wormed voice
+}
+
+//////////////////////////////////////////////////////////////////////////
 
 void delay(int ms){
 	while(ms){
@@ -95,10 +133,12 @@ void delay(int ms){
 
 uint32_t fiver=0;
 
+#ifdef FIVEFIVE
 ISR (INT0_vect) // this is 555 interrupt counter
 {
   fiver++;
 }
+#endif
 
 void serial_init(int baudrate){
   UBRRH = (uint8_t)(UART_BAUD_CALC(baudrate,F_CPU)>>8);
@@ -127,17 +167,6 @@ static int uart_putchar(char c, FILE *stream)
         PutChr('\n');
     }
     }*/
-
-ISR(TIMER1_COMPA_vect) {
-  static uint8_t nextPwm, noisy;
-  static uint8_t periodCounter;
-  static int16_t nsq;
-
-  //  OCR2A= noisy;
-  OCR2B = nextPwm;
-  sei();
-  nextPwm = 120 + synthPeriod * ((nsq++%synthPeriod)/(synthPeriod/2));
-}
 
 void adc_init(void)
 {
@@ -168,7 +197,6 @@ void init_all() {
   //  PORTB=0x01; // set up to allow RF OUT...
   
   // Timer 2 set up as a 62500Hz PWM.
-  //
   TCCR2A = _BV(COM2A1) |_BV(COM2B1) | _BV(WGM21) | _BV(WGM20);
   //  TCCR2A = _BV(COM2B1) | _BV(WGM21) | _BV(WGM20);
   TCCR2B = _BV(CS20);
@@ -180,25 +208,29 @@ void init_all() {
   TCNT1 = 0;
   OCR1A = F_CPU / FS;
   TIMSK1 = _BV(OCIE1A);  
-  synthPeriod=0x50; 
+  synthPeriod=0x80; 
 
   serial_init(9600);
   stdout = &mystdout;
-  //  adc_init(); // fix i2c pins but that's not it...
-    printf("TESTING1 9600\r\n");
+  adc_init(); 
+  printf("TESTING1 9600\r\n");
 
   // how do we set up HIH sensor?
-  i2c_init();
+#ifdef HIH
+    i2c_init();
+#endif
 
-  // for MAX31865
+#ifdef MAX   // for MAX31865
   MAX31865_init(MAX31865_2WIRE);
-
+#endif
+  
   // 555 is on INT0 - set up here - we don't need pullup as we have on board...
-
+#ifdef FIVEFIVE
   EICRA |= (1 << ISC01);    // on rising edge
   EIMSK |= (1 << INT0);     // Turns on INT0
-    
-  sei();
+#endif
+  
+  sei(); // always set
   
 }
 
@@ -263,9 +295,11 @@ void main() {
   uint32_t offset=0;
   unsigned char readbuffer,writebuffer;
   float tempy;
+  uint16_t lastvalue, difference;
   
   init_all();
 
+#ifdef SDCARD
     while(1){    // outer loop for SD-cardery
         if(!sd_raw_init())
       {
@@ -296,46 +330,69 @@ void main() {
       }
 
     printf("OPENED");
+#endif
+
+    sbi(PORTB,0); // !ON! = transmit ON
     
   while(1){
-    // turn on and off FET for one second PB0 - in reverse high=off
-    /*    cbi(DDRB,0);  
-    cbi(PORTB,0);
-    _delay_ms(500);
-    sbi(DDRB,0); 
-    sbi(PORTB,0);
-    _delay_ms(500);        
-    synthPeriod++;*/
-    
+    // turn on and off FET for xx second PB0 
+      /*      cbi(PORTB,0);
+    _delay_ms(10);
+    sbi(PORTB,0); 
+    _delay_ms(10);        
+      */
     // tests for HIH
     //      THSense();
     //    printf("TEMP: %d HUM: %d\r\n", tempN, humN);
 
-    // test the 555 - working it seems
-    _delay_ms(1000);
+#ifdef C02 // sensor on 6 down middle jumper, ADC3
+      int sensorValue = adcread10(3);
+      float voltage = sensorValue*(5000/1024.0); 
+      int voltage_diference=voltage-400;
+      //      float concentration=voltage_diference*50.0/16.0;
+      // test with level of white noise
+      
+      int value=abs(voltage_diference); // what range are these values in and shall we take the difference of these - how much is that
+      difference=abs(lastvalue-value);
+      lastvalue=synthEnergy;
+      if (difference>255) synthenergy=255;
+      else      synthEnergy=difference;
+      // test this with serial
+      //      synthEnergy++;
+      printf("CO2 val: %d lastvalue: %d difference: %d\r\n", value, lastvalue, difference);
+#endif
+      
+    
+#ifdef FIVEFIVE // test the 555 - working it seems
+      _delay_ms(1000);
     uint32_t fivee=fiver;
     printf("555 count: %d\r\n", fivee);
+    fiver=0; // zero the 555
+#endif
     
-
+#ifdef SDCARD
     // write to sd-card RAW
-
-    //    sd_raw_write(offset, &humN, 1);
+    sd_raw_write(offset, &humN, 1);
 
     // read as test - this seems to work...
         sd_raw_read(offset, &readbuffer, 1);
         printf("read back HUM: %d\r\n", readbuffer);
 	offset++;
         if (offset>SIZEY) offset=0; 
+#endif
 
-	fiver=0; // zero the 555
-    // test for MAX31865:
-    //    Serial.print("Temperature = "); Serial.println(max.temperature(RNOMINAL, RREF));
+	// test for MAX31865:
+	//    Serial.print("Temperature = "); Serial.println(max.temperature(RNOMINAL, RREF));
 	//    tempy=temperature(RNOMINAL, RREF); // working but not with sdcard
 	//    int temper=(int)(tempy*100.0);
 	//    printf("MAX temp %d\r\n", temper);
-    ////////////////////////////////    
-  }
 
+
+////////////////////////////////    
+#ifdef SDCARD
+    }
+#endif
+  
     }
   return 0;
 }

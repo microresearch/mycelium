@@ -21,9 +21,15 @@ and additional option to always just use micro to switch on/off transmitter eith
 
 ** sound strategies...
 
+- wormed voice
+- microbd/livecoding
+- test tones/white noise filtered, noise or tone bursts
+
++ strategies for FET timings... we can also modulate with turning FET on/off
+
 - white noise, wormed voice oscillations, shift register with leaks, test tone transmits - regularity driven
 
-minimal...
+minimal, what makes most sense: bursts, silence also gated, not so loud transmissions
 
 * other TODO for TAIPEI
 
