@@ -1,0 +1,153 @@
+// license:GPL-2.0+
+// copyright-holders: Martin Howse
+
+// read back raw sd card to serial to check it out!
+
+#include <stdio.h>
+#include <stdint.h>
+#include <stdlib.h>
+#include <avr/io.h>
+#include <avr/interrupt.h>
+#include <util/delay.h>
+#include <avr/pgmspace.h>
+#include <inttypes.h>
+
+#include "sd_raw.h"
+#include "sd_raw_config.h"
+#include "partition.h"
+#include "i2c_master.h"
+
+#ifdef UDR0
+#define UBRRH UBRR0H
+#define UBRRL UBRR0L
+#define UDR UDR0
+
+#define UCSRA UCSR0A
+#define UDRE UDRE0
+#define RXC RXC0
+
+#define UCSRB UCSR0B
+#define RXEN RXEN0
+#define TXEN TXEN0
+#define RXCIE RXCIE0
+
+#define UCSRC UCSR0C
+#define URSEL 
+#define UCSZ0 UCSZ00
+#define UCSZ1 UCSZ01
+#define UCSRC_SELECT 0
+#else
+#define UCSRC_SELECT (1 << URSEL)
+#endif
+
+#define BV(bit) (1<<(bit)) // Byte Value => converts bit into a byte value. One at bit location.
+#define cbi(reg, bit) reg &= ~(BV(bit)) // Clears the corresponding bit in register reg
+#define sbi(reg, bit) reg |= (BV(bit))              // Sets the corresponding bit in register reg
+
+#define UART_BAUD_CALC(UART_BAUD_RATE,F_OSC) ((F_OSC)/((UART_BAUD_RATE)*16l)-1)
+
+void delay(int ms){
+	while(ms){
+		_delay_ms(0.96);
+		ms--;
+	}
+}
+
+void serial_init(int baudrate){
+  UBRRH = (uint8_t)(UART_BAUD_CALC(baudrate,F_CPU)>>8);
+  UBRRL = (uint8_t)UART_BAUD_CALC(baudrate,F_CPU); /* set baud rate */
+  UCSRB = (1<<RXEN) | (1<<TXEN); /* enable receiver and transmitter */
+  UCSRC |=(3<<UCSZ0);   /* asynchronous 8N1 */
+}
+
+static int uart_putchar(char c, FILE *stream);
+
+static FILE mystdout = FDEV_SETUP_STREAM(uart_putchar, NULL,_FDEV_SETUP_WRITE);
+
+static int uart_putchar(char c, FILE *stream)
+{
+  loop_until_bit_is_set(UCSRA, UDRE);
+  UDR = c;
+  return 0;
+  }
+
+/*void PutStrNl (char *data, bool newLine)
+{
+    while (*data) PutChr(*data++);
+    if (newLine)
+    {
+        PutChr('\r');    // optional
+        PutChr('\n');
+    }
+    }*/
+
+void init_all() {
+
+  // pins: OC2B is PWM OUT (PD3), INT0 (PD2) is 555 counter IN
+// PC0,1,2,3: ADC0+ = adc_light, adc_mushroom, spare_adc, adc_co2
+// PB0 is RF ENABLE=OUT 
+
+// PB1 is temp_cs and rest of temp as usual setup MAX31865 (port library)
+  
+  DDRD=0x08;  // PD3
+  DDRB|=0x01; // PB0 and for SD card  
+
+  serial_init(9600);
+  stdout = &mystdout;
+  //  adc_init(); 
+  printf("TESTING1 9600\r\n");
+  
+}
+
+
+unsigned char rx_buffer[8]; // for sd-card
+
+void main() {
+  const uint32_t SIZEY=2000000000; // 2 GB say
+  uint32_t offset=0;
+  unsigned char readbuffer,writebuffer, value;
+
+    while(1){    // outer loop for SD-cardery
+        if(!sd_raw_init())
+      {
+	//	printf("NO raw");
+	continue;
+      }
+
+    struct partition_struct* partition = partition_open(sd_raw_read,
+							sd_raw_read_interval,
+							sd_raw_write,
+							sd_raw_write_interval,
+							0
+							);
+
+    if(!partition)
+      {
+	partition = partition_open(sd_raw_read,
+				   sd_raw_read_interval,
+				   sd_raw_write,
+				   sd_raw_write_interval,
+				   -1
+				   );
+	if(!partition)
+	  {
+	    //	printf("NO part");
+	    continue;          
+	  }
+      }
+
+    printf("OPENED");
+    
+  while(1){
+    // write to sd-card RAW
+    //    sd_raw_write(offset, &value, 1);
+
+    // read as test - this seems to work...
+        sd_raw_read(offset, &readbuffer, 1);
+        printf("%d\r\n", readbuffer);
+	offset++;
+        if (offset>SIZEY) offset=0; 
+    }
+    }
+  return 0;
+}

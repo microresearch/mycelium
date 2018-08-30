@@ -29,18 +29,17 @@
 
 // define sensors: 
 //#define FIVEFIVE 1
-//#define HIH 1
+#define HIH 1
 //#define MAX 1
-#define C02 1
+//#define C02 1
 //#define ADC 1 // can be from earthboot or from mushroom
 //#define AD5933 1 // or we seperate that out in other file as code is quite long
 
 // define audio mode:
 
-// define FET mode: ??
+// define FET mode: ?? not really needed
 
 // define SDCARD:
-
 //#define SDCARD 1
 
 //#define F_CPU 16000000UL 
@@ -97,7 +96,7 @@
 #define sbi(reg, bit) reg |= (BV(bit))              // Sets the corresponding bit in register reg
 
 
-#define FS 8000 // sample rate
+#define FS 16000 // sample rate
 
 uint8_t synthPeriod, sample, rate, counter, synthEnergy=128;
 
@@ -293,7 +292,7 @@ unsigned char rx_buffer[8]; // for sd-card
 void main() {
   const uint32_t SIZEY=2000000000; // 2 GB say
   uint32_t offset=0;
-  unsigned char readbuffer,writebuffer;
+  unsigned char readbuffer,writebuffer, value;
   float tempy;
   uint16_t lastvalue, difference;
   
@@ -332,18 +331,22 @@ void main() {
     printf("OPENED");
 #endif
 
-    sbi(PORTB,0); // !ON! = transmit ON
+    //    sbi(PORTB,0); // !ON! = transmit ON
     
   while(1){
     // turn on and off FET for xx second PB0 
-      /*      cbi(PORTB,0);
-    _delay_ms(10);
+    cbi(PORTB,0);
+    _delay_ms(500);
     sbi(PORTB,0); 
-    _delay_ms(10);        
-      */
-    // tests for HIH
-    //      THSense();
-    //    printf("TEMP: %d HUM: %d\r\n", tempN, humN);
+    _delay_ms(500);        
+    
+
+#ifdef HIH    // tests for HIH
+    THSense();
+    value=humN;
+    synthEnergy=value*5;
+    printf("TEMP: %d HUM: %d\r\n", tempN, humN);
+#endif
 
 #ifdef C02 // sensor on 6 down middle jumper, ADC3
       int sensorValue = adcread10(3);
@@ -352,14 +355,15 @@ void main() {
       //      float concentration=voltage_diference*50.0/16.0;
       // test with level of white noise
       
-      int value=abs(voltage_diference); // what range are these values in and shall we take the difference of these - how much is that
-      difference=abs(lastvalue-value);
-      lastvalue=synthEnergy;
-      if (difference>255) synthenergy=255;
+      int vvalue=abs(voltage_diference); // difference as best 0-60 odd...
+      difference=abs(lastvalue-vvalue);
+      lastvalue=vvalue;
+      if (difference>255) synthEnergy=255;
       else      synthEnergy=difference;
       // test this with serial
       //      synthEnergy++;
-      printf("CO2 val: %d lastvalue: %d difference: %d\r\n", value, lastvalue, difference);
+      printf("CO2 val: %d lastvalue: %d difference: %d\r\n", vvalue, lastvalue, difference);
+       _delay_ms(1000);
 #endif
       
     
@@ -372,11 +376,11 @@ void main() {
     
 #ifdef SDCARD
     // write to sd-card RAW
-    sd_raw_write(offset, &humN, 1);
+    sd_raw_write(offset, &value, 1);
 
     // read as test - this seems to work...
         sd_raw_read(offset, &readbuffer, 1);
-        printf("read back HUM: %d\r\n", readbuffer);
+        printf("read back value: %d\r\n", readbuffer);
 	offset++;
         if (offset>SIZEY) offset=0; 
 #endif

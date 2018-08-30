@@ -1,4 +1,4 @@
-* type of mycel radio modules
+* TODO and type of mycel radio modules
 
 transmitters: transistor(switchable), HC04
 
@@ -19,17 +19,68 @@ and additional option to always just use micro to switch on/off transmitter eith
 
 [no light option...]
 
+** list possible modules
+
+transistor transmit with:
+
+1-micro/HIH-humidity SDcard
+2-micro/MAX-temperature SDcard
+3-micro/CO2 SDcard
+4-micro/555 in
+5-micro/ADC mushroom in
+6-micro/earthboot620in
+7-micro/earthboot5933-TEST!
+
+04 transmit with:
+
+8-micro/HIH-humidity SDCard
+9-micro/MAX-temperature SDcard
+10-micro/555 in
+11-micro/ADC mushroom in
+12-micro/earthboot620in
+
+13-555->transistor - micro gated?
+14-555->04
+15-theremin->transistor - micro gated?
+16-theremin->04
+17-OP07->transistor
+18-OP07->04
+
+19-transmitter with 555/micro source and replacement caps1 - micro gated?
+20-transmitter with 555/micro source and replacement caps2 - micro gated?
+
+*so maybe 16 with micros max and spares!*
+
+** basic test setup
+
+- micro: sensor in, serial out
+- radio: power and signal in, radio tuned
+- sensor: with micro or just signal out (op, 555)
+
 ** sound strategies...
 
-- wormed voice
+- wormed voice to port...
 - microbd/livecoding
-- test tones/white noise filtered, noise or tone bursts
+- test tones/white noise filtered (check MOZZI), noise or tone bursts
 
-+ strategies for FET timings... we can also modulate with turning FET on/off
++ strategies for FET timings... we can also modulate with turning FET
+  on/off, value used to determine burst of transmission timing/gap
 
 - white noise, wormed voice oscillations, shift register with leaks, test tone transmits - regularity driven
 
 minimal, what makes most sense: bursts, silence also gated, not so loud transmissions
+
+** moisture testing/sealing
+
+epoxy, nail varnish, hot glue, dip in resin - which one?
+
+** reading raw SD for checking
+
+- once is taped in use myc_sdreader.c TEST!
+
+** C02 sensor - what is kind of base line and range
+
+range is maybe 0-60 for differences once has settled down
 
 * other TODO for TAIPEI
 
@@ -379,6 +430,11 @@ http://wiki.seeedstudio.com/Grove-I2C_FM_Receiver/
 
 question of antenna?
 
+** 30/8
+
+numerous tests
+
+- test change of sample rate to 16k
 
 * receivers// with arduino/pi
 
