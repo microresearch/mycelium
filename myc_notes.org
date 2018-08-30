@@ -23,8 +23,9 @@ and additional option to always just use micro to switch on/off transmitter eith
 
 transistor transmit with:
 
-1-micro/HIH-humidity SDcard
-2-micro/MAX-temperature SDcard
+1-micro/HIH-humidity SDcard-built
+2-micro/MAX-temperature SDcard-built
+
 3-micro/CO2 SDcard
 4-micro/555 in
 5-micro/ADC mushroom in
@@ -42,14 +43,16 @@ transistor transmit with:
 13-555->transistor - micro gated?
 14-555->04
 15-theremin->transistor - micro gated?
-16-theremin->04
-17-OP07->transistor
-18-OP07->04
+16-theremin->04 - built radio board
+17-OP07->transistor (no 3.3v, no micro)
+18-OP07->04 (no 3.3v, no micro)
 
 19-transmitter with 555/micro source and replacement caps1 - micro gated?
 20-transmitter with 555/micro source and replacement caps2 - micro gated?
 
-*so maybe 16 with micros max and spares!*
+*so maybe 16 with micros max and spares! - we can build 13 micros+2 built=15*
+
+how many MCP602=20-3(built)=18 (we have only 8 mcps left?)
 
 ** basic test setup
 
@@ -72,7 +75,7 @@ minimal, what makes most sense: bursts, silence also gated, not so loud transmis
 
 ** moisture testing/sealing
 
-epoxy, nail varnish, hot glue, dip in resin - which one?
+epoxy, nail varnish, hot glue, dip in resin - silicone rubber type 16, crystal clear modulor...
 
 ** reading raw SD for checking
 
@@ -95,34 +98,41 @@ http://stwst48x4.stwst.at/radio_mns_workshop  Mycelial Radio Activation
 Sa, 8. Sept, 2018, 11:00 - 17:00
 at STWST48x4, Linz, Austria
 
+- first tea
 - Intro to interspecies communications, project ideas, radio platform // reader re-launch
+- show modules and designs
+
 - building and interfacing to mushrooms - simple circuits, 04, theremin, transistor
-- playing with this and further ideas
-- reception
+- playing with this and further ideas - voice?
+- reception/detection
+
 - ideas for a score/translations
 - tasting and burning/tea
 - final micro ritual/performance
 
 ** materials
 
+- detektorsx2
 - printed reader
-- dried lingzhi for tea
-- copper wires 0.8mm and 1mm
+- dried lingzhi for teaX
+- copper wires 0.8mm and 1mmX
 - several arduinos, cables and receiver modules
 - audio cables
-- vinyl cutter
+[- vinyl cutter]
 - radio receivers
 - copper sheets, thin boards, copper sticky sheets, basic wire, solder, croc clips, 
 - parts boxes just in case...
+- aaa
 
-- 8x 9v batteries
+*AA batteries for radios*
 
 - tools-solder iron, multimeter
 - mycelium modules, sensors, *power supply* and breakout, programmer and cable
+- alcohol for cleaning or clean first
 
 - candles and for heating, laser and light pickup
 
-what to order/buy: 
+check!
 
 thin copper boardsX, parts, *several power supply 5v for arduino and modules*, copper sheets (mod), croc clipsX, batteries, parts:
 
@@ -132,7 +142,7 @@ check: 4.7KX, 47kx, 1kx, 2.5kx, 470Rx, 27Kx, 10KX, 15Kx
 
 check: 33pfx2, 10pfx, 100pfx, 1Nx, 10ux
 
-2.5k trimmerX, 
+2.5k trimmerX???where?, re-ordered
 
 theremin transmit: 4093x, 
 transistor-based:2n2222x, 
@@ -435,6 +445,12 @@ question of antenna?
 numerous tests
 
 - test change of sample rate to 16k
+
+- assembled earthboot but not sure what RFB should be for incoming signal - 100K at moment.
+
+TO TEST!
+
+- experiments TODO: pass audio/pwm signals *through* mushroom, mushroom as FET switcher?
 
 * receivers// with arduino/pi
 

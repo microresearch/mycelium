@@ -1,0 +1,182 @@
+// license:GPL-2.0+
+// copyright-holders: Martin Howse
+
+// simple audio transmission test code - FET is on
+
+#include <stdio.h>
+#include <stdint.h>
+#include <stdlib.h>
+#include <avr/io.h>
+#include <avr/interrupt.h>
+#include <util/delay.h>
+#include <avr/pgmspace.h>
+#include <inttypes.h>
+
+#include "sd_raw.h"
+#include "sd_raw_config.h"
+#include "partition.h"
+#include "i2c_master.h"
+
+#include "MAX31865.h"
+
+//#include "waves.h"
+
+#define BV(bit) (1<<(bit)) // Byte Value => converts bit into a byte value. One at bit location.
+#define cbi(reg, bit) reg &= ~(BV(bit)) // Clears the corresponding bit in register reg
+#define sbi(reg, bit) reg |= (BV(bit))              // Sets the corresponding bit in register reg
+
+#define FS 16384 // sample rate
+
+#define FX_SHIFT 8
+#define SHIFTED_1 ((uint8_t) 255)
+
+uint8_t synthPeriod, sample, rate, counter, synthEnergy=128, value; // value is our varying factor
+
+//////////////////////////////////////////////////////////////////////////
+
+// from MOZZI
+
+	unsigned int ucfxmul(uint8_t a, uint8_t b)
+	{
+		return (((unsigned int)a*b)>>FX_SHIFT);
+	}
+	
+		// multiply two fixed point numbers (returns fixed point)
+	inline
+	int ifxmul(int a, uint8_t b)
+	{
+		return ((a*b)>>FX_SHIFT);
+	}
+	
+	// multiply two fixed point numbers (returns fixed point)
+	inline
+	long fxmul(long a, int b)
+	{
+		return ((a*b)>>FX_SHIFT);
+	}
+
+
+//////////////////////////////////////////////////////////////////////////
+
+ISR(TIMER1_COMPA_vect) {
+  static uint8_t nextPwm;
+  static uint8_t periodCounter;
+  static uint16_t synthRand = 1;
+  static int16_t nsq;
+
+  uint8_t q;
+  uint8_t f;
+  unsigned int fb;
+  static int buf0,buf1,res;
+
+  int16_t u0,u1;
+
+  q = 10; // 0-255 255 most res
+  f = value; // 0-255 half audio rate
+  fb = q+ucfxmul(q, SHIFTED_1 - f);
+
+  
+  OCR2B = nextPwm;
+  sei();
+  synthRand = (synthRand >> 1) ^ ((synthRand & 1) ? 0xB800 : 0);
+  u1 = (synthRand & 1) ? synthEnergy : -synthEnergy;
+  //  u1=(u1>>2) +0x80;
+  // test white noise with filter
+    buf0+=fxmul(((u1 - buf0) + fxmul(fb, buf0-buf1)), f);
+    buf1+=ifxmul(buf0-buf1, f); // could overflow if input changes fast
+  
+  //  nextPwm = (u1>>2)+0x80; // whitenoise from wormed voice - modulate synthEnergy
+  // we can also switch off fet for low energy parts
+    if (buf1>127) buf1=127; // limiting
+    if (buf1<-127) buf1=-127;
+  nextPwm=(buf1>>1) +0x80;  
+  //    nextPwm = 120 + synthPeriod * ((nsq++%synthPeriod)/(synthPeriod/2)); // square from wormed voice
+}
+
+//////////////////////////////////////////////////////////////////////////
+
+void delay(int ms){
+	while(ms){
+		_delay_ms(0.96);
+		ms--;
+	}
+}
+
+uint32_t fiver=0;
+
+void adc_init(void)
+{
+  	cbi(ADMUX, REFS1); 
+	sbi(ADMUX, REFS0); // AVCC
+	//	sbi(ADMUX, ADLAR); //8 bits
+	sbi(ADCSRA, ADPS2);
+	//	sbi(ADCSRA, ADPS1); // change speed here! now div by 64
+	//	sbi(ADCSRA, ADPS0); // change speed here!
+
+	sbi(ADCSRA, ADEN);
+	DDRC = 0x00;
+	PORTC = 0x00;
+	// settle on 10 bits
+}
+
+void init_all() {
+
+  
+  DDRD=0x08;  // PD3
+  DDRB|=0x01; // PB0 and for SD card  
+
+  //  PORTB=0x01; // set up to allow RF OUT...
+  
+  // Timer 2 set up as a 62500Hz PWM.
+  TCCR2A = _BV(COM2A1) |_BV(COM2B1) | _BV(WGM21) | _BV(WGM20);
+  //  TCCR2A = _BV(COM2B1) | _BV(WGM21) | _BV(WGM20);
+  TCCR2B = _BV(CS20);
+  TIMSK2 = 0;
+			
+  // Timer 1 set up as a 16000Hz sample interrupt
+  TCCR1A = 0;
+  TCCR1B = _BV(WGM12) | _BV(CS10);
+  TCNT1 = 0;
+  OCR1A = F_CPU / FS;
+  TIMSK1 = _BV(OCIE1A);  
+  synthPeriod=0x80; 
+  adc_init(); 
+  
+  sei(); // always set
+  
+}
+
+unsigned char adcread(unsigned char channel){
+  unsigned char result, high;
+  ADMUX &= 0xF8; // clear existing channel selection                
+  ADMUX |=(channel & 0x07); // set channel/pin
+  ADCSRA |= (1 << ADSC);  // Start A2D Conversions 
+  loop_until_bit_is_set(ADCSRA, ADIF); /* Wait for ADIF, will happen soon */
+  result=ADCH;
+  return result;
+}
+
+unsigned int adcread10(short channel){
+  unsigned int ADresult;
+  ADMUX &= 0xF8; // clear existing channel selection                
+    ADMUX |=(channel & 0x07); // set channel/pin
+  ADCSRA |= (1 << ADSC);  // Start A2D Conversions 
+  loop_until_bit_is_set(ADCSRA, ADIF); /* Wait for ADIF, will happen soon */
+  ADresult = ADCL;
+  ADresult |= ((int)ADCH) << 8;
+  return(ADresult);
+}
+
+
+void main() {
+  init_all();
+  sbi(PORTB,0); 
+    
+  while(1){
+    // vary values for audio
+    value++;
+    if (value>240) value=10;
+    delay(20);
+  }
+  return 0;
+}
