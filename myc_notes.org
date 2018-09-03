@@ -10,7 +10,6 @@ with input to trans or HC04 from:
 - 4093/theremin out TESTED as audio and as transmit into 04
 - OP07 RF out TESTED as audio
 
-
 -HC04 transmitter lacking 33pf to test - tested with 22pf which puts it at top of FM which is good!
 
 = 20 possibilities. for 17 say 14 micros and 3 analogues or more
@@ -19,12 +18,24 @@ and additional option to always just use micro to switch on/off transmitter eith
 
 [no light option...]
 
+** modules for workshop/ labelled
+
+1- temp-micro-sd-tran-FET
+2- op07-micro-tran - FET -X - mushroom adc
+3- 4093-nomicro-04 -X
+4- 555-nomicro-04 -X
+5- ad620-micro-tran-FET - needs cable to earthboot - mushroom adc
+
+so for workshop: read MAX temp, read AD620 on ADC spare = adc2
+
+FET switchings based on say mushroom adc ..., voice and live_code?
+
 ** list possible modules
 
 transistor transmit with:
 
-1-micro/HIH-humidity SDcard-built
-2-micro/MAX-temperature SDcard-built
+1-micro/HIH-humidity SDcard-built x2
+2-micro/MAX-temperature SDcard-
 
 3-micro/CO2 SDcard
 4-micro/555 in
@@ -34,7 +45,7 @@ transistor transmit with:
 
 04 transmit with:
 
-8-micro/HIH-humidity SDCard
+8-micro/HIH-humidity SDCard-
 9-micro/MAX-temperature SDcard
 10-micro/555 in
 11-micro/ADC mushroom in
@@ -44,19 +55,17 @@ transistor transmit with:
 14-555->04
 15-theremin->transistor - micro gated?
 16-theremin->04 - built radio board
-17-OP07->transistor (no 3.3v, no micro)
+17-OP07->transistor (no 3.3v, micro gated)?
 18-OP07->04 (no 3.3v, no micro)
 
 19-transmitter with 555/micro source and replacement caps1 - micro gated?
 20-transmitter with 555/micro source and replacement caps2 - micro gated?
 
-*so maybe 16 with micros max and spares! - we can build 13 micros+2 built=15*
-
-how many MCP602=20-3(built)=18 (we have only 8 mcps left?)
+how many MCP602=20-3(built)=18 
 
 ** basic test setup
 
-- micro: sensor in, serial out
+- micro: sensor in, serial out, fet switching
 - radio: power and signal in, radio tuned
 - sensor: with micro or just signal out (op, 555)
 
@@ -451,6 +460,23 @@ numerous tests
 TO TEST!
 
 - experiments TODO: pass audio/pwm signals *through* mushroom, mushroom as FET switcher?
+
+** 3/9
+
+myc_wormedvoice.c:
+
+// TODO: defines instead of switch, but maybe keep as switch so we can
+// err switch with the mushroom, ranges of our adc and maybe working
+// with differences
+
+port in hardware stuff for now...
+
+- how could we use say mushroom_adc(ADC1) for FET switching - running
+  average and then switch/flipflop on deviation from that average
+  exceeding/?
+
+- where is running average code? in wormed.c - test this out in myc_wormedvoice.c
+
 
 * receivers// with arduino/pi
 

@@ -3,6 +3,12 @@
 
 // simple audio transmission test code - FET is on
 
+// testing port of white noise/filtered from MOZZI - DONE
+
+// TODO:
+
+// - test port of wavetable sine/etc but first use from wormed voice
+
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
@@ -170,7 +176,7 @@ unsigned int adcread10(short channel){
 
 void main() {
   init_all();
-  sbi(PORTB,0); 
+  sbi(PORTB,0);  // FET is on!PB0
     
   while(1){
     // vary values for audio
