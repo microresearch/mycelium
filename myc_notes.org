@@ -119,21 +119,19 @@ at STWST48x4, Linz, Austria
 - tasting and burning/tea
 - final micro ritual/performance
 
-** materials
+** materials/pack list
 
 - detektorsx2
-- printed reader
 - dried lingzhi for teaX
 - copper wires 0.8mm and 1mmX
 - several arduinos, cables and receiver modules
-- audio cables
-[- vinyl cutter]
+- audio cables/minijack
 - radio receivers
 - copper sheets, thin boards, copper sticky sheets, basic wire, solder, croc clips, 
 - parts boxes just in case...
-- aaa
+- aaaX
 
-*AA batteries for radios*
+*big and AA batteries for radios*
 
 - tools-solder iron, multimeter
 - mycelium modules, sensors, *power supply* and breakout, programmer and cable
@@ -141,9 +139,9 @@ at STWST48x4, Linz, Austria
 
 - candles and for heating, laser and light pickup
 
-check!
+check parts@
 
-thin copper boardsX, parts, *several power supply 5v for arduino and modules*, copper sheets (mod), croc clipsX, batteries, parts:
+thin copper boardsX, parts, several power supply 5v for arduino and modules, 
 
 - parts: battery clips-3xaaaX, 04: HC04 (note 5v only)x, 
 
@@ -153,12 +151,11 @@ check: 33pfx2, 10pfx, 100pfx, 1Nx, 10ux
 
 2.5k trimmerX???where?, re-ordered
 
+04 transmits
 theremin transmit: 4093x, 
 transistor-based:2n2222x, 
 
 wire 0.8, 1mmX
-
-
 
 ** tech rider
 
@@ -477,6 +474,19 @@ port in hardware stuff for now...
 
 - where is running average code? in wormed.c - test this out in myc_wormedvoice.c
 
+** 4/9
+
+idea of data radio style MSX or modem/AFSK/FSK/DTMF transmissions for data:
+
+https://github.com/markqvist/MicroModem/blob/master/Modem/afsk.c
+
+https://www.1010.co.uk/data_radio.html
+
+https://chapmanworld.com/2015/04/07/arduino-uno-and-fast-pwm-for-afsk1200/
+
+this one? https://github.com/DL1CB/ATMEGA8_Bell_AFSK_Generator/blob/master/ATMEGA8_Bell_AFSK_Generator.ino
+
+PD3 OC2B is our PWM out!
 
 * receivers// with arduino/pi
 
