@@ -3,6 +3,8 @@
 
 // based on wormed.c for voices, also myc_microbd.c
 
+// this is more or less just test code here with other codes such as microbd, wormed, test/data tones, white noise filtered in different files
+
 // white noise and filter/volume, wormed voice oscillations, shift register with leaks, test tone transmits - regularity driven
 // see also mozzi for filters maybe
 
@@ -29,10 +31,11 @@
 
 // define sensors: 
 //#define FIVEFIVE 1
-#define HIH 1
+//#define HIH 1
 //#define MAX 1
 //#define C02 1
-//#define ADC 1 // can be from earthboot or from mushroom
+#define AD620 1 // can be from earthboot or from mushroom
+//#define ADC // which ones?
 //#define AD5933 1 // or we seperate that out in other file as code is quite long
 
 // define audio mode:
@@ -98,7 +101,7 @@
 
 #define FS 16000 // sample rate
 
-uint8_t synthPeriod, sample, rate, counter, synthEnergy=128;
+uint8_t synthPeriod, sample, rate, counter, synthEnergy=128, value=128;
 
 #define UART_BAUD_CALC(UART_BAUD_RATE,F_OSC) ((F_OSC)/((UART_BAUD_RATE)*16l)-1)
 
@@ -117,8 +120,8 @@ ISR(TIMER1_COMPA_vect) {
   u1 = (synthRand & 1) ? synthEnergy : -synthEnergy;
   //  nextPwm = (u1>>2)+0x80; // whitenoise from wormed voice - modulate synthEnergy
   // we can also switch off fet for low energy parts
-  
-    nextPwm = 120 + synthPeriod * ((nsq++%synthPeriod)/(synthPeriod/2)); // square from wormed voice
+  synthPeriod=value;
+  nextPwm = 120 + synthPeriod * ((nsq++%synthPeriod)/(synthPeriod/2)); // square from wormed voice
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -201,7 +204,7 @@ void init_all() {
   TCCR2B = _BV(CS20);
   TIMSK2 = 0;
 			
-  // Timer 1 set up as a 8000Hz sample interrupt
+  // Timer 1 set up as a 16000Hz sample interrupt
   TCCR1A = 0;
   TCCR1B = _BV(WGM12) | _BV(CS10);
   TCNT1 = 0;
@@ -292,7 +295,7 @@ unsigned char rx_buffer[8]; // for sd-card
 void main() {
   const uint32_t SIZEY=2000000000; // 2 GB say
   uint32_t offset=0;
-  unsigned char readbuffer,writebuffer, value;
+  unsigned char readbuffer,writebuffer;
   float tempy;
   uint16_t lastvalue, difference;
   
@@ -335,12 +338,15 @@ void main() {
     
   while(1){
     // turn on and off FET for xx second PB0 
-    cbi(PORTB,0);
+    /*    cbi(PORTB,0);
     _delay_ms(500);
     sbi(PORTB,0); 
     _delay_ms(500);        
-    
+    */
 
+    _delay_ms(1);        
+
+    
 #ifdef HIH    // tests for HIH
     THSense();
     value=humN;
@@ -374,6 +380,24 @@ void main() {
     fiver=0; // zero the 555
 #endif
     
+
+#ifdef MAX	
+	// test for MAX31865:
+	//    Serial.print("Temperature = "); Serial.println(max.temperature(RNOMINAL, RREF));
+    	tempy=temperature(RNOMINAL, RREF); // this works as long as sd card is in place
+    	int temper=(int)(tempy*100.0);
+    	printf("MAX temp %d\r\n", temper);
+    	value=(int)(temper/100);
+#endif
+
+#ifdef AD620 // ad620 is on ADC2
+	int ad620value = adcread10(2);
+	value=ad620value>>3;
+#endif
+	
+
+	//    printf("x");
+    
 #ifdef SDCARD
     // write to sd-card RAW
     sd_raw_write(offset, &value, 1);
@@ -384,14 +408,7 @@ void main() {
 	offset++;
         if (offset>SIZEY) offset=0; 
 #endif
-
-	// test for MAX31865:
-	//    Serial.print("Temperature = "); Serial.println(max.temperature(RNOMINAL, RREF));
-	//    tempy=temperature(RNOMINAL, RREF); // working but not with sdcard
-	//    int temper=(int)(tempy*100.0);
-	//    printf("MAX temp %d\r\n", temper);
-
-
+	  
 ////////////////////////////////    
 #ifdef SDCARD
     }

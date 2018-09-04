@@ -488,6 +488,20 @@ this one? https://github.com/DL1CB/ATMEGA8_Bell_AFSK_Generator/blob/master/ATMEG
 
 PD3 OC2B is our PWM out!
 
+based on this test_afsk is working
+
+- max temp only works with SD card in holder
+
+- tested all boards individually for workshop:
+
+1- temp-micro-sd-tran-FET
+2- op07-micro-tran - FET -X - mushroom adc
+3- 4093-nomicro-04 -X
+4- 555-nomicro-04 -X
+5- ad620-micro-tran-FET - needs cable to earthboot - mushroom adc
+
+all working, to be assembled and connected
+
 * receivers// with arduino/pi
 
 ** GRV I2C FM Arduino - Grove I2C FM Receiver - reichelt
