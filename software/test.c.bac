@@ -1,0 +1,21 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// test smoothing which works
+
+#define howmany 2
+
+int pitch[howmany]={0};
+
+int main()
+{
+  int x, total=0, average, pitchindex=0;
+  for (x=0;x<1000;x++){
+  total-=pitch[pitchindex];
+  pitch[pitchindex]=rand()%255;
+  total+=pitch[pitchindex++];
+  if (pitchindex>=howmany) pitchindex=0;
+  average=total/howmany;
+  printf("average: %d\n",average);
+  }
+}

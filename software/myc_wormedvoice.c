@@ -30,12 +30,16 @@
 #define cbi(reg, bit) reg &= ~(BV(bit)) // Clears the corresponding bit in register reg
 #define sbi(reg, bit) reg |= (BV(bit))              // Sets the corresponding bit in register reg
 
+#define hih6131w  0x4E  //write mode - 0x27 <<1
+#define hih6131r  0x4F  //read mode
+#define HIH 1
+
 #define CHIRP_SIZE 41
 #define howmany 10
 
 #define WHICH 2 // for ADC2
 
-uint8_t synthPeriod, sample, rate, counter;
+uint8_t synthPeriod, sample, rate, counter, value;
 volatile uint8_t modus;
 uint16_t synthEnergy;
 volatile uint16_t location=0;
@@ -224,6 +228,39 @@ ISR(TIMER1_COMPA_vect) {
     } // switch
 }
 
+unsigned char humN;
+unsigned char tempN;
+
+void THSense(void) {
+unsigned char humL;
+unsigned char humH;
+unsigned short hum;
+unsigned char tempL;
+unsigned char tempH;
+unsigned short temp;
+
+ i2c_start(hih6131w);               // measurement request
+  i2c_stop();                             // set stop condition = release bus
+  _delay_ms(200);
+
+  i2c_start(hih6131r);               // set device address and read mode
+
+  humH = i2c_read_ack();                   // read one byte from EEPRO M
+  humL = i2c_read_ack();
+  tempH = i2c_read_ack();
+  tempL = i2c_read_nack();
+  i2c_stop();
+
+  hum = (humH << 8) + humL;
+  temp = (tempH << 8) + tempL;
+  hum = (hum << 2);
+  hum = (hum >> 2);
+  temp = (temp >> 2);
+  humN = (hum/16382.0) * 100;
+  tempN = ((temp/16382.0) * 165) - 40;
+
+}
+
 void adc_init(void)
 {
   	cbi(ADMUX, REFS1); 
@@ -280,6 +317,10 @@ void init_all() {
   sbi(DDRB,0);
   sbi(PORTB,0);  // FET is on!PB0
 
+#ifdef HIH
+    i2c_init();
+#endif
+  
 }
 
 unsigned char adcread(unsigned char channel){
@@ -318,7 +359,7 @@ void main() {
   while(1){
 
     // testing FET switch on deviation from average - and average code for other modes is here now... - TO TEST
-      total-=pitch[pitchindex];
+    /*      total-=pitch[pitchindex];
       once=adcread10(WHICH);
       pitch[pitchindex]=once;
       total+=pitch[pitchindex++];
@@ -329,8 +370,20 @@ void main() {
 
       if (state==1)   sbi(PORTB,0);  // FET is on!PB0
       else   cbi(PORTB,0);  // FET is off
-      
+    */
     // set modes as define and replace the switch
+
+    // for HIH humidity set average as our value
+
+#ifdef HIH    // tests for HIH
+    THSense();
+    value=humN;
+    //    synthEnergy=value*5;
+    //    printf("TEMP: %d HUM: %d\r\n", tempN, humN);
+    //    buf_put(value);
+    average=value;
+#endif
+    
     
     modus=3; 
     
@@ -364,7 +417,8 @@ void main() {
     case 10:
     case 11:
       // wavetable rate
-      rate=average>>6; // 10 bits >> 6 = 4 bits
+      //      rate=average>>6; // 10 bits >> 6 = 4 bits
+      rate=average;
       _delay_ms(10);      
       break;
     case 12: // pulse with 2 params - length of pulse and gap

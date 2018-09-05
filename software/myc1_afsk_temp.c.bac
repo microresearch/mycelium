@@ -32,7 +32,7 @@
 // define sensors: 
 //#define FIVEFIVE 1
 //#define HIH 1
-//#define MAX 1
+#define MAX 1
 //#define C02 1
 //#define AD620 1 // can be from earthboot or from mushroom
 //#define ADC // which ones?
@@ -40,18 +40,10 @@
 
 // define audio mode:
 
-// define FET mode:
-
+// define FET mode: ?? not really needed
 
 // define SDCARD:
 //#define SDCARD 1
-
-#define FETADC 1
-#define DEVIATION 8
-#define howmany 16 // how smooth/average?
-#define WHICH 1 // for ADC1 mushroom ADC here into FETADC
-
-//////////////////////////////////////////////////////////////////////////
 
 //#define F_CPU 16000000UL 
 
@@ -114,23 +106,79 @@ uint8_t synthPeriod, sample, rate, counter, synthEnergy=128, value=128;
 #define UART_BAUD_CALC(UART_BAUD_RATE,F_OSC) ((F_OSC)/((UART_BAUD_RATE)*16l)-1)
 
 //////////////////////////////////////////////////////////////////////////
+#define BUFSIZE 512
+char *pIn, *pOut, *pEnd;
+uint8_t buf[513]; // our ring buffer - replace later with sd card stuff
 
-ISR(TIMER1_COMPA_vect) {
-  static uint8_t nextPwm;
-  static uint8_t periodCounter;
-  static uint16_t synthRand = 1;
-  static int16_t nsq;
-  int16_t u0,u1;
-  /*  
-  OCR2B = nextPwm;
-  sei();
-  synthRand = (synthRand >> 1) ^ ((synthRand & 1) ? 0xB800 : 0);
-  u1 = (synthRand & 1) ? synthEnergy : -synthEnergy;
-  //  nextPwm = (u1>>2)+0x80; // whitenoise from wormed voice - modulate synthEnergy
-  // we can also switch off fet for low energy parts
-  synthPeriod=value;
-  nextPwm = 120 + synthPeriod * ((nsq++%synthPeriod)/(synthPeriod/2)); // square from wormed voice
-  */
+void buf_init()
+{
+    pIn = pOut = buf;       // init to any slot in buffer
+    pEnd = &buf[BUFSIZE];   // past last valid slot in buffer
+}
+
+inline void buf_put(char c)
+{
+    *pIn++ = c;             // insert c into buffer
+    if (pIn >= pEnd)        // end of circular buffer?
+        pIn = buf;          // wrap around
+}
+
+inline void buf_get(char *pc)
+{
+
+    *pc = *pOut++;              // pick up next char to be returned
+    if (pOut >= pEnd)       // end of circular buffer?
+        pOut = buf;         // wrap around
+}
+
+//////////////////////////////////////////////////////////////////////////
+
+PROGMEM const unsigned char sinetable[256]  = {
+  0,0,0,1,1,1,2,2,3,4,5,5,6,7,9,10,11,12,14,15,16,18,20,21,23,25,27,29,31,
+  33,35,37,39,42,44,46,49,51,54,56,59,62,64,67,70,73,76,78,81,84,87,90,93,96,99,102,105,108,111,115,118,121,124,127,130,133,136,139,143,146,149,152,155,158,161,164,167,170,173,176,178,181,184,187,190,192,195,198,200,203,205,208,210,212,215,217,219,221,223,225,227,229,231,233,234,236,238,239,240,
+  242,243,244,245,247,248,249,249,250,251,252,252,253,253,253,254,254,254,254,254,254,254,253,253,253,252,252,251,250,249,249,248,247,245,244,243,242,240,239,238,236,234,233,231,229,227,225,223,
+  221,219,217,215,212,210,208,205,203,200,198,195,192,190,187,184,181,178,176,173,170,167,164,161,158,155,152,149,146,143,139,136,133,130,127,124,121,118,115,111,108,105,102,99,96,93,90,87,84,81,78,
+  76,73,70,67,64,62,59,56,54,51,49,46,44,42,39,37,35,33,31,29,27,25,23,21,20,18,16,15,14,12,11,10,9,7,6,5,5,4,3,2,2,1,1,1,0,0,0,0
+};
+
+volatile unsigned char accu = 0, bits=8, shifter=0;
+volatile unsigned char sinetablePointer = 0;
+volatile unsigned char baud = 0; //(62.5khz / 1200bps = 52)
+
+volatile unsigned char newbyte=33;
+
+// Timer 2 COMPARE
+ISR(TIMER2_OVF_vect){
+volatile static unsigned char bit, byte;
+  // set the pwm duty using a sinetable
+  OCR2B=pgm_read_byte_near(sinetable + sinetablePointer);
+  sinetablePointer = sinetablePointer + accu;
+  
+  baud--;
+  if(baud == 0){
+    // this is where we process the bits so a 1 is accu=x and a 0 is....
+    bit=(byte>>shifter++)&0x01;
+    if (shifter==8) {
+      //      byte=rand()%255;       // get a new byte from ring buffer
+      buf_get(&byte);
+      //      byte=newbyte++;
+      shifter=0;
+    }
+	 //I learned that either 2200Hz or 1200Hz tones represent a
+	 //binary one while the tone remains unchanged, switching from
+	 //one tone to the other denotes a binary zero.
+
+    // https://chapmanworld.com/2015/04/07/arduino-uno-and-fast-pwm-for-afsk1200/
+    if (bit==0){	 
+    if(accu == 5  ){
+     accu = 9;
+    }else{
+     accu = 5;
+    }
+  }
+    baud = 52;
+  }  
+
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -214,13 +262,16 @@ void init_all() {
   TIMSK2 = 0;
 			
   // Timer 1 set up as a 16000Hz sample interrupt
-  TCCR1A = 0;
+  /*  TCCR1A = 0;
   TCCR1B = _BV(WGM12) | _BV(CS10);
   TCNT1 = 0;
   OCR1A = F_CPU / FS;
   TIMSK1 = _BV(OCIE1A);  
   synthPeriod=0x80; 
-
+  */
+  TIMSK2 |= (1 << TOIE2); // Enable interrupt on Timer 2 Output Compare
+  sei();
+  
   serial_init(9600);
   stdout = &mystdout;
   adc_init(); 
@@ -241,8 +292,8 @@ void init_all() {
   EIMSK |= (1 << INT0);     // Turns on INT0
 #endif
   
-  sei(); // always set
-  
+    sei(); // always set
+    buf_init();
 }
 
 unsigned char adcread(unsigned char channel){
@@ -301,21 +352,12 @@ unsigned short temp;
 
 unsigned char rx_buffer[8]; // for sd-card
 
-// for averagings/fet stuff
-static uint16_t pitch[howmany];
-uint16_t total=0, average=0, pitchindex;
-
-
 void main() {
   const uint32_t SIZEY=2000000000; // 2 GB say
   uint32_t offset=0;
   unsigned char readbuffer,writebuffer;
   float tempy;
-  uint16_t lastvalue, difference;
-
-  static uint8_t state=0;
-  uint16_t deviation, once;
-
+  uint16_t lastvalue, difference, temper;
   
   init_all();
 
@@ -356,32 +398,14 @@ void main() {
     
   while(1){
     // turn on and off FET for xx second PB0 
-    /*    cbi(PORTB,0);
-    _delay_ms(500);
+    //    cbi(PORTB,0);
+    //    _delay_ms(1000);
     sbi(PORTB,0); 
-    _delay_ms(500);        
-    */
+    _delay_ms(1000);        
+    
 
     //    _delay_ms(1);        
 
-#ifdef FETADC
-    // running average of 10 bit adc values
-    // and if we deviate we switch FET
-        // testing FET switch on deviation from average - and average code for other modes is here now... - TO TEST
-      total-=pitch[pitchindex];
-      once=adcread10(WHICH);
-      pitch[pitchindex]=once;
-      total+=pitch[pitchindex++];
-      if (pitchindex>=howmany) pitchindex=0;
-      average=total/howmany;
-      deviation=abs(once-average);
-      if (deviation>DEVIATION) state^=1;
-
-      if (state==1)   sbi(PORTB,0);  // FET is on!PB0
-      else   cbi(PORTB,0);  // FET is off
-      //      sbi(PORTB,0);
-      
-#endif
     
 #ifdef HIH    // tests for HIH
     THSense();
@@ -421,9 +445,12 @@ void main() {
 	// test for MAX31865:
 	//    Serial.print("Temperature = "); Serial.println(max.temperature(RNOMINAL, RREF));
     	tempy=temperature(RNOMINAL, RREF); // this works as long as sd card is in place
-    	int temper=(int)(tempy*100.0);
-    	printf("MAX temp %d\r\n", temper);
+    	temper=(int)(tempy*100.0);
+	printf("MAX temp %d\r\n", temper);
     	value=(int)(temper/100);
+	// put 2 bytes (low and high) into ring buffer and shift out
+	buf_put(temper&0xff);
+	buf_put((temper>>8)&0xff);	
 #endif
 
 #ifdef AD620 // ad620 is on ADC2

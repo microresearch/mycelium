@@ -121,29 +121,29 @@ at STWST48x4, Linz, Austria
 
 ** materials/pack list
 
-- detektorsx2
+- detektorsx2X
 - dried lingzhi for teaX
 - copper wires 0.8mm and 1mmX
-- several arduinos, cables and receiver modules
-- audio cables/minijack
-- radio receivers
-- copper sheets, thin boards, copper sticky sheets, basic wire, solder, croc clips, 
-- parts boxes just in case...
+- arduino, cables and receiver moduleX
+- audio cables/minijackX
+- radio receiversX
+
+- copper sheetsX, thin boardsX, copper sticky sheetsX, basic wireX, solderX, croc clipsX 
+- parts box with op amps, resistors etc...X
 - aaaX
 
 *big and AA batteries for radios*
 
-- tools-solder iron, multimeter
-- mycelium modules, sensors, *power supply* and breakout, programmer and cable
-- alcohol for cleaning or clean first
+- tools-solder ironTHERE, multimeterX
+- mycelium modules, sensors, *power supply* and breakout, programmer and cableX
 
-- candles and for heating, laser and light pickup
+- *candles for heating*
 
-check parts@
+check parts:
 
-thin copper boardsX, parts, several power supply 5v for arduino and modules, 
+thin copper boardsX, parts, several power supply 5v for arduino and modulesX 
 
-- parts: battery clips-3xaaaX, 04: HC04 (note 5v only)x, 
+- parts: battery clips-3xaaaX, 04: HC04 (note 5v only)x,XXalll parts 
 
 check: 4.7KX, 47kx, 1kx, 2.5kx, 470Rx, 27Kx, 10KX, 15Kx
 
@@ -470,11 +470,11 @@ port in hardware stuff for now...
 
 - how could we use say mushroom_adc(ADC1) for FET switching - running
   average and then switch/flipflop on deviation from that average
-  exceeding/?
+  exceeding/? done in some cases
 
 - where is running average code? in wormed.c - test this out in myc_wormedvoice.c
 
-** 4/9
+** 4/9-5/9
 
 idea of data radio style MSX or modem/AFSK/FSK/DTMF transmissions for data:
 
@@ -494,13 +494,32 @@ based on this test_afsk is working
 
 - tested all boards individually for workshop:
 
-1- temp-micro-sd-tran-FET
-2- op07-micro-tran - FET -X - mushroom adc
-3- 4093-nomicro-04 -X
-4- 555-nomicro-04 -X
-5- ad620-micro-tran-FET - needs cable to earthboot - mushroom adc
+1- temp-micro-sd-tran-FETon/offtimer - AFSK - need to replace microDONE-Z
 
-all working, to be assembled and connected
+2- op07-micro-tran - FET -X - mushroom ADC controls FET /3rd pin down = ADC1 DONE-Z
+3- 4093-nomicro-04 -X DONE-Z
+4- 555-nomicro-04 -X DONE-Z
+
+5- ad620-ADC2 micro-tran-FET - needs cable to earthboot-DONE - livecode -  livecode controls FET
+
+-- all working!
+
+extras from earlier
+
+6- humidity -> tran FET - wormvoice TODO DONE-Z 
+7- has humidity and 555 -> tran FET - AFSK TODO-> no fet action DONE-Z
+
+** 5/9
+
+Notes/TODO for next stage: 
+
+- for humidity we need to see what approx levels and differences we have
+- for co2 also
+
+- how to work more with FET timings...
+- use white noise filter also
+- more congtrol and passing signals through mushrooms
+
 
 * receivers// with arduino/pi
 

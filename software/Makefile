@@ -34,7 +34,7 @@ clean:
 	rm -rf doc/html
 
 flash: $(HEX)
-	avrdude -y -c usbasp -p $(MCU_AVRDUDE) -U flash:w:$(HEX)
+	avrdude  -y -c usbasp -p $(MCU_AVRDUDE) -U flash:w:$(HEX)
 
 $(HEX): $(OUT)
 	$(OBJCOPY) -R .eeprom -O ihex $< $@

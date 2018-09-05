@@ -11,8 +11,15 @@ ADC0 is marked ADC_LIGHT
 
 */
 
+//#define FETADC 1
+#define DEVIATION 8
+#define howmany 16 // how smooth/average?
+#define WHICH 1 // for ADC1 mushroom into fetadc
+
+#define ADC 2
+
 #define F_CPU 16000000UL 
-#define FS 8000 // sample rate
+#define FS 16000 // sample rate
 
 #include <stdio.h>
 #include <stdint.h>
@@ -31,8 +38,11 @@ typedef unsigned char u8;
 
 uint8_t synthPeriod, sample, rate, counter;
 
-#define randi() (adcread(0)) 
-#define trand ((rand()%255)+(adcread(0)&15))
+static uint16_t pitch[howmany];
+uint16_t total=0, average=0, pitchindex;
+
+#define randi() (adcread(ADC)) 
+#define trand ((rand()%255)+(adcread(ADC)&15))
 //#define randi() (incincom())
 #define CELLLEN 16
 #define floor(x) ((int)(x))
@@ -180,7 +190,7 @@ void initcell(unsigned char* cells){
   unsigned char x;
   for (x=0;x<MAX_SAM;x++){
     //    cells[x]=randi();
-    cells[x]=((rand()%255)+randi()+(adcread(0)&15));
+    cells[x]=((rand()%255)+randi()+(adcread(ADC)&15));
   }
 }
 
@@ -1272,12 +1282,12 @@ unsigned char fin1(unsigned char* cells, unsigned char IP){
 }
 
 unsigned char fin2(unsigned char* cells, unsigned char IP){
-  omem=adcread(0);
+  omem=adcread(ADC);
   return IP+insdir;
 }
 
 unsigned char fin3(unsigned char* cells, unsigned char IP){
-  IP=adcread(0);
+  IP=adcread(ADC);
   return IP+insdir;
 }
 
@@ -1389,7 +1399,7 @@ unsigned char die(unsigned char* cells, unsigned char IP){
 }
 
 unsigned char writeknob(unsigned char* cells, unsigned char IP){
-  cells[IP]=adcread(0);
+  cells[IP]=adcread(ADC);
   return IP+insdir;
 }
 
@@ -1420,6 +1430,11 @@ unsigned char feton(unsigned char* cells, unsigned char IP){
 
 void main(void)
 {
+
+  static uint8_t state=0;
+  uint16_t deviation, once;
+
+  
   unsigned char cpu, plague, instruction, instructionp;
   unsigned int counter=0,counterr=0,othercounter=0;
   unsigned int speed,plaguespeed;
@@ -1467,7 +1482,7 @@ void main(void)
   TIMSK2 = 0;
   //   OCR2B = nextPwm;
 
-  // Timer 1 set up as a 8000Hz sample interrupt
+  // Timer 1 set up as a 16000Hz sample interrupt
   TCCR1A = 0;
   TCCR1B = _BV(WGM12) | _BV(CS10);
   TCNT1 = 0;
@@ -1479,16 +1494,32 @@ void main(void)
   
   cbi(PORTB,0); // turn on our FET for TRANSMIT!
   
-
-  
- srand(randi());
+  srand(randi());
 
   instructionp=0; insdir=1; dir=1; btdir=0; dcdir=0;
 
   while(1){
 
+#ifdef FETADC
+    // running average of 10 bit adc values
+    // and if we deviate we switch FET
+        // testing FET switch on deviation from average - and average code for other modes is here now... - TO TEST
+      total-=pitch[pitchindex];
+      once=adcread(WHICH);
+      pitch[pitchindex]=once;
+      total+=pitch[pitchindex++];
+      if (pitchindex>=howmany) pitchindex=0;
+      average=total/howmany;
+      deviation=abs(once-average);
+      if (deviation>DEVIATION) state^=1;
 
-    //    speed=(adcread(0)+adcread(3))<<4; // TESTING! - speed of both slowing!TODO! was <<2
+      if (state==1)   sbi(PORTB,0);  // FET is on!PB0
+      else   cbi(PORTB,0);  // FET is off
+      //      sbi(PORTB,0);
+      
+#endif
+
+    //    speed=(adcread(ADC)+adcread(3))<<4; // TESTING! - speed of both slowing!TODO! was <<2
     //    plaguespeed=speed>>2;//>>4; // 4 bits=16;
     //    cpuspeed=speed>>5;//&15; // should be logarithmic and longer
     //	tmp=(adcread(2)+adcread(4)); // 8 bits
