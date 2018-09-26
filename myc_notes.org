@@ -1,24 +1,17 @@
 * TODO and type of mycel radio modules
 
-transmitters: transistor(switchable), HC04
+** TODO
 
-with input to trans or HC04 from:
-
-- micro with humidity, MAXtemp, CO2, 555 in, ADC mushroom, ADC from AD620 earthboot(TESTED), 5933 from earthboot (7 options)
-
-- 555 out TESTED
-- 4093/theremin out TESTED as audio and as transmit into 04
-- OP07 RF out TESTED as audio
-
--HC04 transmitter lacking 33pf to test - tested with 22pf which puts it at top of FM which is good!
-
-= 20 possibilities. for 17 say 14 micros and 3 analogues or more
-
-and additional option to always just use micro to switch on/off transmitter either according to score or with environmental conditions
-
-[no light option...]
-
-** modules for workshop/ labelled
+- signals throuhg mushrooms, test capacitance
+- how far we are with code eg, worm voice port
+- labelling scheme improved 
+- new code and label codes for each/or defines
+- build, test, waterproof
+- plan for workshop and performance
+- test all radio recievers, pair power supply, own radio/arduino done
+- extra 6v AAA (x4) holders for performance
+ 
+** modules for linz workshop/labelled
 
 1- temp-micro-sd-tran-FET
 2- op07-micro-tran - FET -X - mushroom adc
@@ -63,6 +56,12 @@ transistor transmit with:
 
 how many MCP602=20-3(built)=18 
 
+// extras for performance - so say 30 total:
+
+*** to make for performance
+
+- all with no micro, no waterproof: 555, replacement caps, theremin, ADC in, 620 in...
+
 ** basic test setup
 
 - micro: sensor in, serial out, fet switching
@@ -94,13 +93,55 @@ epoxy, nail varnish, hot glue, dip in resin - silicone rubber type 16, crystal c
 
 range is maybe 0-60 for differences once has settled down
 
-* other TODO for TAIPEI
+** older list
 
-- distributed PSU so we don't short all if there is a problem
-- receiver modules
-- soundcard setup and tests
+transmitters: transistor(switchable), HC04
 
-* workshop plan
+with input to trans or HC04 from:
+
+- micro with humidity, MAXtemp, CO2, 555 in, ADC mushroom, ADC from AD620 earthboot(TESTED), 5933 from earthboot (7 options)
+
+- 555 out TESTED
+- 4093/theremin out TESTED as audio and as transmit into 04
+- OP07 RF out TESTED as audio
+
+-HC04 transmitter lacking 33pf to test - tested with 22pf which puts it at top of FM which is good!
+
+= 20 possibilities. for 17 say 14 micros and 3 analogues or more
+
+and additional option to always just use micro to switch on/off transmitter either according to score or with environmental conditions
+
+[no light option...]
+
+* visua;l score to taipei
+
+not all 17 have radios, some have mushrooms to manipulate (say 7 mushroom)
+
+- bare radio, no amp, one person goes in circle with radio
+- others join movement in space, only one radio, how movement effects micro radio space
+- slowly others very low volume switch on radios (tune only to one spot which is free, never change tuning)
+- return to start location and plug in, mixer down
+- first performer paired with mushroom person, slow manipulations amplified
+- other join to new score:
+-- mushroom words
+-- mushroom voice
+-- mushroom noise
+
+others can join with radios, some move only in space and vocalise maybe low voices
+
+dying down towards mushroom heat/smoke laser end...
+
+unplug, reduce volume and all end by circling mushroom with radios (all now so 17)
+
+* workshop plan taipei
+
+- introduction and demonstrate
+- each person tries with radio
+- find pairs for mushroom/radio pair
+- work in pairs
+- work through the visual score (printed)
+
+* workshop plan linz
 
 http://stwst48x4.stwst.at/radio_mns_workshop  Mycelial Radio Activation
 
@@ -518,7 +559,7 @@ Notes/TODO for next stage:
 
 - how to work more with FET timings...
 - use white noise filter also
-- more congtrol and passing signals through mushrooms
+- more control and passing signals through mushrooms
 
 
 * receivers// with arduino/pi
