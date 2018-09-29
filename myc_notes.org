@@ -9,15 +9,21 @@
 - build, test, waterproof
 - plan for workshop and performance
 - test all radio recievers, pair power supply, own radio/arduino done
-- extra 6v AAA (x4) holders for performance
+
+- extra 4.5v AAA (x3) holders for performance, twisted wire, 8mm
+  circle at end, blocking diode (? from euros), mega8, check all
+  parts, connectors, psu for radios
+
+- clearly label +V (and now protect)
  
 ** modules for linz workshop/labelled
 
 1- temp-micro-sd-tran-FET
-2- op07-micro-tran - FET -X - mushroom adc
-3- 4093-nomicro-04 -X
-4- 555-nomicro-04 -X
-5- ad620-micro-tran-FET - needs cable to earthboot - mushroom adc
+2- op07-micro-tran - FET 
+3- 4093-nomicro-04 
+4- 555-nomicro-04 -
+5- ad620-micro-tran-FET
+6- ???humidity
 
 so for workshop: read MAX temp, read AD620 on ADC spare = adc2
 
@@ -27,13 +33,13 @@ FET switchings based on say mushroom adc ..., voice and live_code?
 
 transistor transmit with:
 
-1-micro/HIH-humidity SDcard-built x2
-2-micro/MAX-temperature SDcard-
+1-micro/HIH-humidity SDcard-built X
+2-micro/MAX-temperature SDcard- X
 
 3-micro/CO2 SDcard
 4-micro/555 in
 5-micro/ADC mushroom in
-6-micro/earthboot620in
+6-micro/earthboot620in X
 7-micro/earthboot5933-TEST!
 
 04 transmit with:
@@ -45,10 +51,11 @@ transistor transmit with:
 12-micro/earthboot620in
 
 13-555->transistor - micro gated?
-14-555->04
+14-555->04 X
 15-theremin->transistor - micro gated?
-16-theremin->04 - built radio board
-17-OP07->transistor (no 3.3v, micro gated)?
+16-theremin->04 - X
+
+17-OP07->transistor (micro gated) X
 18-OP07->04 (no 3.3v, no micro)
 
 19-transmitter with 555/micro source and replacement caps1 - micro gated?
