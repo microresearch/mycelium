@@ -12,7 +12,7 @@
 
 - extra 4.5v AAA (x3) holders for performance, twisted wire, 8mm
   circle at end, blocking diode (? from euros), mega8, check all
-  parts, connectors, psu for radios
+  parts, connectors, psu for radios, bolt 4mm for wires test
 
 - clearly label +V (and now protect)
  
