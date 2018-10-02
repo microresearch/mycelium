@@ -2,34 +2,39 @@
 
 ** TODO
 
-- signals throuhg mushrooms, test capacitance
-- how far we are with code eg, worm voice port
+- build, test - +4 or 5 micros, _1 04, +5 transistor - all sensor/psu/fet/theremin DONE 2/10
+
+- signals through mushrooms, test capacitance
+- how far we are with code eg, worm voice port - bare audio tests
+- new FET code - find lowest and highest or max difference
 - labelling scheme improved 
 - new code and label codes for each/or defines
-- build, test, waterproof
 - plan for workshop and performance
-- test all radio recievers, pair power supply, own radio/arduino done
+- test all radio receivers, pair power supply, *own radio/arduino done (x2)* so total 8 receivers
+- waterproofing
+- clearly label +V *AT_TOP* (and now protection diode to put in!)
 
-- extra 4.5v AAA (x3) holders for performance, twisted wire, 8mm
-  circle at end, blocking diode (? from euros), mega8, check all
-  parts, connectors, psu for radios, bolt 4mm for wires test
+- ORDER: extra 4.5v AAA (x3) holders for performanceX, 
 
-- clearly label +V (and now protect)
+twisted wireX, 4mm circle at end-how thick?-use resistor wire, blocking diode (1n5819)X, mega8X,
+  check all partsX, connectorsX, psu for radios-checkX, bolt 4mm for wires testX
+
  
-** modules for linz workshop/labelled
+** modules for linz workshop/labelled - see list also in diary below
 
 1- temp-micro-sd-tran-FET
 2- op07-micro-tran - FET 
 3- 4093-nomicro-04 
 4- 555-nomicro-04 -
 5- ad620-micro-tran-FET
-6- ???humidity
-
-so for workshop: read MAX temp, read AD620 on ADC spare = adc2
-
-FET switchings based on say mushroom adc ..., voice and live_code?
+6- humidity-tran SD
+7- humidity/HIH/555/sd-tran-FET 
 
 ** list possible modules
+
+// more with replacement caps, more theremin, antenna into mushroom, audio into mushroom, 
+
+FET switchings based on say mushroom adc ...
 
 transistor transmit with:
 
@@ -37,18 +42,20 @@ transistor transmit with:
 2-micro/MAX-temperature SDcard- X
 
 3-micro/CO2 SDcard
-4-micro/555 in
+4-micro/555 in X
 5-micro/ADC mushroom in
 6-micro/earthboot620in X
-7-micro/earthboot5933-TEST!
+///[7-micro/earthboot5933-TEST!]
 
 04 transmit with:
 
 8-micro/HIH-humidity SDCard-
 9-micro/MAX-temperature SDcard
-10-micro/555 in
+////10-micro/555 in
 11-micro/ADC mushroom in
-12-micro/earthboot620in
+////12-micro/earthboot620in
+
+////
 
 13-555->transistor - micro gated?
 14-555->04 X
@@ -56,6 +63,7 @@ transistor transmit with:
 16-theremin->04 - X
 
 17-OP07->transistor (micro gated) X
+
 18-OP07->04 (no 3.3v, no micro)
 
 19-transmitter with 555/micro source and replacement caps1 - micro gated?
@@ -63,11 +71,18 @@ transistor transmit with:
 
 how many MCP602=20-3(built)=18 
 
-// extras for performance - so say 30 total:
-
 *** to make for performance
 
-- all with no micro, no waterproof: 555, replacement caps, theremin, ADC in, 620 in...
+- no FET, no waterproofings
+
+LIST 8:
+
+- ADC in -micro trans
+- earthboot/620 in -micro trans
+- 555 raw transmit x2 -04
+- replacement caps with op07 in trans
+- replacement caps with ADC in -micro trans
+- theremin x2 04
 
 ** basic test setup
 
@@ -568,6 +583,9 @@ Notes/TODO for next stage:
 - use white noise filter also
 - more control and passing signals through mushrooms
 
+** 1/10
+
+- myc_afsk_temp_sd.c is latest SD/AFSK looping to test with temperature
 
 * receivers// with arduino/pi
 

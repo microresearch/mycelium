@@ -25,7 +25,7 @@ bool Radio::init() {
 	if (Wire.endTransmission()) return false;
 
 	regs[RADIO_REG_2] = R2_SOFT_RESET | R2_ENABLE;
-	regs[RADIO_REG_3] = R3_BAND_US_EU | R3_CHAN_SPACE_100K;
+	regs[RADIO_REG_3] = R3_BAND_US_EU | R3_CHAN_SPACE_25K;
 	regs[RADIO_REG_4] = 2048;
 	regs[RADIO_REG_5] = R5_INTERRUPT_MODE | R5_SNR_THRESHOLD | R5_LNA_PORT | state.volume;
 	regs[RADIO_REG_6] = 0x0000;
@@ -193,12 +193,12 @@ void Radio::updateStatus() {
 	}
 
 	// When tuned disable tuning and stop seeking.
-	if (state.isTuning && regs[RADIO_REG_A] & RA_TUNE_COMPLETE) {
+		if (state.isTuning && regs[RADIO_REG_A] & RA_TUNE_COMPLETE) {
 		regs[RADIO_REG_3] &= (~R3_TUNE_ENABLE);
 		sendRegister(RADIO_REG_3);
 		regs[RADIO_REG_2] &= (~R2_SEEK_ENABLE);
 		sendRegister(RADIO_REG_2);
-	}
+		}
 
 	// Transform raw data into radioState.
 	state.hasRdsData       = regs[RADIO_REG_A] & RA_RDS_READY;

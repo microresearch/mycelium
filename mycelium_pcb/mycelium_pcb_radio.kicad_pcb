@@ -1,4 +1,4 @@
-(kicad_pcb (version 20171130) (host pcbnew "(6.0.0-rc1-dev-209-g91e3d21d6)")
+(kicad_pcb (version 20171130) (host pcbnew "(6.0.0-rc1-dev-233-g53236a383)")
 
   (general
     (thickness 1.6)
@@ -731,7 +731,7 @@
     )
   )
 
-  (module Capacitors_SMD:C_0805 (layer F.Cu) (tedit 5B4E5F88) (tstamp 5B4FC244)
+  (module Capacitors_SMD:C_0805 (layer F.Cu) (tedit 5B86AF47) (tstamp 5B4FC244)
     (at 243.4971 48.7172 180)
     (descr "Capacitor SMD 0805, reflow soldering, AVX (see smccp.pdf)")
     (tags "capacitor 0805")
@@ -740,7 +740,7 @@
     (fp_text reference C10 (at 0 -1.5 180) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
     )
-    (fp_text value "10pf or replace conns" (at -0.3429 2.8956 180) (layer F.Fab)
+    (fp_text value "10pf or replace conns" (at -0.6223 3.0226 180) (layer F.Fab)
       (effects (font (size 1 1) (thickness 0.15)))
     )
     (fp_line (start 1.75 0.87) (end -1.75 0.87) (layer F.CrtYd) (width 0.05))
@@ -947,7 +947,7 @@
     )
   )
 
-  (module Capacitors_SMD:C_0805 (layer F.Cu) (tedit 5B5079F2) (tstamp 5B4FC2BB)
+  (module Capacitors_SMD:C_0805 (layer F.Cu) (tedit 5B86B02E) (tstamp 5B4FC2BB)
     (at 231.2543 48.9331 180)
     (descr "Capacitor SMD 0805, reflow soldering, AVX (see smccp.pdf)")
     (tags "capacitor 0805")
@@ -956,7 +956,7 @@
     (fp_text reference C18 (at 0.7874 -0.1524 180) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
     )
-    (fp_text value 330nF (at -3.2639 -0.0254 180) (layer F.Fab)
+    (fp_text value 330nF (at -3.3528 0.3048 180) (layer F.Fab)
       (effects (font (size 1 1) (thickness 0.15)))
     )
     (fp_line (start 1.75 0.87) (end -1.75 0.87) (layer F.CrtYd) (width 0.05))
@@ -1703,7 +1703,7 @@
     )
   )
 
-  (module Resistors_SMD:R_0805_HandSoldering (layer F.Cu) (tedit 5B50796C) (tstamp 5B4FC699)
+  (module Resistors_SMD:R_0805_HandSoldering (layer F.Cu) (tedit 5B86B03E) (tstamp 5B4FC699)
     (at 219.4814 57.1119 180)
     (descr "Resistor SMD 0805, hand soldering")
     (tags "resistor 0805")
@@ -1712,7 +1712,7 @@
     (fp_text reference R5 (at -1.2192 -0.0508 180) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
     )
-    (fp_text value 10K (at -3.6576 -0.0508 180) (layer F.Fab)
+    (fp_text value 10K (at -4.5466 -0.3175 180) (layer F.Fab)
       (effects (font (size 1 1) (thickness 0.15)))
     )
     (fp_line (start 2.35 0.9) (end -2.35 0.9) (layer F.CrtYd) (width 0.05))

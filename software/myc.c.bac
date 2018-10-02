@@ -35,18 +35,18 @@
 //#define MAX 1
 //#define C02 1
 //#define AD620 1 // can be from earthboot or from mushroom
-//#define ADC // which ones?
+//#define ADC // which ones=WHICH
 //#define AD5933 1 // or we seperate that out in other file as code is quite long
 
 // define audio mode:
 
 // define FET mode:
 
+#define FETADC 1
 
 // define SDCARD:
 //#define SDCARD 1
 
-#define FETADC 1
 #define DEVIATION 8
 #define howmany 16 // how smooth/average?
 #define WHICH 1 // for ADC1 mushroom ADC here into FETADC
