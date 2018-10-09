@@ -2,7 +2,9 @@
 
 ** TODO
 
-- build, test - +4 or 5 micros, _1 04, +5 transistor - all sensor/psu/fet/theremin DONE 2/10
+- build, test - +4 or 5 micros, +1 04, +5 transistor - all sensor/psu/fet/theremin DONE 2/10
+
+test micros so far-FUSES programmed, add power diode, add cables and fit together, re-program and test
 
 - signals through mushrooms, test capacitance
 - how far we are with code eg, worm voice port - bare audio tests
@@ -22,13 +24,15 @@ twisted wireX, 4mm circle at end-how thick?-use resistor wire, blocking diode (1
  
 ** modules for linz workshop/labelled - see list also in diary below
 
-1- temp-micro-sd-tran-FET
-2- op07-micro-tran - FET 
-3- 4093-nomicro-04 
-4- 555-nomicro-04 -
-5- ad620-micro-tran-FET
-6- humidity-tran SD
-7- humidity/HIH/555/sd-tran-FET 
+1- temp-micro-sd-tran-FET ->2
+2- op07-micro-tran - FET ->14
+3- 4093-nomicro-04 ->13
+4- 555-nomicro-04 ->11
+5- ad620-micro-tran-FET ->6
+6- humidity-tran SD ->1
+7- humidity/HIH/555/sd-tran-FET ->4
+
+now re-labelled as:
 
 ** list possible modules
 
@@ -38,36 +42,29 @@ FET switchings based on say mushroom adc ...
 
 transistor transmit with:
 
-1-micro/HIH-humidity SDcard-built X
+1-micro/HIH-humidity SDcard-built X 
 2-micro/MAX-temperature SDcard- X
 
-3-micro/CO2 SDcard
-4-micro/555 in X
+3-micro/CO2 SDcard 
+4-micro/555 in X +HIH humidity X
 5-micro/ADC mushroom in
 6-micro/earthboot620in X
-///[7-micro/earthboot5933-TEST!]
 
 04 transmit with:
 
-8-micro/HIH-humidity SDCard-
-9-micro/MAX-temperature SDcard
-////10-micro/555 in
-11-micro/ADC mushroom in
-////12-micro/earthboot620in
+7-micro/HIH-humidity SDCard-
+8-micro/MAX-temperature SDcard
+9-micro/ADC mushroom in
+10-555->transistor - micro gated?
+11-555->04 X
+12-theremin->transistor - micro gated?
+13-theremin->04 - X
+14-OP07->transistor (micro gated) X
 
-////
+15-OP07->04 (no 3.3v, no micro) 
 
-13-555->transistor - micro gated?
-14-555->04 X
-15-theremin->transistor - micro gated?
-16-theremin->04 - X
-
-17-OP07->transistor (micro gated) X
-
-18-OP07->04 (no 3.3v, no micro)
-
-19-transmitter with 555/micro source and replacement caps1 - micro gated?
-20-transmitter with 555/micro source and replacement caps2 - micro gated?
+16-transmitter with 555/micro source and replacement caps1 - micro gated?
+17-transmitter with 555/micro source and replacement caps2 - micro gated?
 
 how many MCP602=20-3(built)=18 
 
@@ -77,12 +74,12 @@ how many MCP602=20-3(built)=18
 
 LIST 8:
 
-- ADC in -micro trans
-- earthboot/620 in -micro trans
-- 555 raw transmit x2 -04
-- replacement caps with op07 in trans
-- replacement caps with ADC in -micro trans
-- theremin x2 04
+18- ADC in -micro trans
+19- earthboot/620 in -micro trans
+20/21- 555 raw transmit x2 -04
+22- replacement caps with op07 into trans no 3.3V 
+23- replacement caps with ADC in need micro trans
+24/25- theremin x2 04 no 3.3V
 
 ** basic test setup
 
