@@ -1,0 +1,73 @@
+* 17 for installation to specify
+
+- continuous
+- intermittent or clicks
+- very intermittent - burst of osc or noise
+- disturbers - audio into mush, mush antennas, white noise, mushroom caps...
+
+* softwares: 
+
+- AFSK
+- white noise and filter
+- live coding
+- wormed voice
+- clicks
+- oscillation pulses
+
+* Transistor transmit with (check gating):
+
+1-micro/HIH-humidity SDcard X  -SOFT: SD,
+
+2-micro/MAX-temperature SDcard X  -SOFT: SD, 
+
+3-micro/CO2 SDcard -SOFT: SD, 
+
+4-micro/555 in X +HIH humidity X -SOFT:
+
+5-micro/ADC mushroom in -SOFT:
+
+6-micro/earthboot620in X -SOFT:
+
+* 04 transmit with:
+
+7-micro/HIH-humidity SDCard-  -SOFT: SD, 
+
+8-micro/MAX-temperature SDcard -SOFT: SD, 
+
+9-micro/ADC mushroom in -SOFT:
+
+10-555->transistor - micro gated?  -SOFT: gating only
+
+11-555->04 X
+
+* misc - disturbers
+
+12-theremin->transistor - micro gated  -SOFT: gating only
+
+13-theremin->04 - X
+
+14-OP07->transistor (micro gated) X -SOFT: gating only
+
+15-OP07->04 (no 3.3v, no micro) 
+
+16-transmitter with 555/micro source - trans and replacement caps1 - micro gated  -SOFT: gating only
+
+17-transmitter with 555/micro source -trans and replacement caps2 - micro gated  -SOFT: gating only
+
+* For performance 18-25
+
+18- ADC in -micro trans X  -SOFT: with ADC2 as mode, wormed voice
+
+19- earthboot/620 in -micro trans  -SOFT: 
+
+20- 555 raw transmit -04
+
+21- 555 raw transmit -04
+
+22- replacement caps with op07 into trans no 3.3V 
+
+23- replacement caps with ADC in micro trans  -SOFT: 
+
+24- theremin 04 no 3.3V
+
+25- theremin 04 no 3.3V
