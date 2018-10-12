@@ -2,11 +2,12 @@
 
 ** TODO
 
-- build, test - +4 or 5 micros, +1 04, +5 transistor - all sensor/psu/fet/theremin DONE 2/10
+- build, test - +4 or 5 microsXDONE, +1 04DONE, +5 transistorDONE - all sensor/psu/fet/theremin DONE 2/10 // 9/10
+
 
 test micros so far-FUSES programmed, add power diode, add cables and fit together, re-program and test
 
-- signals through mushrooms, test capacitance
+- [RF signals through mushrooms], test capacitance
 - how far we are with code eg, worm voice port - bare audio tests
 - new FET code - find lowest and highest or max difference
 - labelling scheme improved 
@@ -16,12 +17,11 @@ test micros so far-FUSES programmed, add power diode, add cables and fit togethe
 - waterproofing
 - clearly label +V *AT_TOP* (and now protection diode to put in!)
 
-- ORDER: extra 4.5v AAA (x3) holders for performanceX, 
+- +ORDER+DONE: extra 4.5v AAA (x3) holders for performanceX, 
 
 twisted wireX, 4mm circle at end-how thick?-use resistor wire, blocking diode (1n5819)X, mega8X,
   check all partsX, connectorsX, psu for radios-checkX, bolt 4mm for wires testX
 
- 
 ** modules for linz workshop/labelled - see list also in diary below
 
 1- temp-micro-sd-tran-FET ->2
@@ -70,12 +70,12 @@ how many MCP602=20-3(built)=18
 
 *** to make for performance
 
-- no FET, no waterproofings
+- no FET, no waterproofings-18+! 4.5V
 
-LIST 8:
+LIST 8: 18/19/20/21/22/23/24/25/
 
-18- ADC in -micro trans
-19- earthboot/620 in -micro trans
+18- ADC1 in + added ADC2 for mode- - micro trans -X
+19- earthboot/620 in -micro tran s
 20/21- 555 raw transmit x2 -04
 22- replacement caps with op07 into trans no 3.3V 
 23- replacement caps with ADC in need micro trans
@@ -583,6 +583,17 @@ Notes/TODO for next stage:
 ** 1/10
 
 - myc_afsk_temp_sd.c is latest SD/AFSK looping to test with temperature
+
+** 9/10
+
+installation 17: 4 sets to program
+
+- continuous AFSK...
+- intermittent - clicks also - pulses - myc.c rough versions
+- very intermittent - noise or other bursts
+- disturbers - low level, capacitance, rf and audio through mushrooms, mushroom antennas, white noise, mush caps...
+
+for perf modules with micro: different mushroom modes on one ADC!
 
 * receivers// with arduino/pi
 
