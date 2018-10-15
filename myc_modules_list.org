@@ -56,7 +56,7 @@
 
 * For performance 18-25
 
-18- ADC in -micro trans X  -SOFT: with ADC2 as mode, wormed voice
+18- ADC1 in -micro trans X  -SOFT: with ADC2 as mode, wormed voice
 
 19- earthboot/620 in -micro trans  -SOFT: 
 

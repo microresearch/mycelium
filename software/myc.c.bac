@@ -40,14 +40,16 @@
 
 // define audio mode:
 
+#define CLICKS 1 // but not with FET - click on deviation from max - length is deviation
+
 // define FET mode:
 
-#define FETADC 1
+#define FETADC 0
 
 // define SDCARD:
 //#define SDCARD 1
 
-#define DEVIATION 8
+#define DEVIATION 16
 #define howmany 16 // how smooth/average?
 #define WHICH 1 // for ADC1 mushroom ADC here into FETADC
 
@@ -109,7 +111,7 @@
 
 #define FS 16000 // sample rate
 
-uint8_t synthPeriod, sample, rate, counter, synthEnergy=128, value=128;
+uint8_t synthPeriod, sample, rate, counter, synthEnergy=128, value=128, clicks=0;
 
 #define UART_BAUD_CALC(UART_BAUD_RATE,F_OSC) ((F_OSC)/((UART_BAUD_RATE)*16l)-1)
 
@@ -121,6 +123,24 @@ ISR(TIMER1_COMPA_vect) {
   static uint16_t synthRand = 1;
   static int16_t nsq;
   int16_t u0,u1;
+
+#ifdef CLICKS
+
+  if (clicks){
+    // run click for duration otherwise zero
+    OCR2B=255;
+    if (periodCounter++<value){
+      clicks=1;
+  }
+    else {
+      clicks=0;
+      periodCounter=0;
+    }
+  }
+  else OCR2B=0;
+
+#endif  
+
   /*  
   OCR2B = nextPwm;
   sei();
@@ -303,8 +323,7 @@ unsigned char rx_buffer[8]; // for sd-card
 
 // for averagings/fet stuff
 static uint16_t pitch[howmany];
-uint16_t total=0, average=0, pitchindex;
-
+uint16_t total=0, average=0, pitchindex, absmax=0, last=0;
 
 void main() {
   const uint32_t SIZEY=2000000000; // 2 GB say
@@ -382,7 +401,31 @@ void main() {
       //      sbi(PORTB,0);
       
 #endif
-    
+
+#ifdef CLICKS // don't combine with FET!
+    // running average of 10 bit adc values
+      total-=pitch[pitchindex];
+      once=adcread10(WHICH);
+      pitch[pitchindex]=once;
+      total+=pitch[pitchindex++];
+      if (pitchindex>=howmany) pitchindex=0;
+      average=total/howmany;
+      // also max as abs absmax
+      uint16_t am=abs(last-once);
+      if (am>absmax) {
+	absmax=am;
+      }
+      if (abs(absmax-am)<DEVIATION) { // if we are close to the max
+	clicks=1;
+	value=8;
+      }
+      /*      deviation=abs(once-average); // or this one
+      value=deviation;
+      if (deviation>DEVIATION) clicks=1;
+	*/
+      last=once;
+#endif
+      
 #ifdef HIH    // tests for HIH
     THSense();
     value=humN;
