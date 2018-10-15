@@ -1,4 +1,4 @@
-* 17 for installation to specify
+* 17 for installation to specify - all built
 
 - continuous
 - intermittent or clicks
@@ -16,17 +16,17 @@
 
 * Transistor transmit with (check gating):
 
-1-micro/HIH-humidity SDcard X  -SOFT: SD,
+1-micro/HIH-humidity SDcard-SOFT: SD, sounds good but not using SD?
 
-2-micro/MAX-temperature SDcard X  -SOFT: SD, 
+2-micro/MAX-temperature SDcard-SOFT: SD, 
 
-3-micro/CO2 SDcard -SOFT: SD, 
+3-micro/CO2 SDcard -SOFT: SD, GATE
 
-4-micro/555 in X +HIH humidity X -SOFT:
+4-micro/555 in +HIH humidity -SOFT: SD
 
-5-micro/ADC mushroom in -SOFT:
+5-micro/ADC mushroom in -SOFT: GATE
 
-6-micro/earthboot620in X -SOFT:
+6-micro/earthboot620in -SOFT:
 
 * 04 transmit with:
 
@@ -36,27 +36,27 @@
 
 9-micro/ADC mushroom in -SOFT:
 
-10-555->transistor - micro gated?  -SOFT: gating only
+10-555->transistor - micro gated?  -SOFT: gate, 555 signal to micro, micro pwm to output
 
-11-555->04 X
+11-555->04 
 
 * misc - disturbers
 
 12-theremin->transistor - micro gated  -SOFT: gating only
 
-13-theremin->04 - X
+13-theremin->04 -
 
-14-OP07->transistor (micro gated) X -SOFT: gating only
+14-OP07->transistor (micro gated) -SOFT: gating only
 
 15-OP07->04 (no 3.3v, no micro) 
 
-16-transmitter with 555/micro source - trans and replacement caps1 - micro gated  -SOFT: gating only
+16-transmitter with 555/micro source - trans and replacement caps1 - micro gated  -SOFT: gating, 555->micro, pwm
 
-17-transmitter with 555/micro source -trans and replacement caps2 - micro gated  -SOFT: gating only
+17-transmitter with 555/micro source -trans and replacement caps2 - micro gated  -SOFT: gating only, 555->micro, pwm
 
 * For performance 18-25
 
-18- ADC1 in -micro trans X  -SOFT: with ADC2 as mode, wormed voice
+18- ADC1 in -micro trans -SOFT: with ADC2 as mode, wormed voice
 
 19- earthboot/620 in -micro trans  -SOFT: 
 
@@ -64,7 +64,7 @@
 
 21- 555 raw transmit -04
 
-22- replacement caps with op07 into trans no 3.3V 
+22- replacement/parallel caps with op07 into trans no 3.3V 
 
 23- replacement caps with ADC in micro trans  -SOFT: 
 

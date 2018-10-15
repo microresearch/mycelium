@@ -4,10 +4,26 @@
 
 - build, test - +4 or 5 microsXDONE, +1 04DONE, +5 transistorDONE - all sensor/psu/fet/theremin DONE 2/10 // 9/10
 
-
 test micros so far-FUSES programmed, add power diode, add cables and fit together, re-program and test
 
-- [RF signals through mushrooms], test capacitance
+- [RF signals through mushrooms], test capacitanceX
+
+- test all performance modules, all have long power cablesX, power for
+  all and add leg points, make legs (more brass + also flexi-copper
+  legs)
+
+- test sd card read and write/afsk code, test 555->micro audio codes, wormed voice with ADC2 as mode select and freeze...
+
+record value, when we reach abs DEVIATION do something (FET or pulse/click) and record new value...
+
+clean up code for 4 variations and also FET codings...
+
+- continuous AFSK...
+- intermittent - clicks also - pulses - myc.c rough versions
+- very intermittent - noise or other bursts
+- disturbers - low level, capacitance, rf and audio through mushrooms, mushroom antennas, white noise, mush caps...
+
+
 - how far we are with code eg, worm voice port - bare audio tests
 - new FET code - find lowest and highest or max difference
 - labelling scheme improved 
@@ -34,7 +50,7 @@ twisted wireX, 4mm circle at end-how thick?-use resistor wire, blocking diode (1
 
 now re-labelled as:
 
-** list possible modules
+** List modules - all built - see myc_modules_list.org
 
 // more with replacement caps, more theremin, antenna into mushroom, audio into mushroom, 
 
@@ -68,7 +84,7 @@ transistor transmit with:
 
 how many MCP602=20-3(built)=18 
 
-*** to make for performance
+*** to make for performance DONE
 
 - no FET, no waterproofings-18+! 4.5V
 
@@ -132,15 +148,19 @@ and additional option to always just use micro to switch on/off transmitter eith
 
 [no light option...]
 
-* visua;l score to taipei
+* visual score to taipei
 
 not all 17 have radios, some have mushrooms to manipulate (say 7 mushroom)
 
 - bare radio, no amp, one person goes in circle with radio
 - others join movement in space, only one radio, how movement effects micro radio space
-- slowly others very low volume switch on radios (tune only to one spot which is free, never change tuning)
+- slowly others very low volume switch on radios (tuned already only to one spot which is free, never change tuning)
 - return to start location and plug in, mixer down
+
+- form groupd around mushroom setups
+
 - first performer paired with mushroom person, slow manipulations amplified
+
 - other join to new score:
 -- mushroom words
 -- mushroom voice
@@ -154,11 +174,18 @@ unplug, reduce volume and all end by circling mushroom with radios (all now so 1
 
 * workshop plan taipei
 
-- introduction and demonstrate
+- introduction and demonstrate slowly bit by bit
 - each person tries with radio
-- find pairs for mushroom/radio pair
-- work in pairs
+- find pairs for mushroom/radio pair - no pairing now, what temporary stations can be formed and re-formed
+
 - work through the visual score (printed)
+
+** packing list
+
+- psu for testing, all tools (cutters, iron, solder, multimeter, extra wire, extra copper, copper 
+- all radios and all psu, 2x arduino, cables, psu and radio receiver modules,
+- for workshop: printouts, other circuits, extra batteries, radios to get there+open_call!
+
 
 * workshop plan linz
 
