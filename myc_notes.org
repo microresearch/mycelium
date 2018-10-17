@@ -2,19 +2,33 @@
 
 ** TODO
 
-- build, test - +4 or 5 microsXDONE, +1 04DONE, +5 transistorDONE - all sensor/psu/fet/theremin DONE 2/10 // 9/10
+list ADC/AVR pins down from top= 1-5v, 2-GND, 3-mush=1, 4-spare=2, 5-light=0, 6-co2=3,7-SCL, 8-SDA, 9-+3.3V
 
-test micros so far-FUSES programmed, add power diode, add cables and fit together, re-program and test
+earthboot pins: from underneath left: 5v for 5933, 3,3V, GND, 620_OUT, SCL, SDA
 
-- [RF signals through mushrooms], test capacitanceX
+/////
+
++build, test - 4 or 5 microsXDONE, 1 04DONE, 5 transistorDONE - all sensor/psu/fet/theremin DONE 2/10 // 9/10+
+
++test micros so far-FUSES programmed, add power diode, add cables and fit together, re-program and test+
+
++[RF signals through mushrooms], test capacitanceX+
 
 - test all performance modules, all have long power cablesX, power for
   all and add leg points, make legs (more brass + also flexi-copper
   legs)
 
-- test sd card read and write/afsk code, test 555->micro audio codes, wormed voice with ADC2 as mode select and freeze...
++TESTED all analogue modules+
 
-record value, when we reach abs DEVIATION do something (FET or pulse/click) and record new value...
++test sd card read and write/afsk codeDONE+
+
+test 555->micro audio codes, 
+
++wormed voice with ADC2 as mode select and freeze DONE in arduino test folder+
+
+arduino test case: myc_arduino - just uploads via makefile/plain c - tested wormed!
+
+- scheme for FET: record value, when we reach abs DEVIATION do something (FET or pulse/click) and record new value...
 
 clean up code for 4 variations and also FET codings...
 
@@ -23,6 +37,7 @@ clean up code for 4 variations and also FET codings...
 - very intermittent - noise or other bursts
 - disturbers - low level, capacitance, rf and audio through mushrooms, mushroom antennas, white noise, mush caps...
 
+*check ADC read as 10 bit seems best - fix ADLAR options as in arduino/livecode example*
 
 - how far we are with code eg, worm voice port - bare audio tests
 - new FET code - find lowest and highest or max difference

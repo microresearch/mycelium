@@ -89,7 +89,7 @@ void init_all() {
 
 // PB1 is temp_cs and rest of temp as usual setup MAX31865 (port library)
   
-  DDRD=0x08;  // PD3
+//  DDRD=0x08;  // PD3
   DDRB|=0x01; // PB0 and for SD card  
 
   serial_init(9600);
@@ -105,8 +105,9 @@ unsigned char rx_buffer[8]; // for sd-card
 void main() {
   const uint32_t SIZEY=2000000000; // 2 GB say
   uint32_t offset=0;
-  unsigned char readbuffer,writebuffer, value;
-
+  unsigned char readbuffer,writebuffer, value=0;
+  init_all();
+  
     while(1){    // outer loop for SD-cardery
         if(!sd_raw_init())
       {
@@ -139,7 +140,8 @@ void main() {
     printf("OPENED");
     
   while(1){
-    // write to sd-card RAW
+    // write to sd-card RAW - this works???
+    //    value++;
     //    sd_raw_write(offset, &value, 1);
 
     // read as test - this seems to work...

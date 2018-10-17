@@ -1,3 +1,4 @@
+# just for upload to arduino uno
 
 NAME := myco
 HEX := $(NAME).hex
@@ -7,8 +8,8 @@ SOURCES := $(wildcard *.c)
 HEADERS := $(wildcard *.h)
 OBJECTS := $(patsubst %.c,%.o,$(SOURCES))
 
-MCU := atmega168
-MCU_AVRDUDE := m168
+MCU := atmega328
+MCU_AVRDUDE := m328
 MCU_FREQ := 16000000UL
 
 
@@ -22,8 +23,6 @@ CFLAGS := -Wall -pedantic -mmcu=$(MCU) -std=c99 -Os -DF_OSC=16000000 -DF_CPU=$(M
 FUSEH = 0xdf
 FUSEL = 0xff
 
-
-
 all: $(HEX)
 
 fuse:
@@ -34,7 +33,9 @@ clean:
 	rm -rf doc/html
 
 flash: $(HEX)
-	avrdude  -y -c avrisp -p $(MCU_AVRDUDE) -U flash:w:$(HEX)
+#	avrdude  -y -c avrisp -p $(MCU_AVRDUDE) -U flash:w:$(HEX)
+	avrdude -y -c arduino -p ATMEGA328P -P /dev/ttyACM0 -b 115200 -U flash:w:$(HEX)
+
 
 $(HEX): $(OUT)
 	$(OBJCOPY) -R .eeprom -O ihex $< $@
