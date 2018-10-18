@@ -1,30 +1,30 @@
+* pins
+
+ADC/AVR/micro pins down from top= 1-5v, 2-GND, 3-mush=1, 4-spare=2, 5-light=0, 6-co2=3,7-SCL, 8-SDA, 9-+3.3V
+
+earthboot pins: from underneath left: 5v for 5933, 3,3V, GND, 620_OUT, SCL, SDA
+
+range of both 04 and transistor is full FM 87-107 MHz
+
+POWER: +V *AT_TOP* (and now protection diode to put in!), white stripe is GND on all cables
+
 * TODO and type of mycel radio modules
 
 ** TODO
 
-list ADC/AVR pins down from top= 1-5v, 2-GND, 3-mush=1, 4-spare=2, 5-light=0, 6-co2=3,7-SCL, 8-SDA, 9-+3.3V
+- how to work with SD and not just as AFSK - despite slow speed of SD read/write:
 
-earthboot pins: from underneath left: 5v for 5933, 3,3V, GND, 620_OUT, SCL, SDA
+loop through and change livecode, voice params//other data sends
 
-/////
+also new kansas and softmodem code in arduino dir to test with SD and ...
 
-+build, test - 4 or 5 microsXDONE, 1 04DONE, 5 transistorDONE - all sensor/psu/fet/theremin DONE 2/10 // 9/10+
-
-+test micros so far-FUSES programmed, add power diode, add cables and fit together, re-program and test+
-
-+[RF signals through mushrooms], test capacitanceX+
+(also AFSK = 1200 bps bits per second /8 = 150 bytes per sec = potential for 150 reads = 0.006 secs max for read = 6mS)
 
 - test all performance modules, all have long power cablesX, power for
   all and add leg points, make legs (more brass + also flexi-copper
   legs)
 
-+TESTED all analogue modules+
-
-+test sd card read and write/afsk codeDONE+
-
-test 555->micro audio codes, 
-
-+wormed voice with ADC2 as mode select and freeze DONE in arduino test folder+
+test 555->micro audio codes - noise or clicks?
 
 arduino test case: myc_arduino - just uploads via makefile/plain c - tested wormed!
 
@@ -39,14 +39,25 @@ clean up code for 4 variations and also FET codings...
 
 *check ADC read as 10 bit seems best - fix ADLAR options as in arduino/livecode example*
 
-- how far we are with code eg, worm voice port - bare audio tests
 - new FET code - find lowest and highest or max difference
-- labelling scheme improved 
-- new code and label codes for each/or defines
+
 - plan for workshop and performance
 - test all radio receivers, pair power supply, *own radio/arduino done (x2)* so total 8 receivers
 - waterproofing
-- clearly label +V *AT_TOP* (and now protection diode to put in!)
+
+** done
+
++wormed voice with ADC2 as mode select and freeze DONE in arduino test folder+
+
++build, test - 4 or 5 microsXDONE, 1 04DONE, 5 transistorDONE - all sensor/psu/fet/theremin DONE 2/10 // 9/10+
+
++test micros so far-FUSES programmed, add power diode, add cables and fit together, re-program and test+
+
++[RF signals through mushrooms], test capacitanceX+
+
++TESTED all analogue modules+
+
++test sd card read and write/afsk codeDONE+
 
 - +ORDER+DONE: extra 4.5v AAA (x3) holders for performanceX, 
 
@@ -197,7 +208,7 @@ unplug, reduce volume and all end by circling mushroom with radios (all now so 1
 
 ** packing list
 
-- psu for testing, all tools (cutters, iron, solder, multimeter, extra wire, extra copper, copper 
+- psu for testing, all tools (cutters, iron, solder, multimeter, extra wire, extra copper, copper, wirings for all parts, spares, diodes)
 - all radios and all psu, 2x arduino, cables, psu and radio receiver modules,
 - for workshop: printouts, other circuits, extra batteries, radios to get there+open_call!
 

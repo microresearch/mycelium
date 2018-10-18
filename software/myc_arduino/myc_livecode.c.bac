@@ -18,7 +18,7 @@ ADC0 is marked ADC_LIGHT
 
 #define ADC 2
 
-#define ADCMODES 1 // for ADC1 as doing switching of modus=cpu and plague - jumps up!
+//#define ADCMODES  // for ADC1 as doing switching of modus=cpu and plague - jumps up!
 
 #define F_CPU 16000000UL 
 #define FS 16000 // sample rate
@@ -1597,7 +1597,7 @@ void main(void)
     //	if (plague==0) plague=cells[instructionp]>>4;
 	//	cpu=9;
 
-    cpu=12; plague=0; plaguespeed=1;cpuspeed=1; speed=1; // FIXED speeds
+    cpu=9; plague=0; plaguespeed=1;cpuspeed=1; speed=1; // FIXED speeds
     
     // 9 is nice !
 
@@ -1620,6 +1620,7 @@ void main(void)
 #else
     modus=9; 
 #endif
+    
     cpu=modus%16; plague=modus/16;
     
     

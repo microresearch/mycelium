@@ -16,15 +16,17 @@
 
 * Transistor transmit with (check gating):
 
-1-micro/HIH-humidity SDcard-SOFT: SD, sounds good but not using SD?
+T-tested/done
 
-2-micro/MAX-temperature SDcard-SOFT: SD, 
+1-micro/HIH-humidity SDcard-SOFT: SD, sounds good but not using SD? -T-
+
+2-micro/MAX-temperature SDcard-SOFT: SD, AFSK
 
 3-micro/CO2 SDcard -SOFT: SD, GATE
 
 4-micro/555 in +HIH humidity -SOFT: SD
 
-5-micro/ADC mushroom in -SOFT: GATE
+5-micro/ADC mushroom in -SOFT: GATE, livecode ADC, cpu=9
 
 6-micro/earthboot620in -SOFT:
 
@@ -32,42 +34,42 @@
 
 7-micro/HIH-humidity SDCard-  -SOFT: SD, 
 
-8-micro/MAX-temperature SDcard -SOFT: SD, 
+8-micro/MAX-temperature SDcard -SOFT:  
 
 9-micro/ADC mushroom in -SOFT:
 
 10-555->transistor - micro gated?  -SOFT: gate, 555 signal to micro, micro pwm to output
 
-11-555->04 
+11-555->04 -T-
 
 * misc - disturbers
 
-12-theremin->transistor - micro gated  -SOFT: gating only
+12-theremin->transistor - micro gated  -SOFT: gating only - sequenced
 
-13-theremin->04 -
+13-theremin->04 -T-
 
-14-OP07->transistor (micro gated) -SOFT: gating only
+14-OP07->transistor (micro gated) -SOFT: gating only - with ADC maybe
 
-15-OP07->04 (no 3.3v, no micro) 
+15-OP07->04 (no 3.3v, no micro) -T-
 
-16-transmitter with 555/micro source - trans and replacement caps1 - micro gated  -SOFT: gating, 555->micro, pwm
+16-transmitter with 555/micro source - trans and replacement caps1 - micro gated  -SOFT: gating, 555->micro, pwm, noise or clicks
 
-17-transmitter with 555/micro source -trans and replacement caps2 - micro gated  -SOFT: gating only, 555->micro, pwm
+17-transmitter with 555/micro source -trans and replacement caps2 - micro gated  -SOFT: gating only, 555->micro, pwm, noise or clicks
 
 * For performance 18-25
 
 18- ADC1 in -micro trans -SOFT: with ADC2 as mode, wormed voice
 
-19- earthboot/620 in -micro trans  -SOFT: 
+19- earthboot/620 in -micro trans  -SOFT: live code with ADC2 as cpu/plague
 
-20- 555 raw transmit -04
+20- 555 raw transmit -04 -T-
 
-21- 555 raw transmit -04
+21- 555 raw transmit -04 -T-
 
-22- replacement/parallel caps with op07 into trans no 3.3V 
+22- replacement/parallel caps with op07 into trans no 3.3V -T-
 
-23- replacement caps with ADC in micro trans  -SOFT: 
+23- replacement caps with ADC in micro trans  -SOFT: code? maybe live code with fixed CPU
 
-24- theremin 04 no 3.3V
+24- theremin 04 no 3.3V -T-
 
-25- theremin 04 no 3.3V
+25- theremin 04 no 3.3V -T-
