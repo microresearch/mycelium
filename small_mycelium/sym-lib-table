@@ -1,0 +1,3 @@
+(sym_lib_table
+  (lib (name small_mycelium-rescue)(type Legacy)(uri ${KIPRJMOD}/small_mycelium-rescue.lib)(options "")(descr ""))
+)
