@@ -40,24 +40,13 @@ F 3 "" H 5850 2850 50  0001 C CNN
 $EndComp
 $Comp
 L small_mycelium-rescue:74HC04-Logic_74xx-mycelium_pcb-rescue U1
-U 3 1 5B3D76CA
+U 1 1 5B3D76CA
 P 3350 2850
 F 0 "U1" H 3350 3167 50  0000 C CNN
 F 1 "74HC04" H 3350 3076 50  0000 C CNN
 F 2 "Housings_DIP:DIP-14_W7.62mm_LongPads" H 3350 2850 50  0001 C CNN
 F 3 "" H 3350 2850 50  0001 C CNN
-	3    3350 2850
-	1    0    0    -1  
-$EndComp
-$Comp
-L small_mycelium-rescue:74HC04-Logic_74xx-mycelium_pcb-rescue U1
-U 2 1 5B3D761F
-P 1900 2850
-F 0 "U1" H 1900 3167 50  0000 C CNN
-F 1 "74HC04" H 1900 3076 50  0000 C CNN
-F 2 "Housings_DIP:DIP-14_W7.62mm_LongPads" H 1900 2850 50  0001 C CNN
-F 3 "" H 1900 2850 50  0001 C CNN
-	2    1900 2850
+	1    3350 2850
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -116,26 +105,15 @@ F 3 "" H 4800 3100 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L small_mycelium-rescue:R-device-mycelium_pcb-rescue R2
-U 1 1 5B3DBA5A
-P 2850 2850
-F 0 "R2" H 2850 2850 50  0000 L CNN
-F 1 "27K" H 2920 2805 50  0000 L CNN
-F 2 "Resistors_ThroughHole:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal" V 2780 2850 50  0001 C CNN
-F 3 "" H 2850 2850 50  0001 C CNN
-	1    2850 2850
-	0    -1   -1   0   
-$EndComp
-$Comp
 L small_mycelium-rescue:C-device-mycelium_pcb-rescue C1
 U 1 1 5B3DBB72
-P 2450 2850
-F 0 "C1" H 2565 2896 50  0000 L CNN
-F 1 "10pF" H 2565 2805 50  0000 L CNN
-F 2 "Capacitors_ThroughHole:C_Disc_D7.5mm_W5.0mm_P5.00mm" H 2488 2700 50  0001 C CNN
-F 3 "" H 2450 2850 50  0001 C CNN
-	1    2450 2850
-	0    1    1    0   
+P 3000 3450
+F 0 "C1" H 3115 3496 50  0000 L CNN
+F 1 "10pF" H 3115 3405 50  0000 L CNN
+F 2 "Capacitors_ThroughHole:C_Disc_D7.5mm_W5.0mm_P5.00mm" H 3038 3300 50  0001 C CNN
+F 3 "" H 3000 3450 50  0001 C CNN
+	1    3000 3450
+	-1   0    0    1   
 $EndComp
 Wire Wire Line
 	3700 2850 3650 2850
@@ -205,36 +183,6 @@ Wire Wire Line
 Wire Wire Line
 	5500 2850 5550 2850
 $Comp
-L small_mycelium-rescue:R-device-mycelium_pcb-rescue R1
-U 1 1 5BBDF272
-P 2650 3100
-F 0 "R1" H 2720 3146 50  0000 L CNN
-F 1 "2K" H 2720 3055 50  0000 L CNN
-F 2 "Resistors_ThroughHole:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal" V 2580 3100 50  0001 C CNN
-F 3 "" H 2650 3100 50  0001 C CNN
-	1    2650 3100
-	-1   0    0    1   
-$EndComp
-Wire Wire Line
-	1600 2850 1600 3250
-Wire Wire Line
-	1600 3250 2650 3250
-Wire Wire Line
-	2650 3250 3700 3250
-Wire Wire Line
-	3700 3250 3700 2850
-Connection ~ 2650 3250
-Connection ~ 3700 2850
-Wire Wire Line
-	2600 2850 2650 2850
-Wire Wire Line
-	2200 2850 2250 2850
-Wire Wire Line
-	2650 2950 2650 2850
-Connection ~ 2650 2850
-Wire Wire Line
-	2650 2850 2700 2850
-$Comp
 L small_mycelium-rescue:Conn_01x02-Connector-mycelium_pcb-rescue J2
 U 1 1 5BBDFC9E
 P 5850 1900
@@ -275,37 +223,66 @@ Wire Wire Line
 	5600 2100 5600 2000
 Wire Wire Line
 	5600 2000 5650 2000
-$Comp
-L small_mycelium-rescue:CONN_01X01-mycelium_pcb-rescue J1
-U 1 1 5BBE0483
-P 2650 2450
-F 0 "J1" H 2728 2491 50  0000 L CNN
-F 1 "ANTENNA_2" H 2728 2400 50  0000 L CNN
-F 2 "Wire_Pads:SolderWirePad_single_1mmDrill" H 2650 2450 50  0001 C CNN
-F 3 "" H 2650 2450 50  0001 C CNN
-	1    2650 2450
-	0    -1   -1   0   
-$EndComp
-Wire Wire Line
-	2650 2850 2650 2650
 Wire Wire Line
 	3000 2850 3050 2850
 $Comp
 L small_mycelium-rescue:CONN_01X01-mycelium_pcb-rescue J4
 U 1 1 5BBECDB7
-P 2050 2400
-F 0 "J4" H 2128 2441 50  0000 L CNN
-F 1 "ANTENNA" H 2128 2350 50  0000 L CNN
-F 2 "Wire_Pads:SolderWirePad_single_1mmDrill" H 2050 2400 50  0001 C CNN
-F 3 "" H 2050 2400 50  0001 C CNN
-	1    2050 2400
+P 2575 2900
+F 0 "J4" H 2653 2941 50  0000 L CNN
+F 1 "ANTENNA" H 2653 2850 50  0000 L CNN
+F 2 "Wire_Pads:SolderWirePad_single_1mmDrill" H 2575 2900 50  0001 C CNN
+F 3 "" H 2575 2900 50  0001 C CNN
+	1    2575 2900
+	0    -1   -1   0   
+$EndComp
+Connection ~ 3650 2850
+Wire Wire Line
+	3650 3250 3000 3250
+Wire Wire Line
+	3000 3250 3000 2850
+Wire Wire Line
+	3650 2850 3650 3250
+$Comp
+L small_mycelium-rescue:GND-power-mycelium_pcb-rescue #PWR?
+U 1 1 5BCDA59C
+P 3000 3675
+F 0 "#PWR?" H 3000 3425 50  0001 C CNN
+F 1 "GND" H 3005 3502 50  0000 C CNN
+F 2 "" H 3000 3675 50  0001 C CNN
+F 3 "" H 3000 3675 50  0001 C CNN
+	1    3000 3675
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3000 3250 3000 3300
+Connection ~ 3000 3250
+Wire Wire Line
+	3000 3600 3000 3675
+$Comp
+L small_mycelium-rescue:GND-power-mycelium_pcb-rescue #PWR?
+U 1 1 5BCDAC2E
+P 2575 3200
+F 0 "#PWR?" H 2575 2950 50  0001 C CNN
+F 1 "GND" H 2580 3027 50  0000 C CNN
+F 2 "" H 2575 3200 50  0001 C CNN
+F 3 "" H 2575 3200 50  0001 C CNN
+	1    2575 3200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2575 3100 2575 3200
+$Comp
+L small_mycelium-rescue:CONN_01X01-mycelium_pcb-rescue J?
+U 1 1 5BCDAF62
+P 3650 2450
+F 0 "J?" H 3728 2491 50  0000 L CNN
+F 1 "ANTENNA" H 3728 2400 50  0000 L CNN
+F 2 "Wire_Pads:SolderWirePad_single_1mmDrill" H 3650 2450 50  0001 C CNN
+F 3 "" H 3650 2450 50  0001 C CNN
+	1    3650 2450
 	0    -1   -1   0   
 $EndComp
 Wire Wire Line
-	2250 2850 2250 2600
-Wire Wire Line
-	2250 2600 2050 2600
-Connection ~ 2250 2850
-Wire Wire Line
-	2250 2850 2300 2850
+	3650 2850 3650 2650
 $EndSCHEMATC
