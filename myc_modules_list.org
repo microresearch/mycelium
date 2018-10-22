@@ -22,7 +22,7 @@ T-tested/done
 
 2-micro/MAX-temperature SDcard-SOFT: SD, AFSK
 
-3-micro/CO2 SDcard -SOFT: SD, GATE
+3-micro/CO2 SDcard -SOFT: SD, GATE, NOTE to put CO2 on ADC1!
 
 4-micro/555 in +HIH humidity -SOFT: SD
 
