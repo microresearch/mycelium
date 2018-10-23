@@ -7,7 +7,7 @@
 
 * softwares: 
 
-- AFSK
+- AFSK, softmodem, kansas, click transmit maybe - with SD!
 - white noise and filter
 - live coding
 - wormed voice
@@ -22,29 +22,29 @@ T-tested/done
 
 2-micro/MAX-temperature SDcard-SOFT: SD, AFSK
 
-3-micro/CO2 SDcard -SOFT: SD, GATE, NOTE to put CO2 on ADC1!
+3-micro/CO2 SDcard -SOFT: SD, GATE, NOTE to put CO2 on ADC1!, kansas
 
-4-micro/555 in +HIH humidity -SOFT: SD
+4-micro/555 in +HIH humidity -SOFT: SD, click transmit
 
 5-micro/ADC mushroom in -SOFT: GATE, livecode ADC, cpu=9
 
-6-micro/earthboot620in -SOFT:
+6-micro/earthboot620in -SOFT: wormed voice
 
 * 04 transmit with:
 
-7-micro/HIH-humidity SDCard-  -SOFT: SD, 
+7-micro/HIH-humidity SDCard-  -SOFT: SD, softmodem
 
-8-micro/MAX-temperature SDcard -SOFT:  
+8-micro/MAX-temperature -SOFT: wormedvoice
 
-9-micro/ADC mushroom in -SOFT:
+9-micro/ADC mushroom in -SOFT: livecode
 
-10-555->transistor - micro gated?  -SOFT: gate, 555 signal to micro, micro pwm to output
+10-555->transistor - micro gated?  -SOFT: gate, 555 signal to micro, micro pwm to output, wormedvoice
 
 11-555->04 -T-
 
 * misc - disturbers
 
-12-theremin->transistor - micro gated  -SOFT: gating only - sequenced
+12-theremin->transistor - micro gated  -SOFT: gating only - sequenced seconds
 
 13-theremin->04 -T-
 
@@ -52,15 +52,15 @@ T-tested/done
 
 15-OP07->04 (no 3.3v, no micro) -T-
 
-16-transmitter with 555/micro source - trans and replacement caps1 - micro gated  -SOFT: gating, 555->micro, pwm, noise or clicks
+16-transmitter with 555/micro source - trans and replacement caps1 - micro gated  -SOFT: gating, 555->micro, pwm, whitenoise
 
-17-transmitter with 555/micro source -trans and replacement caps2 - micro gated  -SOFT: gating only, 555->micro, pwm, noise or clicks
+17-transmitter with 555/micro source -trans and replacement caps2 - micro gated  -SOFT: gating only, 555->micro, pwm, clicks
 
 * For performance 18-25
 
-18- ADC1 in -micro trans -SOFT: with ADC2 as mode, wormed voice
+18- ADC1 in -micro trans -SOFT: *wormed voice with ADC2 as mode*
 
-19- earthboot/620 in -micro trans  -SOFT: live code with ADC2 as cpu/plague
+19- earthboot/620 in -micro trans  -SOFT: *live code with ADC1 as cpu/plague, ADC2 as input*
 
 20- 555 raw transmit -04 -T-
 
@@ -68,7 +68,7 @@ T-tested/done
 
 22- replacement/parallel caps with op07 into trans no 3.3V -T-
 
-23- replacement caps with ADC in micro trans  -SOFT: code? maybe live code with fixed CPU
+23- replacement caps with ADC in micro trans  -SOFT: *live code with fixed CPU - 9*
 
 24- theremin 04 no 3.3V -T-
 

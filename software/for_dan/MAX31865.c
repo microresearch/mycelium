@@ -129,12 +129,7 @@ void autoConvert(uint8_t b) {
 
 void setWires(max31865_numwires_t wires ) {
   uint8_t t = readRegister8(MAX31856_CONFIG_REG);
-  if (wires == MAX31865_3WIRE) {
-    t |= MAX31856_CONFIG_3WIRE;
-  } else {
-    // 2 or 4 wire
     t &= ~MAX31856_CONFIG_3WIRE;
-  }
   writeRegister8(MAX31856_CONFIG_REG, t);
 }
 

@@ -1,0 +1,201 @@
+
+
+#include <avr/sleep.h>
+#include <avr/wdt.h>
+#include <OneWire.h>
+
+OneWire ds(7);
+
+#ifndef cbi
+#define cbi(sfr, bit) (_SFR_BYTE(sfr) &= ~_BV(bit))
+#endif
+#ifndef sbi
+#define sbi(sfr, bit) (_SFR_BYTE(sfr) |= _BV(bit))
+#endif
+
+int nint;
+int pinLed=13;
+
+volatile boolean f_wdt=1;
+
+//////// 1- wire variables /////////
+int HighByte, LowByte, TReading, SignBit, Tc_100, Whole, Fract;
+
+byte i;
+byte present = 0;
+byte data[12];
+byte addr[8];
+////////////////
+
+void setup(){
+
+ Serial.begin(9600);
+ pinMode(pinLed,OUTPUT);
+ Serial.println("Setup watchdog");
+
+ // CPU Sleep Modes
+ // SM2 SM1 SM0 Sleep Mode
+ // 0    0  0 Idle
+ // 0    0  1 ADC Noise Reduction
+ // 0    1  0 Power-down
+ // 0    1  1 Power-save
+ // 1    0  0 Reserved
+ // 1    0  1 Reserved
+ // 1    1  0 Standby(1)
+
+ cbi( SMCR,SE );      // sleep enable, power down mode
+ cbi( SMCR,SM0 );     // power down mode
+ sbi( SMCR,SM1 );     // power down mode
+ cbi( SMCR,SM2 );     // power down mode
+
+ setup_watchdog(9);
+
+}
+
+byte del;
+int cnt;
+int counter = 10; // timer for counting watchdog cicles
+long time = 0;
+
+//****************************************************************
+//****************************************************************
+//****************************************************************
+void loop(){
+
+ if (f_wdt==1) {  // wait for timed out watchdog / flag is set when a watchdog timeout occurs
+   f_wdt=0;       // reset flag
+
+   /* ///// debuging purpose only /////
+    time = millis();
+    Serial.print(counter);
+    Serial.print(" ");
+    Serial.println(time);
+    delay(2); //needed for serial.print operation to finish
+    */    ////////////////////////////////////
+
+   if(counter==10)  // if ==10 -> this will be true every 10x8 = 80seconds; set to 225 to get 225x8=1800s = 30min
+   {
+
+     //////////////// put code inside this IF ////////
+
+     pinMode(pinLed,INPUT); // set all used port to intput to save power
+
+     for(int i=0; i<10; i++)
+     {
+       digitalWrite(pinLed, HIGH);
+       delay(90);
+       digitalWrite(pinLed, LOW);
+       delay(90);  
+     }
+
+     ///////// 1-wire //////////
+     ds.reset();
+     ds.skip();
+     ds.write(0x44,1);         // start conversion, with parasite power on at the end
+
+     delay(1000);     // maybe 750ms is enough, maybe not
+     // we might do a ds.depower() here, but the reset will take care of it.
+
+     present = ds.reset();
+     ds.skip();    
+     ds.write(0xBE);         // Read Scratchpad
+
+
+     for ( i = 0; i < 9; i++) {           // we need 9 bytes
+       data[i] = ds.read();
+     }
+
+
+     LowByte = data[0];
+     HighByte = data[1];
+     TReading = (HighByte << 8) + LowByte;
+     SignBit = TReading & 0x8000;  // test most sig bit
+     if (SignBit) // negative
+     {
+       TReading = (TReading ^ 0xffff) + 1; // 2's comp
+     }
+     Tc_100 = (6 * TReading) + TReading / 4;    // multiply by (100 * 0.0625) or 6.25
+
+
+     Whole = Tc_100 / 100;  // separate off the whole and fractional portions
+     Fract = Tc_100 % 100;
+
+
+     if (SignBit) // If its negative
+     {
+       Serial.print("-");
+     }
+     Serial.print(Whole);
+     Serial.print(".");
+     if (Fract < 10)
+     {
+       Serial.print("0");
+     }
+     Serial.print(Fract);
+
+     Serial.print("\n");
+     ///////////////1-wire end///////////
+
+     pinMode(pinLed,OUTPUT); // set all ports into state before sleep
+
+     ////////////////////////////////////////////////////
+
+     counter = 0;
+   }
+   else counter++;
+
+   system_sleep();
+
+ }
+
+}
+
+
+//****************************************************************
+// set system into the sleep state
+// system wakes up when wtchdog is timed out
+void system_sleep() {
+
+ cbi(ADCSRA,ADEN);                    // switch Analog to Digitalconverter OFF
+
+ set_sleep_mode(SLEEP_MODE_PWR_DOWN); // sleep mode is set here
+ sleep_enable();
+
+ sleep_mode();                        // System sleeps here
+
+   sleep_disable();                     // System continues execution here when watchdog timed out
+ sbi(ADCSRA,ADEN);                    // switch Analog to Digitalconverter ON
+
+}
+
+//****************************************************************
+// 0=16ms, 1=32ms,2=64ms,3=128ms,4=250ms,5=500ms
+// 6=1 sec,7=2 sec, 8=4 sec, 9= 8sec
+void setup_watchdog(int ii) {
+
+ byte bb;
+ int ww;
+ if (ii > 9 ) ii=9;
+ bb=ii & 7;
+ if (ii > 7) bb|= (1<<5);
+ bb|= (1<<WDCE);
+ ww=bb;
+ Serial.println(ww);
+
+
+ MCUSR &= ~(1<<WDRF);
+ // start timed sequence
+ WDTCSR |= (1<<WDCE) | (1<<WDE);
+ // set new watchdog timeout value
+ WDTCSR = bb;
+ WDTCSR |= _BV(WDIE);
+
+}
+//****************************************************************
+// Watchdog Interrupt Service / is executed when  watchdog timed out
+ISR(WDT_vect) {
+ f_wdt=1;  // set global flag
+}
+
+
+

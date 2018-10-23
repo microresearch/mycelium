@@ -1,0 +1,140 @@
+
+#include <avr/sleep.h>
+#include <avr/wdt.h>
+
+int led;
+int motor;   //TODO! Testing value
+
+long timePointer1;
+long n;
+bool awake;
+bool menuOn;
+
+void setup() {
+  wdt_disable();
+  
+  attachInterrupt(0, interruptFunction, RISING);  //Digital Pin 2
+  pinMode(led,OUTPUT);
+  led=13;
+  motor=12;
+  timePointer1=0;
+  n=0;
+  awake=0;
+  menuOn=1;
+  Serial.begin(9600);
+  Serial.print("Setup ");
+  Serial.println();
+  Serial.end();
+}
+
+void loop() {
+  
+  if((digitalRead(2)==HIGH || menuOn==1)&&awake==0){   //Menu
+    menuOn=0;
+    Serial.begin(9600);
+    Serial.println("Menu ");
+    Serial.end();
+    delay(500);
+    
+  }
+  if(digitalRead(2)==LOW && awake==1 ){   //Time controlled event
+    
+    watering();
+    
+  }
+  if(digitalRead(2)==LOW){  //Test State
+    Serial.begin(9600);
+    Serial.println("Power LOW");
+    Serial.end();
+  }
+  if(digitalRead(2)==HIGH){  //Test State
+    Serial.begin(9600);
+    Serial.println("Power HIGH");
+    Serial.end();
+    attachInterrupt(0, interruptFunction, RISING);
+  }
+  if(awake==1){   //Test Blink
+    Serial.begin(9600);
+    Serial.println("Awake");
+    Serial.end();
+  }
+
+  if(awake==0 && digitalRead(2)==LOW){
+    longDelayWDT(40);
+  }
+  
+}
+
+void interruptFunction(){
+  
+  sleep_disable();
+  detachInterrupt(0);   //turns Interrupts off
+  Serial.begin(9600);
+    Serial.println("Interrupt");
+    Serial.end();
+}
+
+ISR(WDT_vect){
+  wdt_disable();    //TODO: should it be in the code?
+  //MCUSR=0; //clear WDT flag (optional)
+}
+
+void delayWDT(byte timer){
+  sleep_enable();
+  set_sleep_mode(SLEEP_MODE_PWR_DOWN);
+  ADCSRA &= ~(1<<ADEN);
+  wdt_enable(timer);
+  WDTCSR = (1 <<WDIE) | (0<<WDE);   //Interrupt Enable, Reset Disable
+
+  wdt_reset();
+  sleep_cpu();
+  sleep_disable();
+  ADCSRA |= (1<<ADEN);
+}
+
+void longDelayWDT(long t){
+  //t in seconds
+  
+  n=(long)(t/8);    //To be added later
+
+  //n=5;  //Testing value. To be removed
+  
+  if(timePointer1>=n){
+    Serial.begin(9600);
+    Serial.println("Restarting queue");
+    //Serial.println(timePointer1);
+    Serial.end();
+    
+    timePointer1=0;
+    awake=1;
+  }
+  if(timePointer1<n && awake==0){
+    
+
+    Serial.begin(9600);
+    Serial.print("TimePointer: ");
+    Serial.println(timePointer1);
+    Serial.end();
+    
+    timePointer1++;
+    
+    delayWDT(WDTO_8S);  //Testing Value: TODO Change to 8s
+  }
+  
+}
+
+void watering(){
+  long t;
+  
+ 
+  
+  digitalWrite(motor,HIGH);
+  delay(t*1000);
+  digitalWrite(motor,LOW);
+
+  Serial.begin(9600);
+  Serial.print("Watering");
+  Serial.println();
+  Serial.end();
+  awake=0;
+}
