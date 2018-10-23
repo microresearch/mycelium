@@ -2,21 +2,25 @@
 
 port of microbd/SIR for mycelium live coding:
 
-TODO: trim, fix mode, one ADC control, fix speed, port for OCR2B as output and as tonegen
-
 ADC0 is marked ADC_LIGHT
 
 - single ADC in live codes at fixed speed and OCR2B is output!
 - we could also live code FET switch = PB0 inverted! - added instructions to bf code
 
+--- modules->>>
+19- earthboot/620 in - replacement 10P -micro trans  -SOFT: *live code with ADC0 as cpu/plague, ADC3 as input*
+23- replacement caps with ADC in micro trans  -SOFT: *live code with ADC1 as input and ADC0 as mode select*
+
 */
 
 //#define FETADC 1
 #define DEVIATION 8
-#define howmany 16 // how smooth/average?
+#define howmany 1 // how smooth/average?
 #define WHICH 1 // for ADC1 mushroom into fetadc
 
-#define ADC 2
+#define ADC 1
+#define MODE 0
+//#define ADCMODES 1  // for ADC0 as doing switching of modus=cpu and plague - jumps up!
 
 #define F_CPU 16000000UL 
 #define FS 16000 // sample rate
@@ -42,7 +46,7 @@ static uint16_t pitch[howmany];
 uint16_t total=0, average=0, pitchindex;
 
 #define randi() (adcread(ADC)) 
-#define trand ((rand()%255)+(adcread(ADC)&15))
+#define trand ((rand())+(adcread(ADC)&15))
 //#define randi() (incincom())
 #define CELLLEN 16
 #define floor(x) ((int)(x))
@@ -59,10 +63,10 @@ uint16_t total=0, average=0, pitchindex;
 
 signed char insdir,dir; 
 unsigned char modifier,flaggy; 
-unsigned char xxx[MAX_SAM+12];
+unsigned char xxx[MAX_SAM+10];
 //unsigned char incom[255];
 signed char m_stack_pos;
-u8 m_stack[16];
+u8 m_stack[17];
 u8 m_reg8bit1,m_reg8bit2;
 
 #define NOP 0
@@ -94,7 +98,7 @@ u8 m_reg8bit1,m_reg8bit2;
 //unsigned char countt=0;
 
 ISR(TIMER1_COMPA_vect) {
-  static int16_t nsq;
+  static uint16_t nsq;
   static uint8_t nextPwm;
   
   OCR2B = nextPwm;
@@ -102,16 +106,76 @@ ISR(TIMER1_COMPA_vect) {
   nextPwm = synthPeriod * ((nsq++%synthPeriod)/(synthPeriod/2));
 }
 
+// serial stuff
+#ifdef UDR0
+#define UBRRH UBRR0H
+#define UBRRL UBRR0L
+#define UDR UDR0
+
+#define UCSRA UCSR0A
+#define UDRE UDRE0
+#define RXC RXC0
+
+#define UCSRB UCSR0B
+#define RXEN RXEN0
+#define TXEN TXEN0
+#define RXCIE RXCIE0
+
+#define UCSRC UCSR0C
+#define URSEL 
+#define UCSZ0 UCSZ00
+#define UCSZ1 UCSZ01
+#define UCSRC_SELECT 0
+#else
+#define UCSRC_SELECT (1 << URSEL)
+#endif
+
+#define UART_BAUD_CALC(UART_BAUD_RATE,F_OSC) ((F_OSC)/((UART_BAUD_RATE)*16l)-1)
+
+void serial_init(int baudrate){
+  UBRRH = (uint8_t)(UART_BAUD_CALC(baudrate,F_CPU)>>8);
+  UBRRL = (uint8_t)UART_BAUD_CALC(baudrate,F_CPU); /* set baud rate */
+  UCSRB = (1<<RXEN) | (1<<TXEN); /* enable receiver and transmitter */
+  UCSRC |=(3<<UCSZ0);   /* asynchronous 8N1 */
+}
+
+static int uart_putchar(char c, FILE *stream);
+
+static FILE mystdout = FDEV_SETUP_STREAM(uart_putchar, NULL,_FDEV_SETUP_WRITE);
+
+static int uart_putchar(char c, FILE *stream)
+{
+  loop_until_bit_is_set(UCSRA, UDRE);
+  UDR = c;
+  return 0;
+  }
+
+
 
 unsigned char adcread(unsigned char channel){
+  unsigned int ADresult;
   unsigned char result, high;
   ADMUX &= 0xF8; // clear existing channel selection                
   ADMUX |=(channel & 0x07); // set channel/pin
   ADCSRA |= (1 << ADSC);  // Start A2D Conversions 
   loop_until_bit_is_set(ADCSRA, ADIF); /* Wait for ADIF, will happen soon */
-  result=ADCH;
+  ADresult = ADCL;
+  ADresult |= ((int)ADCH) << 8;
+  result=ADresult>>2;
   return result;
 }
+
+unsigned int adcread10(short channel){
+  unsigned int ADresult;
+  ADMUX &= 0xF8; // clear existing channel selection                
+    ADMUX |=(channel & 0x07); // set channel/pin
+  ADCSRA |= (1 << ADSC);  // Start A2D Conversions 
+  loop_until_bit_is_set(ADCSRA, ADIF); /* Wait for ADIF, will happen soon */
+  ADresult = ADCL;
+  ADresult |= ((int)ADCH) << 8;
+  return(ADresult);
+}
+
 
 unsigned char oldone;
 
@@ -175,7 +239,7 @@ void adc_init(void)
 {
 	cbi(ADMUX, REFS1);
 	sbi(ADMUX, REFS0); // AVCC
-	sbi(ADMUX, ADLAR); //8 bits
+	//	sbi(ADMUX, ADLAR); //8 bits
 	sbi(ADCSRA, ADPS2);
 	//	sbi(ADCSRA, ADPS1); // change speed here! now div by 64
 	//	sbi(ADCSRA, ADPS0); // change speed here!
@@ -465,7 +529,7 @@ void runfire(unsigned char* cellies){
     cells=&cellies[MAX_SAM2]; newcells=cellies;
   }      
 
-  u8 sum;
+  u8 sum=0;
   u8 y;
   u8 probB=cellies[0]/32;
   u8 probI=cellies[1]/10;
@@ -1262,7 +1326,7 @@ unsigned char bfbrac1(unsigned char* cells, unsigned char IP){
 }
 
 unsigned char bfbrac2(unsigned char* cells, unsigned char IP){
-  int i;
+  int i=0;
   if(cells[omem] != 0) i = ostack[cycle]-1; 
   cycle--; 
   if(cycle<-1) cycle=20;
@@ -1415,13 +1479,13 @@ unsigned char dirout(unsigned char* cells, unsigned char IP){
 
 unsigned char fetoff(unsigned char* cells, unsigned char IP){
   //    synthPeriod =cells[IP];
-  cbi(PORTB,0); // turn on our FET for TRANSMIT!
+  //  cbi(PORTB,0); // turn on our FET for TRANSMIT!
   return IP+insdir;
 }
 
 unsigned char feton(unsigned char* cells, unsigned char IP){
   //    synthPeriod =cells[IP];
-    sbi(PORTB,0); // turn on our FET for TRANSMIT!
+  //    sbi(PORTB,0); // turn on our FET for TRANSMIT!
 
   return IP+insdir;
 }
@@ -1435,7 +1499,7 @@ void main(void)
   uint16_t deviation, once;
 
   
-  unsigned char cpu, plague, instruction, instructionp;
+  unsigned char cpu=8, plague=0, instruction=0, instructionp=0;
   unsigned int counter=0,counterr=0,othercounter=0;
   unsigned int speed,plaguespeed;
   unsigned char *cells=xxx; 
@@ -1465,10 +1529,15 @@ void main(void)
 
   omem=1;
 
+  // serial
+  serial_init(9600);
+  stdout = &mystdout;
+  printf("TESTING1 9600\r\n");
+  
   adc_init();
   initcell(cells);
   dir=1;
-  cli();//stop interrupts
+  //  cli();//stop interrupts
   
   // do our PWM stuff - our out is PD3
   // RF_EN is on PB0 which we could also live code
@@ -1498,6 +1567,8 @@ void main(void)
 
   instructionp=0; insdir=1; dir=1; btdir=0; dcdir=0;
 
+  uint8_t counterrr=0, mode=0, modus;
+
   while(1){
 
 #ifdef FETADC
@@ -1526,16 +1597,35 @@ void main(void)
     //	cpu=tmp>>4; // 8 CPUs // 6 bits->8 CPUs=3bits - now 4 =16 CPUS TODO!
     //	plague=tmp&15;
     //	if (plague==0) plague=cells[instructionp]>>4;
-	//	cpu=9;
 
-    cpu=2; plague=0; plaguespeed=1;cpuspeed=1; speed=1; // FIXED speeds
+      //      cpu=8; plague=0;
+      plaguespeed=1;cpuspeed=1; speed=1; // FIXED speeds
     
+    // 9 is nice !
+
+    // how many cpu/ how many plague? 16x16=255 so we can freeze of say ADC1
+
+    //    printf("adc8 %d\r\n", adcread(1));
+
+    
+      /*    if (counterrr++>=16){ // might need tweaking but seems to work
+      counterrr=0;
+            if (adcread(MODE)>128){ 
+            	cpu++;
+            	if (cpu>15) cpu=9;
+            }
+    }
+    cpu=1;
+    plague=0;
+      */    
     // plague CPU!
     //    if (count%((IP%32)+1)==0){ // ??? This is where we do speed!
-       		if (++counter>=cpuspeed){
+      cpu=0;
+
+      if (++counter>=cpuspeed){
 	  counter=0;
 	//        if ((counter%(1+cpuspeed))==0){ // ??? This is where we do speed!
-	  //	oldone=instructionp;// TESTY!!!!
+	  //	  oldone=instructionp;// TESTY!!!!
 	  switch(cpu){
 	  case 0:
 	    instruction=cells[instructionp];
@@ -2035,10 +2125,10 @@ break;
 	  //	  OCR0A=255;
 	  //	}
   //  plague=9;
-  if (++othercounter>=plaguespeed){ //was instructionp%step
+    if (++othercounter>=plaguespeed){ //was instructionp%step
     othercounter=0;
-       (*plag[plague])(cells);
-  }
+    //       (*plag[plague])(cells);
+       }
 	    //  }
   }
 }

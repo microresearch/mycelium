@@ -60,7 +60,7 @@ T-tested/done
 
 18- ADC1 in -micro trans -SOFT: *wormed voice with ADC2 as mode*
 
-19- earthboot/620 in -micro trans  -SOFT: *live code with ADC1 as cpu/plague, ADC2 as input*
+19- earthboot/620 in - replacement 10P -micro trans  -SOFT: *live code with ADC2 as cpu/plague, ADC3 as input* -T-
 
 20- 555 raw transmit -04 -T-
 
@@ -68,7 +68,7 @@ T-tested/done
 
 22- replacement/parallel caps with op07 into trans no 3.3V -T-
 
-23- replacement caps with ADC in micro trans  -SOFT: *live code with fixed CPU - 9*
+23- replacement caps with ADC in micro trans  -SOFT: *live code with ADC1 as input and ADC0 as mode select*
 
 24- theremin 04 no 3.3V -T-
 
