@@ -11,8 +11,14 @@
 // ALWAYS REMEMBER SEI()!
 
 // - other options: turn off sd
-// (how), change bits on sd port in between, other low power options,
+// (how), change to high pins on sd port in between, other low power options,
 // clock speed, remove regulator (sd power is probably main thing)...
+
+// further refs: http://www.osbss.com/tutorials/temperature-relative-humidity/
+// https://electronics.stackexchange.com/questions/37173/low-power-micro-sd-card-storage
+// https://github.com/EKMallon/UNO-Breadboard-Datalogger/blob/master/_20160110_UnoBasedDataLogger_v1/_20160110_UnoBasedDataLogger_v1.ino
+
+// this is probably easiest on a serial enable board!
 
 #include <string.h>
 #include <stdio.h>

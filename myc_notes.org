@@ -16,7 +16,7 @@ POWER: +V *AT_TOP* (and now protection diode to put in!), white stripe is GND on
 
 loop through and change livecode, voice params//other data sends
 
-also new kansas and softmodem code in arduino dir to test with SD and ...
+also new kansas and softmodem code in arduino dir to test with SD DONE!
 
 (also AFSK = 1200 bps bits per second /8 = 150 bytes per sec = potential for 150 reads = 0.006 secs max for read = 6mS)
 
@@ -59,10 +59,9 @@ clean up code for 4 variations and also FET codings...
 
 +test sd card read and write/afsk codeDONE+
 
-- +ORDER+DONE: extra 4.5v AAA (x3) holders for performanceX, 
++ORDER+DONE: extra 4.5v AAA (x3) holders for performanceX+
 
-twisted wireX, 4mm circle at end-how thick?-use resistor wire, blocking diode (1n5819)X, mega8X,
-  check all partsX, connectorsX, psu for radios-checkX, bolt 4mm for wires testX
++twisted wireX, 4mm circle at end-how thick?-use resistor wire, blocking diode (1n5819)X, mega8X,  check all partsX, connectorsX, psu for radios-checkX, bolt 4mm for wires testX+
 
 ** modules for linz workshop/labelled - see list also in diary below
 
@@ -647,6 +646,11 @@ installation 17: 4 sets to program
 - disturbers - low level, capacitance, rf and audio through mushrooms, mushroom antennas, white noise, mush caps...
 
 for perf modules with micro: different mushroom modes on one ADC!
+
+** 23/10
+
+- watch ports from arduino and always remember ot set sei()
+- watch other files which get compiles - raw sd has large array
 
 * receivers// with arduino/pi
 

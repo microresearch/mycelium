@@ -241,10 +241,10 @@ void init_all() {
   TIMSK1 = _BV(OCIE1A);  
   synthPeriod=0x80; 
 
-  serial_init(9600);
-  stdout = &mystdout;
+//  serial_init(9600);
+//  stdout = &mystdout;
   adc_init(); 
-  printf("TESTING1 9600\r\n");
+//  printf("TESTING1 9600\r\n");
 
   // how do we set up HIH sensor?
 #ifdef HIH
@@ -368,7 +368,7 @@ void main() {
 	  }
       }
 
-    printf("OPENED");
+//    printf("OPENED");
 #endif
 
     //    sbi(PORTB,0); // !ON! = transmit ON
@@ -430,7 +430,7 @@ void main() {
     THSense();
     value=humN;
     synthEnergy=value*5;
-    printf("TEMP: %d HUM: %d\r\n", tempN, humN);
+//    printf("TEMP: %d HUM: %d\r\n", tempN, humN);
 #endif
 
 #ifdef C02 // sensor on 6 down middle jumper, ADC3
@@ -447,7 +447,7 @@ void main() {
       else      synthEnergy=difference;
       // test this with serial
       //      synthEnergy++;
-      printf("CO2 val: %d lastvalue: %d difference: %d\r\n", vvalue, lastvalue, difference);
+  //    printf("CO2 val: %d lastvalue: %d difference: %d\r\n", vvalue, lastvalue, difference);
        _delay_ms(1000);
 #endif
       
@@ -455,17 +455,35 @@ void main() {
 #ifdef FIVEFIVE // test the 555 - working it seems
       _delay_ms(1000);
     uint32_t fivee=fiver;
-    printf("555 count: %d\r\n", fivee);
+//    printf("555 count: %d\r\n", fivee);
     fiver=0; // zero the 555
 #endif
-    
+
+#ifdef FIVEFIVE_CLICKS // test the 555 - working it seems
+      _delay_ms(100);
+    uint16_t fivee=fiver;
+//    printf("555 count: %d\r\n", fivee);
+
+      uint16_t am=abs(last-fivee);
+      if (am>absmax) {
+	absmax=am;
+      }
+      if (abs(absmax-am)<DEVIATION) { // if we are close to the max
+	clicks=1;
+	value=8;
+      }
+      last=fivee;
+      fiver=0; // zero the 555
+#endif
+
+
 
 #ifdef MAX	
 	// test for MAX31865:
 	//    Serial.print("Temperature = "); Serial.println(max.temperature(RNOMINAL, RREF));
     	tempy=temperature(RNOMINAL, RREF); // this works as long as sd card is in place
     	int temper=(int)(tempy*100.0);
-    	printf("MAX temp %d\r\n", temper);
+//    	printf("MAX temp %d\r\n", temper);
     	value=(int)(temper/100);
 #endif
 
@@ -483,7 +501,7 @@ void main() {
 
     // read as test - this seems to work...
         sd_raw_read(offset, &readbuffer, 1);
-        printf("read back value: %d\r\n", readbuffer);
+//        printf("read back value: %d\r\n", readbuffer);
 	offset++;
         if (offset>SIZEY) offset=0; 
 #endif

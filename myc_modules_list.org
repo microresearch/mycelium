@@ -18,58 +18,58 @@
 
 T-tested/done
 
-1-micro/HIH-humidity SDcard-SOFT: SD, sounds good but not using SD? -T-
+1-micro/HIH-humidity SDcard-SOFT: SD, sounds good but not using SD? *-T-*
 
-2-micro/MAX-temperature SDcard-SOFT: SD, AFSK
+2-micro/MAX-temperature SDcard-SOFT: SD, *AFSK afsk_temp_sd tests*
 
-3-micro/CO2 SDcard -SOFT: SD, GATE, NOTE to put CO2 on ADC1!, kansas
+3-micro/CO2 SDcard -SOFT: SD, GATE, NOTE to put CO2 on ADC1!, *kansas. gate on?*
 
-4-micro/555 in +HIH humidity -SOFT: SD, click transmit
+4-micro/555 in +HIH humidity -SOFT: SD, *clicks transmit - run through sd bits as click, no click TODO*
 
-5-micro/ADC mushroom in -SOFT: GATE, livecode ADC, cpu=9
+5-micro/ADC mushroom in -SOFT: GATE, *gate in livecode. livecode ADC, cpu=9*
 
-6-micro/earthboot620in -SOFT: wormed voice
+6-micro/earthboot620in -SOFT: *wormed voice*
 
 * 04 transmit with:
 
-7-micro/HIH-humidity SDCard-  -SOFT: SD, softmodem
+7-micro/HIH-humidity SDCard-  -SOFT: SD, *softmodem with SD TODO*
 
-8-micro/MAX-temperature -SOFT: wormedvoice
+8-micro/MAX-temperature -SOFT: *wormedvoice*
 
-9-micro/ADC mushroom in -SOFT: livecode
+9-micro/ADC mushroom in -SOFT: *livecode*
 
-10-555->transistor - micro gated?  -SOFT: gate, 555 signal to micro, micro pwm to output, wormedvoice
+10-555->transistor - micro gated?  -SOFT: *gate on 555, 555 signal to micro, micro pwm to output, wormedvoice*
 
-11-555->04 -T-
+11-555->04 *-T-*
 
 * misc - disturbers
 
-12-theremin->transistor - micro gated  -SOFT: gating only - sequenced seconds
+12-theremin->transistor - micro gated  -SOFT: *gating only - sequenced seconds*
 
-13-theremin->04 -T-
+13-theremin->04 *-T-*
 
-14-OP07->transistor (micro gated) -SOFT: gating only - with ADC maybe
+14-OP07->transistor (micro gated) -SOFT: *gating only - with ADC*
 
-15-OP07->04 (no 3.3v, no micro) -T-
+15-OP07->04 (no 3.3v, no micro) *-T-*
 
-16-transmitter with 555/micro source - trans and replacement caps1 - micro gated  -SOFT: gating, 555->micro, pwm, whitenoise
+16-transmitter with 555/micro source - trans and replacement caps1 - micro gated  -SOFT: *gating on 555 deviation, 555->micro, pwm, whitenoise filter*
 
-17-transmitter with 555/micro source -trans and replacement caps2 - micro gated  -SOFT: gating only, 555->micro, pwm, clicks
+17-transmitter with 555/micro source -trans and replacement caps2 - micro gated  -SOFT: *gating-sequenced, 555->micro, pwm, clicks as deviation - myc.c*
 
 * For performance 18-25
 
-18- ADC1 in -micro trans -SOFT: *wormed voice with ADC2 as mode*
+18- ADC1 in -micro trans -SOFT: *wormed voice with ADC1 as input and ADC2 as mode*
 
-19- earthboot/620 in - replacement 10P -micro trans  -SOFT: *live code with ADC2 as cpu/plague, ADC3 as input* -T-
+19- earthboot/620 in - replacement 10P -micro trans  -SOFT: *live code with ADC2 as cpu/plague, ADC3 as input* 
 
-20- 555 raw transmit -04 -T-
+20- 555 raw transmit -04 *-T-*
 
-21- 555 raw transmit -04 -T-
+21- 555 raw transmit -04 *-T-*
 
-22- replacement/parallel caps with op07 into trans no 3.3V -T-
+22- replacement/parallel caps with op07 into trans no 3.3V *-T-*
 
-23- replacement caps with ADC in micro trans  -SOFT: *live code with ADC1 as input and ADC0 as mode select*
+23- replacement caps with ADC in micro trans  -SOFT: *wormed voice with ADC1 as input and ADC0 as mode select*
 
-24- theremin 04 no 3.3V -T-
+24- theremin 04 no 3.3V *-T-*
 
-25- theremin 04 no 3.3V -T-
+25- theremin 04 no 3.3V *-T-*

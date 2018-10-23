@@ -38,8 +38,8 @@
 #define howmany 10
 
 #define WHICH 1 // for ADC1
-#define ADCMODES 1 // this is for ADC2 to select the modus
-
+#define ADCMODES 1 // this is for ADC to select the modus
+#define MODE 2 // ADC for mode
 
 uint8_t synthPeriod, sample, rate, counter, value;
 volatile uint8_t modus;
@@ -390,7 +390,7 @@ void main() {
     counterr++;
 	    if (counterr==16){ // might need tweaking but seems to work
       	    counterr=0;
-      	    if (adcread10(2)>255){ // small changed here for location //adc2 is for mode select
+      	    if (adcread10(MODE)>255){ // small changed here for location //adc2 is for mode select
 	    	location=0;
 		mode++;
 		modus=mode%16; // 16 modes, could be 32
