@@ -25,8 +25,6 @@ F 3 "" H 4350 1950 50  0001 C CNN
 	1    4350 1950
 	1    0    0    -1  
 $EndComp
-Text Notes 4700 2000 0    60   ~ 0
-decouple
 $Comp
 L small_mycelium-rescue:74HC04-Logic_74xx-mycelium_pcb-rescue U1
 U 4 1 5B3D7748
@@ -140,7 +138,7 @@ L small_mycelium-rescue:CONN_01X01-mycelium_pcb-rescue J3
 U 1 1 5B3DEA6D
 P 6450 2850
 F 0 "J3" H 6528 2891 50  0000 L CNN
-F 1 "ANTENNA" H 6528 2800 50  0000 L CNN
+F 1 "transmit antenna" H 6528 2800 50  0000 L CNN
 F 2 "Wire_Pads:SolderWirePad_single_1mmDrill" H 6450 2850 50  0001 C CNN
 F 3 "" H 6450 2850 50  0001 C CNN
 	1    6450 2850
@@ -185,44 +183,44 @@ Wire Wire Line
 $Comp
 L small_mycelium-rescue:Conn_01x02-Connector-mycelium_pcb-rescue J2
 U 1 1 5BBDFC9E
-P 5850 1900
-F 0 "J2" H 5930 1892 50  0000 L CNN
-F 1 "Conn_01x02-Connector" H 5930 1801 50  0000 L CNN
-F 2 "Pin_Headers:Pin_Header_Straight_1x02_Pitch2.54mm" H 5850 1900 50  0001 C CNN
-F 3 "" H 5850 1900 50  0001 C CNN
-	1    5850 1900
+P 5250 1925
+F 0 "J2" H 5330 1917 50  0000 L CNN
+F 1 "4.5 V battery connection" H 5330 1826 50  0000 L CNN
+F 2 "Pin_Headers:Pin_Header_Straight_1x02_Pitch2.54mm" H 5250 1925 50  0001 C CNN
+F 3 "" H 5250 1925 50  0001 C CNN
+	1    5250 1925
 	1    0    0    -1  
 $EndComp
 $Comp
 L small_mycelium-rescue:GND-power-mycelium_pcb-rescue #PWR04
 U 1 1 5BBDFD54
-P 5600 2100
-F 0 "#PWR04" H 5600 1850 50  0001 C CNN
-F 1 "GND" H 5605 1927 50  0000 C CNN
-F 2 "" H 5600 2100 50  0001 C CNN
-F 3 "" H 5600 2100 50  0001 C CNN
-	1    5600 2100
+P 5000 2125
+F 0 "#PWR04" H 5000 1875 50  0001 C CNN
+F 1 "GND" H 5005 1952 50  0000 C CNN
+F 2 "" H 5000 2125 50  0001 C CNN
+F 3 "" H 5000 2125 50  0001 C CNN
+	1    5000 2125
 	1    0    0    -1  
 $EndComp
 $Comp
 L small_mycelium-rescue:VCC-power-mycelium_pcb-rescue #PWR03
 U 1 1 5BBDFD7B
-P 5550 1850
-F 0 "#PWR03" H 5550 1700 50  0001 C CNN
-F 1 "VCC" H 5567 2023 50  0000 C CNN
-F 2 "" H 5550 1850 50  0001 C CNN
-F 3 "" H 5550 1850 50  0001 C CNN
-	1    5550 1850
+P 4950 1875
+F 0 "#PWR03" H 4950 1725 50  0001 C CNN
+F 1 "VCC" H 4967 2048 50  0000 C CNN
+F 2 "" H 4950 1875 50  0001 C CNN
+F 3 "" H 4950 1875 50  0001 C CNN
+	1    4950 1875
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	5550 1850 5550 1900
+	4950 1875 4950 1925
 Wire Wire Line
-	5550 1900 5650 1900
+	4950 1925 5050 1925
 Wire Wire Line
-	5600 2100 5600 2000
+	5000 2125 5000 2025
 Wire Wire Line
-	5600 2000 5650 2000
+	5000 2025 5050 2025
 Wire Wire Line
 	3000 2850 3050 2850
 $Comp
@@ -230,7 +228,7 @@ L small_mycelium-rescue:CONN_01X01-mycelium_pcb-rescue J4
 U 1 1 5BBECDB7
 P 2575 2900
 F 0 "J4" H 2653 2941 50  0000 L CNN
-F 1 "ANTENNA" H 2653 2850 50  0000 L CNN
+F 1 "mushroom antenna" V 2750 2550 50  0000 L CNN
 F 2 "Wire_Pads:SolderWirePad_single_1mmDrill" H 2575 2900 50  0001 C CNN
 F 3 "" H 2575 2900 50  0001 C CNN
 	1    2575 2900
