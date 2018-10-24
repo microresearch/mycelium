@@ -3,7 +3,7 @@
 // on the selected PWM pin.
 //
 
-// 3-micro/CO2 SDcard -SOFT: SD, GATE, NOTE to put CO2 on ADC1!, *kansas. gate on?*
+// 3-micro/CO2 SDcard -SOFT: SD, NO GATE, NOTE to put CO2 on ADC1!, *kansas. gate on?*
 
 //
 
@@ -230,6 +230,7 @@ void main() {
   initall();
   uint8_t value=0;
   uint32_t offset=0, x;
+  sbi(PORTB,0); // turn on FET
   
 #ifdef SDCARD
     while(1){    // outer loop for SD-cardery
@@ -270,7 +271,6 @@ void main() {
     // write a value to SD from xxxx
     // read and send values from SD
 
-	// TODO: read value
 	value=adcread10(ADC)>>2; // 8 bits
 	
     sd_raw_write(offset++, &value, 1);

@@ -22,11 +22,13 @@ T-tested/done
 
 2-micro/MAX-temperature SDcard-SOFT: SD, *AFSK afsk_temp_sd gate on...* *-T-*
 
-3-micro/CO2 SDcard -SOFT: SD, GATE, NOTE to put CO2 on ADC1!, *kansas. gate on?*
+3-micro/CO2 SDcard -SOFT: SD, GATE, NOTE to put CO2 on ADC1!, *kansas. no gate* *-T-*
 
 4-micro/555 in +HIH humidity -SOFT: SD, *clicks transmit - run through sd bits as click, no click* clicks.c with gate on click, adc3 pulse length! *-T-*
 
-5-micro/ADC mushroom in -SOFT: GATE, *gate in livecode. livecode ADC, cpu=9*
+5-micro/ADC mushroom in -SOFT: GATE, *gate in livecode. livecode ADC, cpu=9* *-T-*
+
+///HERE
 
 6-micro/earthboot620in -SOFT: *wormed voice*
 

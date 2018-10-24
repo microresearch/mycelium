@@ -25,15 +25,15 @@ FUSEL = 0xff
 all: $(HEX)
 
 fuse:
-	avrdude -y -c usbasp -p $(MCU_AVRDUDE) -F -U hfuse:w:$(FUSEH):m -U lfuse:w:$(FUSEL):m
+#	avrdude -y -c usbasp -p $(MCU_AVRDUDE) -F -U hfuse:w:$(FUSEH):m -U lfuse:w:$(FUSEL):m
 
 clean:
 	rm -f $(HEX) $(OUT) $(MAP) $(OBJECTS)
 	rm -rf doc/html
 
 flash: $(HEX)
-	avrdude  -y -c usbasp -p $(MCU_AVRDUDE) -U flash:w:$(HEX)
-
+#	avrdude  -y -c usbasp -p $(MCU_AVRDUDE) -U flash:w:$(HEX)
+	 avrdude -y -c stk500v2 -P /dev/ttyACM0 -p $(MCU_AVRDUDE)  -U flash:w:$(HEX)
 $(HEX): $(OUT)
 	$(OBJCOPY) -R .eeprom -O ihex $< $@
 
