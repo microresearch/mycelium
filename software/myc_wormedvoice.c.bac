@@ -1,13 +1,7 @@
 // license:GPL-2.0+
 // copyright-holders: Martin Howse
 
-// simple audio transmission test code - FET is on
-
-// porting in wormed voice to test
-
-// TODO: defines instead of switch, but maybe keep as switch so we can
-// err switch with the mushroom, ranges of our adc and maybe working
-// with differences
+// 18- ADC1 in -micro trans -SOFT: *wormed voice with ADC1 as input and ADC2 as mode*
 
 #include <stdio.h>
 #include <stdint.h>
@@ -32,10 +26,10 @@
 
 #define hih6131w  0x4E  //write mode - 0x27 <<1
 #define hih6131r  0x4F  //read mode
-#define HIH 1
+//#define HIH 
 
 #define CHIRP_SIZE 41
-#define howmany 10
+#define howmany 24
 
 #define WHICH 1 // for ADC1
 #define ADCMODES 1 // this is for ADC to select the modus
@@ -233,6 +227,7 @@ ISR(TIMER1_COMPA_vect) {
 unsigned char humN;
 unsigned char tempN;
 
+#ifdef HIH
 void THSense(void) {
 unsigned char humL;
 unsigned char humH;
@@ -260,8 +255,8 @@ unsigned short temp;
   temp = (temp >> 2);
   humN = (hum/16382.0) * 100;
   tempN = ((temp/16382.0) * 165) - 40;
-
 }
+#endif
 
 void adc_init(void)
 {
@@ -388,25 +383,28 @@ void main() {
 #ifdef ADCMODES
     // we increment modus on touch
     counterr++;
-	    if (counterr==16){ // might need tweaking but seems to work
+	    if (counterr==32){ // might need tweaking but seems to work
       	    counterr=0;
-      	    if (adcread10(MODE)>255){ // small changed here for location //adc2 is for mode select
+      	    if (adcread10(MODE)>912){ // small changed here for location //adc2 is for mode select
 	    	location=0;
 		mode++;
-		modus=mode%16; // 16 modes, could be 32
+		modus=mode&15; // 16 modes, could be 32
       }
     }
 #else
-    modus=3; 
+    modus=0; 
 #endif
 
+    //    modus=4;
+    
     // what are the modes?
     switch(modus){
     case 0: // stopped pitch - tms
     // type of glottal from talkie
       _delay_ms(10);
       sample=adcread10(WHICH)>>2;
-      synthPeriod=128-sample;
+      //      synthPeriod=128-sample;
+      synthPeriod=128-(average>>2);
       break;
     case 1: // continuous pitch - tms
     case 13:
@@ -431,7 +429,7 @@ void main() {
     case 11:
       // wavetable rate
       //      rate=average>>6; // 10 bits >> 6 = 4 bits
-      rate=average;
+      rate=average>>6;
       _delay_ms(10);      
       break;
     case 12: // pulse with 2 params - length of pulse and gap

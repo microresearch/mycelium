@@ -16,9 +16,10 @@ ADC0 is marked ADC_LIGHT
 #define howmany 16 // how smooth/average?
 #define WHICH 1 // for ADC1 mushroom into fetadc
 
-#define ADC 2
+#define ADC 2 // adc for cells input
 
-//#define ADCMODES  // for ADC1 as doing switching of modus=cpu and plague - jumps up!
+#define ADCMODES 1 // for ADC1 as doing switching of modus=cpu and plague - jumps up!
+#define MODES 0 // adc for mode select
 
 #define F_CPU 16000000UL 
 #define FS 16000 // sample rate
@@ -1611,7 +1612,7 @@ void main(void)
     counterrr++;
 	    if (counterrr==16){ // might need tweaking but seems to work
       	    counterrr=0;
-      	    if (adcread10(1)>255){ //adc1 is for mode select
+      	    if (adcread10(MODES)>255){ //adc1 is for mode select
 	      //    	location=0;
 		mode++;
 		modus=mode&255; // 16 modes, could be 32

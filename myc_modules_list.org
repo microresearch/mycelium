@@ -9,7 +9,7 @@
 
 - AFSK, softmodem, kansas, click transmit maybe - with SD!
 - white noise and filter
-- live coding
+- live coding = livecode2 -> we can also have adc for just plague or cpu
 - wormed voice
 - clicks
 - oscillation pulses
@@ -20,11 +20,11 @@ T-tested/done
 
 1-micro/HIH-humidity SDcard-SOFT: SD, sounds good but not using SD? *-T-*
 
-2-micro/MAX-temperature SDcard-SOFT: SD, *AFSK afsk_temp_sd tests*
+2-micro/MAX-temperature SDcard-SOFT: SD, *AFSK afsk_temp_sd gate on...* *-T-*
 
 3-micro/CO2 SDcard -SOFT: SD, GATE, NOTE to put CO2 on ADC1!, *kansas. gate on?*
 
-4-micro/555 in +HIH humidity -SOFT: SD, *clicks transmit - run through sd bits as click, no click TODO*
+4-micro/555 in +HIH humidity -SOFT: SD, *clicks transmit - run through sd bits as click, no click* clicks.c with gate on click, adc3 pulse length! *-T-*
 
 5-micro/ADC mushroom in -SOFT: GATE, *gate in livecode. livecode ADC, cpu=9*
 
@@ -58,9 +58,9 @@ T-tested/done
 
 * For performance 18-25
 
-18- ADC1 in -micro trans -SOFT: *wormed voice with ADC1 as input and ADC2 as mode*
+18- ADC1 in -micro trans -SOFT: *wormed voice with ADC1 as input and ADC2 as mode*  *-T-*
 
-19- earthboot/620 in - replacement 10P -micro trans  -SOFT: *live code with ADC2 as cpu/plague, ADC3 as input* 
+19- earthboot/620 in - replacement 10P -micro trans  -SOFT: *live code with ADC2 as cpu/plague, ADC3 as input*  *-T-*
 
 20- 555 raw transmit -04 *-T-*
 
@@ -68,7 +68,7 @@ T-tested/done
 
 22- replacement/parallel caps with op07 into trans no 3.3V *-T-*
 
-23- replacement caps with ADC in micro trans  -SOFT: *wormed voice with ADC1 as input and ADC0 as mode select*
+23- replacement caps with ADC in micro trans  -SOFT: *live code with ADC1 as input and ADC0 as mode select *-T-*
 
 24- theremin 04 no 3.3V *-T-*
 

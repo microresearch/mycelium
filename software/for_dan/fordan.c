@@ -20,6 +20,11 @@
 
 // this is probably easiest on a serial enable board!
 
+// removed SD card and MAX and we have 5 or 6 mA with sleep, without regulator is really low!
+// without reg and with max and sd we have 5mA with sleep
+
+// is write buffered!?
+
 #include <string.h>
 #include <stdio.h>
 #include <stdint.h>
@@ -43,6 +48,9 @@
 #define sbi(var, mask)   ((var) |= (uint8_t)(1 << mask))
 #define cbi(var, mask)   ((var) &= (uint8_t)~(1 << mask))
 
+#define SD 1
+#define MAX 1
+#define SERIAL 1
 
 const uint32_t SIZEY=2000000000; // 2 GB say
 volatile unsigned char f_wdt=1;
@@ -59,7 +67,28 @@ volatile uint16_t cont;
 */
 
 
+#ifdef UDR0
+#define UBRRH UBRR0H
+#define UBRRL UBRR0L
+#define UDR UDR0
 
+#define UCSRA UCSR0A
+#define UDRE UDRE0
+#define RXC RXC0
+
+#define UCSRB UCSR0B
+#define RXEN RXEN0
+#define TXEN TXEN0
+#define RXCIE RXCIE0
+
+#define UCSRC UCSR0C
+#define URSEL 
+#define UCSZ0 UCSZ00
+#define UCSZ1 UCSZ01
+#define UCSRC_SELECT 0
+#else
+#define UCSRC_SELECT (1 << URSEL)
+#endif
 
 unsigned char rx_buffer[RX_BUFF_LENGTH+2];
 uint8_t rx_count,lenny,flag;
@@ -158,13 +187,11 @@ void delay(int ms){
 	}
 }
 
-/* 
-
 void serial_init(int baudrate){
   UBRRH = (uint8_t)(UART_BAUD_CALC(baudrate,F_CPU)>>8);
-  UBRRL = (uint8_t)UART_BAUD_CALC(baudrate,F_CPU);
-  UCSRB = (1<<RXEN) | (1<<TXEN);
-  UCSRC |=(3<<UCSZ0);  
+  UBRRL = (uint8_t)UART_BAUD_CALC(baudrate,F_CPU); /* set baud rate */
+  UCSRB = (1<<RXEN) | (1<<TXEN); /* enable receiver and transmitter */
+  UCSRC |=(3<<UCSZ0);   /* asynchronous 8N1 */
 }
 
 static int uart_putchar(char c, FILE *stream);
@@ -178,7 +205,6 @@ static int uart_putchar(char c, FILE *stream)
   return 0;
   }
 
-*/
 
 void init_all() {
   //  wdt_disable();
@@ -188,12 +214,15 @@ void init_all() {
 //  DDRD=0x08;  // PD3 (TX?)
 //  DDRB|=0x01; // PB0 and for SD card  
 
-
-  //  serial_init(9600);
-  //  stdout = &mystdout;
-  //  printf("TESTING1 9600\r\n");
-
+#ifdef SERIAL
+  serial_init(9600);
+  stdout = &mystdout;
+  printf("reset\r\n");
+#endif
+  
+#ifdef MAX
   MAX31865_init(MAX31865_2WIRE);
+#endif
 }
 
 void main() {
@@ -214,8 +243,8 @@ void main() {
   //  TCCR2B=(0<<7)|(0<<6)|(0<<5)|(0<<4)|(0<<3)|(1<<2)|(1<<1)|(1<<0);
   //  TIMSK2=(0<<2)|(0<<1)|(1<<0);
 
-  
-    while(1){    // outer loop for SD-cardery
+#ifdef SD 
+      while(1){    // outer loop for SD-cardery
   // init sd card
     if(!sd_raw_init())
       {
@@ -293,7 +322,7 @@ void main() {
 	}
 
       int32_t offset=0;
-
+#endif
       
     while(1){
 
@@ -316,13 +345,18 @@ void main() {
       */
       // test for MAX31865:
 	//    Serial.print("Temperature = "); Serial.println(max.temperature(RNOMINAL, RREF));
-            tempy=temperature(RNOMINAL, RREF); // this works as long as sd card is in place
+#ifdef MAX
+      tempy=temperature(RNOMINAL, RREF); // this works as long as sd card is in place
+#endif
       //   tempy=0.01f;
 	//	printf("%f\r\n", tempy);
 	    value=(int)(tempy*100.0f);
 	//////////////////////
 	// write value to sd card
       lenny=sprintf(rx_buffer,"%d\n",value); // how to replace sprintf
+#ifdef SERIAL
+      printf("%d\n", value);
+#endif
       /* chptr = (unsigned char *) &tempy;
  rx_buffer[0]=*chptr++;
  rx_buffer[1]=*chptr++;
@@ -337,7 +371,7 @@ void main() {
       
  //	rx_buffer[lenny+1]=0;
       // lenny=7;
- 
+#ifdef SD 
 	if(!fat_seek_file(fd, &offset, FAT_SEEK_SET))
 	    {
 	      fat_close_file(fd);
@@ -359,6 +393,10 @@ void main() {
 	  offset+=lenny; lenny=0;
 	  ///////
 	  delayWDT(WDTO_8S);  //Testing Value: TODO Change to 8s
+	  delayWDT(WDTO_8S);  //Testing Value: TODO Change to 8s
+	  delayWDT(WDTO_8S);  //Testing Value: TODO Change to 8s
+	  delayWDT(WDTO_8S);  //Testing Value: TODO Change to 8s
+	  delayWDT(WDTO_8S);  //Testing Value: TODO Change to 8s
 
 	  ////////////
     }
@@ -367,7 +405,9 @@ void main() {
      
     fat_close(fs);
     partition_close(partition);
-
-  }
+#else
+    delayWDT(WDTO_8S);  //Testing Value: TODO Change to 8s
+#endif
+      }
   return 0;
 }

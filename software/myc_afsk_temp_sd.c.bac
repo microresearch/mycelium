@@ -2,9 +2,8 @@
 // copyright-holders: Martin Howse
 
 // loop and replay sd card values
-// writes every second a value (2 bytes)
 
-// but sd card cannot be read in such a fast interrupt so we buffer, but we don't have enough memory
+// 2-micro/MAX-temperature SDcard-SOFT: SD, *AFSK afsk_temp_sd gate on...* *-T-*
 
 //////////////////////////////////////////////////////////////////////////
 
@@ -23,10 +22,10 @@
 // define sensors: 
 //#define FIVEFIVE 1
 //#define HIH 1
-//#define MAX 1
+#define MAX 1
 //#define C02 1
 //#define AD620 1 // can be from earthboot or from mushroom
-#define ADC 1 // which ones? - just to test SD in this case
+//#define ADC 1 // which ones? - just to test SD in this case
 //#define AD5933 1 // or we seperate that out in other file as code is quite long
 
 // define audio mode:
@@ -129,7 +128,8 @@ inline void buf_put(char c) // not called in interrupt so we can take time
 
 inline void buf_get(char *pc)
 {
-   *pc = *pOut++;              // pick up next char to be returned
+  if (doit==0)   *pc = *pOut++;              // pick up next char to be returned
+  else *pc=*pOut;
    if (pOut >= pEnd){       // end of circular buffer?
         pOut = buf;         // wrap around
 	//	memcpy(buf,wbuf,512);
@@ -257,7 +257,7 @@ void init_all() {
 // PB1 is temp_cs and rest of temp as usual setup MAX31865 (port library)
   
   DDRD=0x08;  // PD3 (TX?)
-  DDRB|=0x01; // PB0 and for SD card  
+  DDRB|=0x03; // PB0 and for SD card  
 
 
   serial_init(9600);
@@ -366,6 +366,8 @@ void main() {
   float tempy;
   uint16_t lastvalue, difference, temper;
   uint32_t cc=0;
+
+  sbi(PORTB,0); // !ON! = transmit ON
   
   init_all();
 
@@ -402,14 +404,12 @@ void main() {
     sei();
     printf("OPENED");
 #endif
-
-    //    sbi(PORTB,0); // !ON! = transmit ON
     
   while(1){
     // turn on and off FET for xx second PB0 
     //    cbi(PORTB,0);
     //    _delay_ms(1000);
-    sbi(PORTB,0); 
+    //    sbi(PORTB,0); 
     //    _delay_ms(1); //!!!!        
     
 
@@ -449,18 +449,38 @@ void main() {
     fiver=0; // zero the 555
 #endif
     
+    //	cbi(PORTB,0); 
 
-#ifdef MAX	
+#ifdef MAX
+	 
 	// test for MAX31865:
 	//    Serial.print("Temperature = "); Serial.println(max.temperature(RNOMINAL, RREF));
-    	tempy=temperature(RNOMINAL, RREF); // this works as long as sd card is in place
+       if (cc++ > 60000){ // our delay
+	 //	 cbi(PORTB,0); 
+	 tempy=temperature(RNOMINAL, RREF); // this works as long as sd card is in place
     	temper=(int)(tempy*100.0);
-	printf("MAX temp %d\r\n", temper);
-    	value=(int)(temper/100);
+		printf("MAX temp %d\r\n", temper);
+	//    	value=(int)(temper/100);
 	// put 2 bytes (low and high) into ring buffer and shift out
 	buf_put(temper&0xff);
 	buf_put((temper>>8)&0xff);	
-       _delay_ms(1000);
+	cc=0;
+       }
+              // deal with doit?
+       if (doit){
+	 cbi(PORTB,0); 
+ //	fill wbuf with whichever chunk we have from sd
+	 chunkcount++;
+	 if (chunkcount>(writecount/256)) chunkcount=0;
+	 if (oldchunk!=chunkcount) {
+	   sd_raw_read(chunkcount*256, buf, 256); // we could speed this up
+	   oldchunk=chunkcount;
+	 }
+	   doit=0;
+	   sbi(PORTB,0); 
+	 //	 sbi(PORTB,0); 
+       }
+
 #endif
 
 #ifdef ADC
@@ -475,13 +495,15 @@ void main() {
 
        // deal with doit?
        if (doit){
-	 doit=0;
 	 //	fill wbuf with whichever chunk we have from sd
+	 cbi(PORTB,0); 
 	 chunkcount++;
 	 if (chunkcount>(writecount/256)) chunkcount=0;
 	 if (oldchunk!=chunkcount) {
 	   sd_raw_read(chunkcount*256, buf, 256); // we could speed this up
 	   oldchunk=chunkcount;
+	 sbi(PORTB,0); 
+	 doit=0;
 	 }
        }
 #endif
