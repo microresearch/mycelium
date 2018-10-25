@@ -15,6 +15,7 @@ ADC0 is marked ADC_LIGHT
 
 5-micro/ADC mushroom in -SOFT: GATE, *gate in adc. livecode ADC, cpu=9*
 
+9-micro/ADC mushroom in -SOFT: *livecode ADC1 - which mode*
 
 */
 
@@ -1631,7 +1632,7 @@ void main(void)
 #endif
     
     cpu=modus>>4; plague=modus&15;
-    cpu=9; plague=0;
+    cpu=9; plague=1;
     
     // plague CPU!
     //    if (count%((IP%32)+1)==0){ // ??? This is where we do speed!

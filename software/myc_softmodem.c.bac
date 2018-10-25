@@ -1,3 +1,7 @@
+// 7-micro/HIH-humidity SDCard-  -SOFT: SD, *softmodem with SD TODO*
+
+// so we need HIH/ SD card and softmodem
+
 #define F_CPU 16000000UL 
 #define FS 16000 // sample rate
 
@@ -12,6 +16,49 @@
 #include <util/delay.h>
 #include <avr/sleep.h>
 #include <avr/wdt.h>
+
+#include "sd_raw.h"
+#include "sd_raw_config.h"
+#include "partition.h"
+#include "i2c_master.h"
+
+#define SDCARD 1
+
+#define hih6131w  0x4E  //write mode - 0x27 <<1
+#define hih6131r  0x4F  //read mode
+
+unsigned char humN;
+unsigned char tempN;
+
+void THSense(void) {
+unsigned char humL;
+unsigned char humH;
+unsigned short hum;
+unsigned char tempL;
+unsigned char tempH;
+unsigned short temp;
+
+ i2c_start(hih6131w);               // measurement request
+  i2c_stop();                             // set stop condition = release bus
+  _delay_ms(200);
+
+  i2c_start(hih6131r);               // set device address and read mode
+
+  humH = i2c_read_ack();                   // read one byte from EEPRO M
+  humL = i2c_read_ack();
+  tempH = i2c_read_ack();
+  tempL = i2c_read_nack();
+  i2c_stop();
+
+  hum = (humH << 8) + humL;
+  temp = (tempH << 8) + tempL;
+  hum = (hum << 2);
+  hum = (hum >> 2);
+  temp = (temp >> 2);
+  humN = (hum/16382.0) * 100;
+  tempN = ((temp/16382.0) * 165) - 40;
+}
+
 
 #define HIGH 1
 #define LOW 0
@@ -291,13 +338,76 @@ size_t modemwrite(const uint8_t *buffer, size_t size)
     return n;
  }
 
- void main(){
-   uint8_t buf[10]="help";
-   uint8_t rr;
-   initall();
-   while(1){
-   rr++;
-     modemwrite(&rr, 1);
+const uint32_t SIZEY=2000000000; // 2 GB say
 
-   }
+
+ void main(){
+   uint8_t value;
+  uint32_t offset=0;
+   initall();
+    i2c_init();
+#ifdef SDCARD
+    while(1){    // outer loop for SD-cardery
+      cli();
+      if(!sd_raw_init())
+      {
+	//	printf("NO raw");
+	continue;
+      }
+
+    struct partition_struct* partition = partition_open(sd_raw_read,
+							sd_raw_read_interval,
+							sd_raw_write,
+							sd_raw_write_interval,
+							0
+							);
+
+    if(!partition)
+      {
+	partition = partition_open(sd_raw_read,
+				   sd_raw_read_interval,
+				   sd_raw_write,
+				   sd_raw_write_interval,
+				   -1
+				   );
+	if(!partition)
+	  {
+	    //	printf("NO part");
+	    continue;          
+	  }
+      }
+    sei();
+    printf("OPENED");
+#endif
+    
+    while(1){
+      
+
+#ifdef SDCARD
+    // write a value to SD from xxxx
+    // read and send values from SD
+
+    
+          THSense();
+          value=humN;
+
+	  sd_raw_write(offset++, &value, 1);
+    if (offset>SIZEY) offset=0;
+    for (uint32_t x=0;x<offset;x++){
+      sd_raw_read(x, &value, 1);
+      //      Send(value);
+      modemwrite(&value, 1);
+    }
+#else
+    value++;
+    modemwrite(&value, 1);    
+#endif
+
+      
+#ifdef SDCARD
+  }
+#endif
+
+    }
+    
  }

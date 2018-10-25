@@ -1,10 +1,14 @@
 // clicks with sd bits on and off - run through sd bits as click, no click - base on kansas
 
-// to be tested with HIH for 
+// 4-micro/555 in +HIH humidity -SOFT: SD, *clicks transmit - run through sd bits as click, no click* clicks.c with gate on click, adc3 pulse length! *-T-*
+
+// 17-transmitter with 555/micro source -trans and replacement caps2 - micro gated  -SOFT: *gating-sequenced, 555->micro, pwm, clicks as deviation - with emp ty signal*
+
 
 // SDCARD
-#define SDCARD 1
-#define HIH 1
+//#define SDCARD 1
+//#define HIH 1
+#define FIVEFIVE 1
 
 #define ADC 2
 #define ADCLLL 3 // adc for pulse length
@@ -62,6 +66,14 @@
 unsigned char humN;
 unsigned char tempN;
 
+#ifdef FIVEFIVE
+uint32_t fiver=0;
+
+ISR (INT0_vect) // this is 555 interrupt counter
+{
+  fiver++;
+}
+#endif
 
 #ifdef HIH
 void THSense(void) {
@@ -136,6 +148,13 @@ void initall() {
   sbi(PORTB,0); // fet on
   
   adc_init();
+#ifdef FIVEFIVE
+  DDRD &= ~(1 << DDD2);     // Clear the PD2 pin
+  PORTD |= (1 << PORTD2);  
+  EICRA |= (1 << ISC00) | (1 << ISC01);    // on rising edge
+  EIMSK |= (1 << INT0);     // Turns on INT0
+  #endif
+  sei();
 }
 
 void Delay1ms() {
@@ -170,6 +189,21 @@ void click(uint8_t value, uint16_t length){
   }
 
 }
+
+void clickpause(uint16_t value){
+  uint16_t x;
+  // go through bit by bit and click
+	  	  sbi(PORTB,0); // fet on
+		  OCR2B=0; // empty signl
+	  	  ourdelay(600);
+	  _delay_ms(1);
+	  OCR2B=0;
+	  for (x=0;x<(value);x++){
+	  _delay_ms(10);
+	  }
+	  	  cbi(PORTB,0); // fet off
+}
+
 
 void main() {
   initall();
@@ -217,18 +251,19 @@ void main() {
 #endif
 
       while(1){
+#ifdef HIH
+	THSense(); // working
+	value=humN;
+#endif
+
 #ifdef SDCARD
     // write a value to SD from xxxx
     // read and send values from SD
 
 	// TODO: read value
 	// for XX this should be HIH
-#ifdef HIH
-	THSense(); // working
-	value=humN;
-#else
-	value=adcread10(0)>>2; // 8 bits
-#endif
+
+	//	value=adcread10(0)>>2; // 8 bits
 	sd_raw_write(offset++, &value, 1);
     if (offset>SIZEY) offset=0;
     for (x=0;x<offset;x++){
@@ -236,12 +271,15 @@ void main() {
       click(value, adcread10(ADCLLL*4)); // send x clicks on and off - length we can vary say with adc!
       }
     _delay_ms(600);
-#else
+#endif
     //    value=adcread10(0)>>2; // 8 bits
-    	THSense();
-	value=humN;
-
-    click(value, 1000); // send x clicks on and off - length we can vary say with adc!
+    //    	THSense();
+    //	value=humN;
+#ifdef FIVEFIVE    
+    uint16_t fivee=fiver;
+    //    value++;
+    clickpause(fivee); 
+    fiver=0; // zero the 555
     _delay_ms(500);
 #endif
       }

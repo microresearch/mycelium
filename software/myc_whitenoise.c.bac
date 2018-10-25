@@ -1,13 +1,9 @@
 // license:GPL-2.0+
 // copyright-holders: Martin Howse
 
-// simple audio transmission test code - FET is on
+// 16-transmitter with 555/micro source - trans and replacement caps1 - micro gated  -SOFT: *gating on 555 deviation, 555->micro, pwm, whitenoise filter*
 
 // testing port of white noise/filtered from MOZZI - DONE
-
-// TODO:
-
-// - test port of wavetable sine/etc but first use from wormed voice
 
 #include <stdio.h>
 #include <stdint.h>
@@ -37,6 +33,13 @@
 #define SHIFTED_1 ((uint8_t) 255)
 
 uint8_t synthPeriod, sample, rate, counter, synthEnergy=128, value; // value is our varying factor
+uint32_t fiver=0;
+
+ISR (INT0_vect) // this is 555 interrupt counter
+{
+  fiver++;
+}
+
 
 //////////////////////////////////////////////////////////////////////////
 
@@ -108,8 +111,6 @@ void delay(int ms){
 	}
 }
 
-uint32_t fiver=0;
-
 void adc_init(void)
 {
   	cbi(ADMUX, REFS1); 
@@ -147,6 +148,11 @@ void init_all() {
   TIMSK1 = _BV(OCIE1A);  
   synthPeriod=0x80; 
   adc_init(); 
+
+  DDRD &= ~(1 << DDD2);     // Clear the PD2 pin
+  PORTD |= (1 << PORTD2);  
+  EICRA |= (1 << ISC00) | (1 << ISC01);    // on rising edge
+  EIMSK |= (1 << INT0);     // Turns on INT0
   
   sei(); // always set
   
@@ -180,9 +186,12 @@ void main() {
     
   while(1){
     // vary values for audio
-    value++;
+    uint16_t fivee=fiver;
+    fiver=0; // zero the 555
+    //    value++;
+    value=fivee;
     if (value>240) value=10;
-    delay(20);
+    delay(1000);
   }
   return 0;
 }

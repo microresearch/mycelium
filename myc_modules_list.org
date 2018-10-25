@@ -32,11 +32,11 @@ T-tested/done
 
 * 04 transmit with:
 
-7-micro/HIH-humidity SDCard-  -SOFT: SD, *softmodem with SD TODO*
+7-micro/HIH-humidity SDCard-  -SOFT: SD, *softmodem with SD TODO* *-T-*
 
 8-micro/MAX-temperature -SOFT: *wormedvoice - mode on ADC3* *-T-*
 
-9-micro/ADC mushroom in -SOFT: *livecode*
+9-micro/ADC mushroom in -SOFT: *livecode ADC1 cpu9 and plague1* *-T-*
 
 10-555->transistor - micro gated?  -SOFT: *gate on 555, 555 signal to micro for gating only* *-T-*
 
@@ -52,9 +52,11 @@ T-tested/done
 
 15-OP07->04 (no 3.3v, no micro) *-T-*
 
-16-transmitter with 555/micro source - trans and replacement caps1 - micro gated  -SOFT: *gating on 555 deviation, 555->micro, pwm, whitenoise filter*
+////
 
-17-transmitter with 555/micro source -trans and replacement caps2 - micro gated  -SOFT: *gating-sequenced, 555->micro, pwm, clicks as deviation - myc.c*
+16-transmitter with 555/micro source - trans and replacement caps1 - micro gated  -SOFT: *no gating, 555->micro, pwm, whitenoise filter* *-T-*
+
+17-transmitter with 555/micro source -trans and replacement caps2 - micro gated  -SOFT: *gating, 555->micro clicks with empty signal* *-T-*
 
 * For performance 18-25
 
