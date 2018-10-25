@@ -12,6 +12,13 @@ POWER: +V *AT_TOP* (and now protection diode to put in!), white stripe is GND on
 
 ** TODO
 
+- plan for workshop and performance
+- more legs
+- test all radio receivers, pair power supply, *own radio/arduino done (x2)* so total 8 receivers
+- waterproofing: pipes fixed (maybe fix volume?), silicon...
+
+** done
+
 - how to work with SD and not just as AFSK - despite slow speed of SD read/write:
 
 loop through and change livecode, voice params//other data sends
@@ -40,12 +47,6 @@ clean up code for 4 variations and also FET codings...
 *check ADC read as 10 bit seems best - fix ADLAR options as in arduino/livecode example*
 
 - new FET code - find lowest and highest or max difference
-
-- plan for workshop and performance
-- test all radio receivers, pair power supply, *own radio/arduino done (x2)* so total 8 receivers
-- waterproofing
-
-** done
 
 +wormed voice with ADC2 as mode select and freeze DONE in arduino test folder+
 
