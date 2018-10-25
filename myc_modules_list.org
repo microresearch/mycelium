@@ -28,29 +28,27 @@ T-tested/done
 
 5-micro/ADC mushroom in -SOFT: GATE, *gate in livecode. livecode ADC, cpu=9* *-T-*
 
-///HERE
-
-6-micro/earthboot620in -SOFT: *wormed voice*
+6-micro/earthboot620in -SOFT: *wormed voice mode=, FET on deviation* *-T-*
 
 * 04 transmit with:
 
 7-micro/HIH-humidity SDCard-  -SOFT: SD, *softmodem with SD TODO*
 
-8-micro/MAX-temperature -SOFT: *wormedvoice*
+8-micro/MAX-temperature -SOFT: *wormedvoice - mode on ADC3* *-T-*
 
 9-micro/ADC mushroom in -SOFT: *livecode*
 
-10-555->transistor - micro gated?  -SOFT: *gate on 555, 555 signal to micro, micro pwm to output, wormedvoice*
+10-555->transistor - micro gated?  -SOFT: *gate on 555, 555 signal to micro for gating only* *-T-*
 
 11-555->04 *-T-*
 
 * misc - disturbers
 
-12-theremin->transistor - micro gated  -SOFT: *gating only - sequenced seconds*
+12-theremin->transistor - micro gated  -SOFT: *gating only - sequenced seconds+adc*  *-T-*
 
 13-theremin->04 *-T-*
 
-14-OP07->transistor (micro gated) -SOFT: *gating only - with ADC*
+14-OP07->transistor (micro gated) -SOFT: *gating only - with ADC/scheme* *-T-*
 
 15-OP07->04 (no 3.3v, no micro) *-T-*
 

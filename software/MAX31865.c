@@ -62,8 +62,8 @@ void MAX31865_release(void){
 
 void MAX31865_comeback(void){
   // give it me
-   SPCR=(1<<SPE)|(1<<MSTR)|(1<<SPR1)|(1<<CPHA); // mode 1 and check prescaler - should be 32 for 500 000 above
-   SPSR=(1<<SPI2X);
+     SPCR=(1<<SPE)|(1<<MSTR)|(1<<SPR1)|(1<<CPHA); // mode 1 and check prescaler - should be 32 for 500 000 above
+  SPSR=1<<SPI2X;
 }
 
 
@@ -71,17 +71,42 @@ void MAX31865_comeback(void){
 uint8_t MAX31865_init(max31865_numwires_t wires){
 
    // Set MOSI, SCK as Output
-  DDRB|=(1<<5)|(1<<3) |(1<<1); // and _CS
+  //  DDRB|=(1<<5)|(1<<3) |(1<<1); // and _CS
+
+  DDRB |= (1 << DDB3);
+  DDRB |= (1 << DDB5);
+  DDRB |= (1 << DDB1); // CS
+  DDRB &= ~(1 << DDB4);
+
+  
   sbi(PORTB,1); // _CS high 
     // Enable SPI, Set as Master
+  //      digitalWrite(SS, HIGH); // we need to do SS stuff to make it work!
+      sbi(PORTB, 2);
+    // When the SS pin is set as OUTPUT, it can be used as
+    // a general purpose output port (it doesn't influence
+    // SPI operations).
+      //    pinMode(SS, OUTPUT);
+      //      sbi(DDRD,
+        DDRB |= (1 << DDB2); // SS
+
+    // Warning: if the SS pin ever becomes a LOW INPUT then SPI
+    // automatically switches to Slave, so the data direction of
+    // the SS pin MUST be kept as OUTPUT.
+    SPCR |= _BV(MSTR);
+    SPCR |= _BV(SPE);
+
+
+  
     // Prescaler: Fosc/16, Enable Interrupts
     //The MOSI, SCK pins are as per ATMega8
-  //  SPCR=(1<<SPE)|(1<<MSTR)|(1<<SPR0)|(1<<CPHA); // mode 1 and check prescaler?
-   SPCR=(1<<SPE)|(1<<MSTR)|(1<<SPR1)|(1<<CPHA); // mode 1 and check prescaler - should be 32 for 500 000 above
+  //    SPCR=(1<<SPE)|(1<<MSTR)|(1<<SPR0)|(1<<CPHA); // mode 1 and check prescaler?
+  SPCR=(1<<SPE)|(1<<MSTR)|(1<<SPR1)|(1<<CPHA); // mode 1 and check prescaler - should be 32 for 500 000 above
    SPSR=(1<<SPI2X);
    // Enable Global Interrupts
-  //  sei();
+   //   sei();
 
+   
   for (uint8_t i=0; i<16; i++) {
     // readRegister8(i);
   }

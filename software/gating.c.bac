@@ -1,0 +1,322 @@
+// license:GPL-2.0+
+// copyright-holders: Martin Howse
+
+// gating only
+
+// 10-555->transistor - micro gated?  -SOFT: *gate on 555, 555 signal to micro for gating only* *-T-*
+// 12-theremin->transistor - micro gated  -SOFT: *gating only - sequenced seconds and with ADC3
+// 14-OP07->transistor (micro gated) -SOFT: *gating only - with ADC/scheme -ADC1 - slower*
+
+#include <stdio.h>
+#include <stdint.h>
+#include <stdlib.h>
+#include <avr/io.h>
+#include <avr/interrupt.h>
+#include <util/delay.h>
+#include <avr/pgmspace.h>
+#include <inttypes.h>
+
+#include "sd_raw.h"
+#include "sd_raw_config.h"
+#include "partition.h"
+#include "i2c_master.h"
+
+#include "MAX31865.h"
+#include "waves.h"
+
+#define BV(bit) (1<<(bit)) // Byte Value => converts bit into a byte value. One at bit location.
+#define cbi(reg, bit) reg &= ~(BV(bit)) // Clears the corresponding bit in register reg
+#define sbi(reg, bit) reg |= (BV(bit))              // Sets the corresponding bit in register reg
+
+#define hih6131w  0x4E  //write mode - 0x27 <<1
+#define hih6131r  0x4F  //read mode
+//#define HIH 
+
+#define CHIRP_SIZE 41
+#define howmany 16
+
+//#define MAX 1
+
+//#define FIVEFIVE 1
+
+#define DEVIATION 32
+
+#define WHICH 1 // for ADC as voice
+
+#define RREF      430.0
+#define RNOMINAL  100.0
+
+#ifdef UDR0
+#define UBRRH UBRR0H
+#define UBRRL UBRR0L
+#define UDR UDR0
+
+#define UCSRA UCSR0A
+#define UDRE UDRE0
+#define RXC RXC0
+
+#define UCSRB UCSR0B
+#define RXEN RXEN0
+#define TXEN TXEN0
+#define RXCIE RXCIE0
+
+#define UCSRC UCSR0C
+#define URSEL 
+#define UCSZ0 UCSZ00
+#define UCSZ1 UCSZ01
+#define UCSRC_SELECT 0
+#else
+#define UCSRC_SELECT (1 << URSEL)
+#endif
+
+
+#define UART_BAUD_CALC(UART_BAUD_RATE,F_OSC) ((F_OSC)/((UART_BAUD_RATE)*16l)-1)
+
+
+uint8_t synthPeriod, sample, rate, counter, value;
+volatile uint8_t modus;
+uint16_t synthEnergy;
+volatile uint16_t location=0;
+
+static uint16_t pitch[howmany];
+static float floatrate;
+uint8_t pitchindex=0;
+uint16_t total=0, average=0;
+uint8_t pulsecounter, pulselength;
+
+uint8_t chirp[CHIRP_SIZE] = {0x00,0x2a,0xd4,0x32,0xb2,0x12,0x25,0x14,0x02,0xe1,0xc5,0x02,0x5f,0x5a,0x05,0x0f,0x26,0xfc,0xa5,0xa5,0xd6,0xdd,0xdc,0xfc,0x25,0x2b,0x22,0x21,0x0f,0xff,0xf8,0xee,0xed,0xef,0xf7,0xf6,0xfa,0x00,0x03,0x02,0x01};// tms
+
+uint8_t glottal_wave[9] = {128, 54, 0, 237, 219, 201, 182, 164, 146};// klatt
+uint8_t impulsive_source[3] = {128,0,250};
+uint8_t rates[16] = {6, 5, 4, 3, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+uint8_t inks[16] =  {1, 1, 1, 1, 1, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5};
+
+#define FS 16384 // sample rate
+
+uint32_t fiver=0;
+
+#ifdef FIVEFIVE
+ISR (INT0_vect) // this is 555 interrupt counter
+{
+  fiver++;
+}
+#endif
+
+
+unsigned char humN;
+unsigned char tempN;
+
+
+void serial_init(int baudrate){
+  UBRRH = (uint8_t)(UART_BAUD_CALC(baudrate,F_CPU)>>8);
+  UBRRL = (uint8_t)UART_BAUD_CALC(baudrate,F_CPU); /* set baud rate */
+  UCSRB = (1<<RXEN) | (1<<TXEN); /* enable receiver and transmitter */
+  UCSRC |=(3<<UCSZ0);   /* asynchronous 8N1 */
+}
+
+static int uart_putchar(char c, FILE *stream);
+
+static FILE mystdout = FDEV_SETUP_STREAM(uart_putchar, NULL,_FDEV_SETUP_WRITE);
+
+static int uart_putchar(char c, FILE *stream)
+{
+  loop_until_bit_is_set(UCSRA, UDRE);
+  UDR = c;
+  return 0;
+  }
+
+
+#ifdef HIH
+void THSense(void) {
+unsigned char humL;
+unsigned char humH;
+unsigned short hum;
+unsigned char tempL;
+unsigned char tempH;
+unsigned short temp;
+
+ i2c_start(hih6131w);               // measurement request
+  i2c_stop();                             // set stop condition = release bus
+  _delay_ms(200);
+
+  i2c_start(hih6131r);               // set device address and read mode
+
+  humH = i2c_read_ack();                   // read one byte from EEPRO M
+  humL = i2c_read_ack();
+  tempH = i2c_read_ack();
+  tempL = i2c_read_nack();
+  i2c_stop();
+
+  hum = (humH << 8) + humL;
+  temp = (tempH << 8) + tempL;
+  hum = (hum << 2);
+  hum = (hum >> 2);
+  temp = (temp >> 2);
+  humN = (hum/16382.0) * 100;
+  tempN = ((temp/16382.0) * 165) - 40;
+}
+#endif
+
+void adc_init(void)
+{
+  	cbi(ADMUX, REFS1); 
+	sbi(ADMUX, REFS0); // AVCC
+	//	sbi(ADMUX, ADLAR); //8 bits
+	sbi(ADCSRA, ADPS2);
+	//	sbi(ADCSRA, ADPS1); // change speed here! now div by 64
+	//	sbi(ADCSRA, ADPS0); // change speed here!
+
+	sbi(ADCSRA, ADEN);
+	DDRC = 0x00;
+	PORTC = 0x00;
+	// settle on 10 bits
+}
+
+void init_all() {
+
+  counter=1;
+
+  // outputs
+  
+  //  pinMode(3,OUTPUT); //  output for OCR2B - on atmega would be = PD3 OC2B - pin 1
+  //  pinMode(11, OUTPUT); //  output for OCR2A = PB3 OC2A - pin 15
+
+  DDRD=0x08;  // PD3
+  DDRB=0x09; // PB3  // PB1 is temp CS
+  sbi(PORTB,0);
+  // three inputs? one is pitch, bottom one is algo, one is ????
+  adc_init();
+  // clear pitches
+  uint8_t xx;
+  for (xx=0;xx<howmany;xx++){
+    pitch[xx]=0;
+  }  
+
+  // set up FET for transmit ON!
+
+  //  sbi(DDRB,0);
+  //  sbi(PORTB,0);  // FET is on!PB0
+
+#ifdef HIH
+    i2c_init();
+#endif
+    serial_init(9600);
+    stdout = &mystdout;
+    printf("TESTING1 9600\r\n");
+
+#ifdef MAX   // for MAX31865
+    MAX31865_init(MAX31865_2WIRE);
+#endif
+
+  // 555 is on INT0 - set up here - we don't need pullup as we have on board...
+#ifdef FIVEFIVE
+        DDRD &= ~(1 << DDD2);     // Clear the PD2 pin
+    PORTD |= (1 << PORTD2);  
+  EICRA |= (1 << ISC00) | (1 << ISC01);    // on rising edge
+  EIMSK |= (1 << INT0);     // Turns on INT0
+#endif
+  sei();
+}
+
+unsigned char adcread(unsigned char channel){
+  unsigned char result, high;
+  ADMUX &= 0xF8; // clear existing channel selection                
+  ADMUX |=(channel & 0x07); // set channel/pin
+  ADCSRA |= (1 << ADSC);  // Start A2D Conversions 
+  loop_until_bit_is_set(ADCSRA, ADIF); /* Wait for ADIF, will happen soon */
+  result=ADCH;
+  return result;
+}
+
+unsigned int adcread10(short channel){
+  unsigned int ADresult;
+  ADMUX &= 0xF8; // clear existing channel selection                
+    ADMUX |=(channel & 0x07); // set channel/pin
+  ADCSRA |= (1 << ADSC);  // Start A2D Conversions 
+  loop_until_bit_is_set(ADCSRA, ADIF); /* Wait for ADIF, will happen soon */
+  ADresult = ADCL;
+  ADresult |= ((int)ADCH) << 8;
+  return(ADresult);
+}
+
+
+void main() {
+
+  // adcread for adc620 is on ADC2
+  
+  static uint8_t counterr, mode, state=0;
+  static int16_t lastsample, sample, lastmaxed, maxed=0;
+  float tempy;
+  uint16_t temper;
+
+  init_all();
+
+  uint16_t deviation, once;
+  
+  while(1){
+
+    // testing FET switch on deviation from average - and average code for other modes is here now... - TO TEST
+             total-=pitch[pitchindex];
+
+#ifdef MAX
+	     tempy=temperature(RNOMINAL, RREF); // this works as long as sd card is in place
+	     temper=(int)(tempy*100.0)>>1;
+	     //	     printf("temper %d\r\n", temper);
+	     once=temper;
+#endif
+#ifdef FIVEFIVE // test the 555 - working it seems
+      _delay_ms(1000);
+    uint16_t fivee=fiver;
+    once=fivee;
+    fiver=0; // zero the 555
+#endif	     
+    once=adcread10(WHICH);
+    // strategies for switching	     
+    /*
+    pitch[pitchindex]=once;
+    total+=pitch[pitchindex++];
+      if (pitchindex>=howmany) pitchindex=0;
+      average=total/howmany;
+      deviation=abs(once-average);
+      //  printf("555 count: %d once %d dev %d\r\n", fivee, once, deviation);
+            if (deviation>DEVIATION) state^=1;
+    */
+
+    //- scheme for FET: record value, when we reach abs DEVIATION do something (FET or pulse/click) and record new value...
+    /*      deviation=abs(once-average);
+      //  printf("555 count: %d once %d dev %d\r\n", fivee, once, deviation);
+      if (deviation>DEVIATION) {
+	state=1;
+  }
+      if (state==0)   {
+	sbi(PORTB,0);  // FET is on!PB0
+	state=1;
+      }
+      else   {
+	cbi(PORTB,0);  // FET is off
+	state=0;
+      }
+      _delay_ms(100);*/
+      
+    // gated every second on/off
+    state^=1;
+    
+       if (state==1)   sbi(PORTB,0);  // FET is on!PB0
+    else   cbi(PORTB,0);  // FET is off
+       for (uint16_t x=0;x<(1000+(once*8));x++){
+    _delay_ms(1); // or with adc value to give indeterminancy
+  }
+      
+    // for HIH humidity set average as our value
+
+#ifdef HIH    // tests for HIH
+    THSense();
+    value=humN;
+    //    synthEnergy=value*5;
+    //    printf("TEMP: %d HUM: %d\r\n", tempN, humN);
+    //    buf_put(value);
+    average=value;
+#endif
+  }
+}
+

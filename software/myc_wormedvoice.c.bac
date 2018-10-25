@@ -2,6 +2,8 @@
 // copyright-holders: Martin Howse
 
 // 18- ADC1 in -micro trans -SOFT: *wormed voice with ADC1 as input and ADC2 as mode*
+// 6-micro/earthboot620in -SOFT: *wormed voice* - 620 is on ADC2. modus=0, fet on DEVIATION
+//8-micro/MAX-temperature -SOFT: *wormedvoice - mode on ADC3*
 
 #include <stdio.h>
 #include <stdint.h>
@@ -31,9 +33,45 @@
 #define CHIRP_SIZE 41
 #define howmany 24
 
-#define WHICH 1 // for ADC1
+//#define MAX 1
+
+#define FIVEFIVE 1
+
+#define DEVIATION 128
+
+#define WHICH 2 // for ADC as voice
 #define ADCMODES 1 // this is for ADC to select the modus
-#define MODE 2 // ADC for mode
+#define MODE 3 // ADC for mode
+
+#define RREF      430.0
+#define RNOMINAL  100.0
+
+#ifdef UDR0
+#define UBRRH UBRR0H
+#define UBRRL UBRR0L
+#define UDR UDR0
+
+#define UCSRA UCSR0A
+#define UDRE UDRE0
+#define RXC RXC0
+
+#define UCSRB UCSR0B
+#define RXEN RXEN0
+#define TXEN TXEN0
+#define RXCIE RXCIE0
+
+#define UCSRC UCSR0C
+#define URSEL 
+#define UCSZ0 UCSZ00
+#define UCSZ1 UCSZ01
+#define UCSRC_SELECT 0
+#else
+#define UCSRC_SELECT (1 << URSEL)
+#endif
+
+
+#define UART_BAUD_CALC(UART_BAUD_RATE,F_OSC) ((F_OSC)/((UART_BAUD_RATE)*16l)-1)
+
 
 uint8_t synthPeriod, sample, rate, counter, value;
 volatile uint8_t modus;
@@ -54,6 +92,16 @@ uint8_t rates[16] = {6, 5, 4, 3, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
 uint8_t inks[16] =  {1, 1, 1, 1, 1, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5};
 
 #define FS 16384 // sample rate
+
+uint32_t fiver=0;
+
+#ifdef FIVEFIVE
+ISR (INT0_vect) // this is 555 interrupt counter
+{
+  fiver++;
+}
+#endif
+
 
 ISR(TIMER1_COMPA_vect) {
   static uint8_t nextPwm, noisy;
@@ -224,8 +272,29 @@ ISR(TIMER1_COMPA_vect) {
     } // switch
 }
 
+
 unsigned char humN;
 unsigned char tempN;
+
+
+void serial_init(int baudrate){
+  UBRRH = (uint8_t)(UART_BAUD_CALC(baudrate,F_CPU)>>8);
+  UBRRL = (uint8_t)UART_BAUD_CALC(baudrate,F_CPU); /* set baud rate */
+  UCSRB = (1<<RXEN) | (1<<TXEN); /* enable receiver and transmitter */
+  UCSRC |=(3<<UCSZ0);   /* asynchronous 8N1 */
+}
+
+static int uart_putchar(char c, FILE *stream);
+
+static FILE mystdout = FDEV_SETUP_STREAM(uart_putchar, NULL,_FDEV_SETUP_WRITE);
+
+static int uart_putchar(char c, FILE *stream)
+{
+  loop_until_bit_is_set(UCSRA, UDRE);
+  UDR = c;
+  return 0;
+  }
+
 
 #ifdef HIH
 void THSense(void) {
@@ -283,8 +352,8 @@ void init_all() {
   //  pinMode(11, OUTPUT); //  output for OCR2A = PB3 OC2A - pin 15
 
   DDRD=0x08;  // PD3
-  DDRB=0x08; // PB3  
-
+  DDRB=0x08; // PB3  // PB1 is temp CS
+  
   // Timer 2 set up as a 62500Hz PWM.
   //
   TCCR2A = _BV(COM2A1) |_BV(COM2B1) | _BV(WGM21) | _BV(WGM20);
@@ -300,7 +369,6 @@ void init_all() {
   TIMSK1 = _BV(OCIE1A);  
   synthPeriod=0x50; 
   synthEnergy=14;
-  sei();
   // three inputs? one is pitch, bottom one is algo, one is ????
   adc_init();
   // clear pitches
@@ -311,13 +379,30 @@ void init_all() {
 
   // set up FET for transmit ON!
 
-  sbi(DDRB,0);
-  sbi(PORTB,0);  // FET is on!PB0
+  //  sbi(DDRB,0);
+  //  sbi(PORTB,0);  // FET is on!PB0
 
 #ifdef HIH
     i2c_init();
 #endif
-  
+    serial_init(9600);
+    stdout = &mystdout;
+    printf("TESTING1 9600\r\n");
+
+#ifdef MAX   // for MAX31865
+    MAX31865_init(MAX31865_2WIRE);
+#endif
+
+  // 555 is on INT0 - set up here - we don't need pullup as we have on board...
+#ifdef FIVEFIVE
+  EICRA |= (1 << ISC01);    // on rising edge
+  EIMSK |= (1 << INT0);     // Turns on INT0
+#endif
+
+
+    sei();
+
+    
 }
 
 unsigned char adcread(unsigned char channel){
@@ -341,7 +426,6 @@ unsigned int adcread10(short channel){
   return(ADresult);
 }
 
-#define DEVIATION 16
 
 void main() {
 
@@ -349,6 +433,9 @@ void main() {
   
   static uint8_t counterr, mode, state=0;
   static int16_t lastsample, sample, lastmaxed, maxed=0;
+  float tempy;
+  uint16_t temper;
+
   init_all();
 
   uint16_t deviation, once;
@@ -356,8 +443,23 @@ void main() {
   while(1){
 
     // testing FET switch on deviation from average - and average code for other modes is here now... - TO TEST
-         total-=pitch[pitchindex];
-      once=adcread10(WHICH);
+             total-=pitch[pitchindex];
+
+#ifdef MAX
+	     tempy=temperature(RNOMINAL, RREF); // this works as long as sd card is in place
+	     temper=(int)(tempy*100.0)>>1;
+	     //	     printf("temper %d\r\n", temper);
+	     once=temper;
+#else
+#ifdef FIVEFIVE // test the 555 - working it seems
+      _delay_ms(100);
+    uint32_t fivee=fiver;
+    once=fivee;
+    //    printf("555 count: %d\r\n", fivee);
+    fiver=0; // zero the 555
+#endif	     
+	     once=adcread10(WHICH);
+#endif
       pitch[pitchindex]=once;
       total+=pitch[pitchindex++];
       if (pitchindex>=howmany) pitchindex=0;
@@ -365,9 +467,9 @@ void main() {
       deviation=abs(once-average);
       if (deviation>DEVIATION) state^=1;
 
-      if (state==1)   sbi(PORTB,0);  // FET is on!PB0
-      else   cbi(PORTB,0);  // FET is off
-      
+      //              if (state==1)   sbi(PORTB,0);  // FET is on!PB0
+      //	      else   cbi(PORTB,0);  // FET is off
+    
 
     // for HIH humidity set average as our value
 
@@ -383,16 +485,16 @@ void main() {
 #ifdef ADCMODES
     // we increment modus on touch
     counterr++;
-	    if (counterr==32){ // might need tweaking but seems to work
-      	    counterr=0;
-      	    if (adcread10(MODE)>912){ // small changed here for location //adc2 is for mode select
-	    	location=0;
-		mode++;
-		modus=mode&15; // 16 modes, could be 32
+    if (counterr==32){ // might need tweaking but seems to work
+      counterr=0;
+      if (adcread10(MODE)>512){ // small changed here for location //adc2 is for mode select
+	location=0;
+	mode++;
+	modus=mode&15; // 16 modes, could be 32
       }
     }
 #else
-    modus=0; 
+	    modus=14; // best modes=14, 12, 11, 10 low and clikcy, 8, 3
 #endif
 
     //    modus=4;
