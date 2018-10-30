@@ -64,7 +64,7 @@ clean up code for 4 variations and also FET codings...
 
 +twisted wireX, 4mm circle at end-how thick?-use resistor wire, blocking diode (1n5819)X, mega8X,  check all partsX, connectorsX, psu for radios-checkX, bolt 4mm for wires testX+
 
-** modules for linz workshop/labelled - see list also in diary below
+*** modules for linz workshop/labelled - see list also in diary below
 
 1- temp-micro-sd-tran-FET ->2
 2- op07-micro-tran - FET ->14
@@ -76,7 +76,7 @@ clean up code for 4 variations and also FET codings...
 
 now re-labelled as:
 
-** List modules - all built - see myc_modules_list.org
+*** List modules - all built - see myc_modules_list.org
 
 // more with replacement caps, more theremin, antenna into mushroom, audio into mushroom, 
 
@@ -123,13 +123,13 @@ LIST 8: 18/19/20/21/22/23/24/25/
 23- replacement caps with ADC in need micro trans
 24/25- theremin x2 04 no 3.3V
 
-** basic test setup
+*** basic test setup
 
 - micro: sensor in, serial out, fet switching
 - radio: power and signal in, radio tuned
 - sensor: with micro or just signal out (op, 555)
 
-** sound strategies...
+*** sound strategies...
 
 - wormed voice to port...
 - microbd/livecoding
@@ -142,19 +142,19 @@ LIST 8: 18/19/20/21/22/23/24/25/
 
 minimal, what makes most sense: bursts, silence also gated, not so loud transmissions
 
-** moisture testing/sealing
+*** moisture testing/sealing
 
 epoxy, nail varnish, hot glue, dip in resin - silicone rubber type 16, crystal clear modulor...
 
-** reading raw SD for checking
+*** reading raw SD for checking
 
 - once is taped in use myc_sdreader.c TEST!
 
-** C02 sensor - what is kind of base line and range
+*** C02 sensor - what is kind of base line and range
 
 range is maybe 0-60 for differences once has settled down
 
-** older list
+*** older list
 
 transmitters: transistor(switchable), HC04
 
@@ -200,18 +200,27 @@ unplug, reduce volume and all end by circling mushroom with radios (all now so 1
 
 * workshop plan taipei
 
-- introduction and demonstrate slowly bit by bit
+- introduction and demonstrate slowly 
 - each person tries with radio
-- find pairs for mushroom/radio pair - no pairing now, what temporary stations can be formed and re-formed
-
+- random number
 - work through the visual score (printed)
 
-** packing list
+* packing list
 
-- psu for testing, all tools (cutters, iron, solder, multimeter, extra wire, extra copper, copper, wirings for all parts, spares, diodes)
-- all radios and all psu, 2x arduino, cables, psu and radio receiver modules,
+- extra 5v psus for testing, all tools (cutters, iron, solder, multimeter, extra wire, extra copper, copper, wirings for all parts, spares, diodes, batteries)
+- programmer and cable
+- plasticene, glue, hotglue, any extras
+- all radios and all psu, 2x arduino, spare arduino?, cables, psu and radio receiver modules,
+- performance modules, tape batteries, tuning screwdrivers
 - for workshop: printouts, other circuits, extra batteries, radios to get there+open_call!
+- laser, laser pickup, cable, older radio circuits
+- crocodile clips
 
+* museum plan
+
+** test transmitters in museum - tune all radios/blank, tune transmitters
+
+** install in mycelium - test first
 
 * workshop plan linz
 
