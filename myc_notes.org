@@ -13,11 +13,16 @@ POWER: +V *AT_TOP* (and now protection diode to put in!), white stripe is GND on
 ** TODO
 
 - plan for workshop and performance
-- more legs
-- test all radio receivers, pair power supply, *own radio/arduino done (x2)* so total 8 receivers
-- waterproofing: pipes fixed (maybe fix volume?), silicon...
+
+- workshop//perf email out
+
+- waterproofing
 
 ** done
+
+- more legs - we have now: 99 total
+
+- test all radio receivers, pair power supply, *own radio/arduino done (x2)* so total 8 receiver
 
 - how to work with SD and not just as AFSK - despite slow speed of SD read/write:
 
