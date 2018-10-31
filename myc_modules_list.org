@@ -28,11 +28,11 @@ T-tested/done
 
 5-micro/ADC mushroom in -SOFT: GATE, *gate in livecode. livecode ADC, cpu=9* *-T-*
 
-6-micro/earthboot620in -SOFT: *wormed voice mode=, FET on deviation* *-T-*
+6-micro/earthboot620in -SOFT: *wormed voice mode=14, FET on deviation* *-T-*
 
 * 04 transmit with:
 
-7-micro/HIH-humidity SDCard-  -SOFT: SD, *softmodem with SD TODO* *-T-*
+7-micro/HIH-humidity SDCard-  -SOFT: SD, *softmodem with SD* *-T-* *FReq fixed**
 
 8-micro/MAX-temperature -SOFT: *wormedvoice - mode on ADC3* *-T-*
 
@@ -75,3 +75,7 @@ T-tested/done
 24- theremin 04 no 3.3V *-T-*
 
 25- theremin 04 no 3.3V *-T-*
+
+* spare/test
+
+04 transmit with micro and ADC1 - worm voice mode=3

@@ -8,7 +8,7 @@ HEADERS := $(wildcard *.h)
 OBJECTS := $(patsubst %.c,%.o,$(SOURCES))
 
 MCU := atmega168
-MCU_AVRDUDE := m168
+MCU_AVRDUDE := m168p
 MCU_FREQ := 16000000UL
 
 
@@ -26,7 +26,7 @@ all: $(HEX)
 
 fuse:
 #	avrdude -y -c usbasp -p $(MCU_AVRDUDE) -F -U hfuse:w:$(FUSEH):m -U lfuse:w:$(FUSEL):m
-
+	avrdude -y -c stk500v2 -P /dev/ttyACM0 -p $(MCU_AVRDUDE) -F -U hfuse:w:$(FUSEH):m -U lfuse:w:$(FUSEL):m
 clean:
 	rm -f $(HEX) $(OUT) $(MAP) $(OBJECTS)
 	rm -rf doc/html
