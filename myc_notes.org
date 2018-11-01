@@ -17,7 +17,7 @@ POWER: +V *AT_TOP* (and now protection diode to put in!), white stripe is GND on
 - workshop//perf email out
 
 - waterproofing
-
+  
 ** done
 
 - more legs - we have now: 99 total
@@ -179,18 +179,31 @@ and additional option to always just use micro to switch on/off transmitter eith
 
 [no light option...]
 
-* visual score to taipei
+* visual score to taipei and workshop should follow this
 
-not all 17 have radios, some have mushrooms to manipulate (say 7 mushroom)
+being in a forest
+being a forest
+mycelium beneath and here above
+a forest is connected through the earth
+
+- assign numbers 1-17
+
+[not all 17 have radios, some have mushrooms to manipulate (say 7 mushroom)]
 
 - bare radio, no amp, one person goes in circle with radio
-- others join movement in space, only one radio, how movement effects micro radio space
-- slowly others very low volume switch on radios (tuned already only to one spot which is free, never change tuning)
+- others join movement in space, only one radio, how movement effects micro radio space, keeping a distance
+
+- slowly others very low volume switch on radios (tuned already only to one spot which is free, *never change tuning*)
+
+[we can think some start to walk with mushrooms and transmitters]
+
 - return to start location and plug in, mixer down
 
-- form groupd around mushroom setups
+- form group around mushroom setups
 
 - first performer paired with mushroom person, slow manipulations amplified
+
+[each person has an action. it can be unamplified]
 
 - other join to new score:
 -- mushroom words
@@ -203,27 +216,109 @@ dying down towards mushroom heat/smoke laser end...
 
 unplug, reduce volume and all end by circling mushroom with radios (all now so 17)
 
-* workshop plan taipei
+** email for participants
+
+-intro as above
+
+-to bring: 
+
+FM radio if you have one (otherwise these will be supplied), notebook, pen
+
+a small, portable setup for performing, a few objects, a fragment of a score which connects you personally to mushrooms or mycelial networks 
+
+In the workshop we 
+
+** first emails
+
+In conjunction with Mycelium Network Society exhibition at Taipei
+Biennale, we will hold a workshop and an opening night performance on
+November 16, 2018 at Taipei Fine Arts Museum. 
+
+Artist Martin Howse of MNS will conduct a one-day workshop with local
+sound artists with whom to collectively develop a group performance
+ritual for the audible, electromagnetic, networked, touch, vocal,
+electronic activition launching the local human/mycelial network
+installation of Mycelium Network Society. (http://myceliumNS.net)
+
+Within this open workshop we will build DIY radio receivers and
+sculptural antennae, testing the reception of signals and interfacing
+with open examples of the growing Lingzhi mushrooms. We will learn
+about inter-species communication between humans and mycelium -
+through sound, radio, touch, smell and ingestion.  
+
+During the performance, seventeen workshop artists will play with
+spatially defined radio signals emitted by the Lingzhi mushroom
+molecule installation. Artists will also work with their own
+approaches to handheld Lingzhi fungi which will serve as audio and
+full spectrum instruments. The performance is a collaboration between
+electronic sensibilities and the extra human realms of radio frequency
+and Lingzhi.   Some experience of working with DIY technologies and/or
+other lifeforms, radio or electronics is welcome, but not
+essential. 
+
+We are particularly interested in performers working with matter,
+process and human/non-human vocalisation/voice.  he selected sound
+artists for the opening night performance will be provided an artist
+fee by the museum. The artists are encouraged to join the
+workshop. The workshop is also open to interested artists.  The
+workshop is free and will be facilitated by Martin Howse
+(www.1010.co.uk) and Tsung-Yun Lai 賴宗昀 of 失聲祭 Lacking Sound
+Festival (lsf-taiwan.blogspot.com) Please send us a brief bio and a
+short statement of interest (in Chinese or English) and email to
+Tsung-Yun Lai <lai.tsung.yun@gmail.com>
+
+for opening night performance equipment list -
+
+ 32 channel analogue audio mixer	
+
+ 5 high quality vocal microphones	
+
+ PA - 2xsubs and 4x mid-range D&B or L.Acoustics with all cables	
+ 17x FM radio receivers are to be provided by Artist Martin Howse
+
+During the workshop we will work with the devices/instruments which I
+have designed with the mushrooms (images attached) so that the
+performers know how to work with radio waves, receivers and sound. We
+will try out different techniques, also finding out more about the
+devices and the receivers also and how we can also use mushrooms
+outside the balls/containers during performance. We will also devise a
+score during the workshop so of course not all 17 artists will perform
+at the same time but individually and in smaller groups or
+clusters. It is very much about working with mushroom, devices, hands
+and body and receiver. There will be different phases during the
+performance, some more physical than others, some noisier, some
+working more with received signals, some more with physical sides of
+the mushroom.
+
+
+
+
+* workshop plan taipei see above visual score
 
 - introduction and demonstrate slowly 
 - each person tries with radio
 - random number
 - work through the visual score (printed)
 
-* packing list
+* packing list and TO GET
 
 - extra 5v psus for testing, all tools (cutters, iron, solder, multimeter, extra wire, extra copper, copper, wirings for all parts, spares, diodes, batteries)
 - programmer and cable
 - plasticene, glue, hotglue, any extras
 - all radios and all psu, 2x arduino, spare arduino?, cables, psu and radio receiver modules,
 - performance modules, tape batteries, tuning screwdrivers
-- for workshop: printouts, other circuits, extra batteries, radios to get there+open_call!
+- for workshop: printouts, other circuits, extra batteries, 
 - laser, laser pickup, cable, older radio circuits
-- crocodile clips
+- crocodile clips, older circuits, transistors etc.
+
+TO GET:
+
+- 17 FM radios +open_call!
+- linghzi mushroom and tea
 
 * museum plan
 
-** test transmitters in museum - tune all radios/blank, tune transmitters
+** test transmitters in museum, set out receivers - volume and tune all radios/blank, tune transmitters
 
 ** install in mycelium - test first
 
