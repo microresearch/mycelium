@@ -183,7 +183,7 @@ and additional option to always just use micro to switch on/off transmitter eith
 
 being in a forest
 being a forest
-mycelium beneath and here above
+mycelium beneath and above our heads
 a forest is connected through the earth
 
 - assign numbers 1-17
@@ -218,15 +218,40 @@ unplug, reduce volume and all end by circling mushroom with radios (all now so 1
 
 ** email for participants
 
--intro as above
+Being in a forest.
+Mycelium beneath and above our heads.
+A forest is connected through the earth.
 
--to bring: 
+During the workshop we will collectively develop a group performance
+ritual for the audible, electromagnetic, material and vocal activition
+of the mycelium networked installation. We will work with receivers,
+mushrooms and bodies in space. 
 
-FM radio if you have one (otherwise these will be supplied), notebook, pen
+We will find out how to work with radio waves, receivers and sound. We
+will devise a visual score during the workshop. It is very much about
+working with mushroom, devices, hands and body and receiver. There
+will be different phases during the performance, some more physical
+than others, some noisier, some working more with received signals,
+some more with physical sides of the mushroom.
 
-a small, portable setup for performing, a few objects, a fragment of a score which connects you personally to mushrooms or mycelial networks 
+If you can bring: 
 
-In the workshop we 
+- one FM radio if you have one (otherwise these will be supplied), notebook, pen
+
+- a small portable setup for performing, a few objects, a fragment of
+  a visual score which connects you personally to mushrooms or
+  mycelial networks
+
+Martin
+
+*** materials for the workshop
+
+- sound system and smaller mixer
+- power points
+- audio cables (eg. minijack to full size jack, jack to jack)
+- wire cutters, scissors, pens, large sheets of paper
+
+(SL: growing Linghzi mushroom)
 
 ** first emails
 
@@ -304,6 +329,7 @@ the mushroom.
 
 - extra 5v psus for testing, all tools (cutters, iron, solder, multimeter, extra wire, extra copper, copper, wirings for all parts, spares, diodes, batteries)
 - programmer and cable
+- wire, copper sheets for diy antennas and constructions
 - plasticene, glue, hotglue, any extras
 - all radios and all psu, 2x arduino, spare arduino?, cables, psu and radio receiver modules,
 - performance modules, tape batteries, tuning screwdrivers
