@@ -327,13 +327,18 @@ the mushroom.
 
 * packing list and TO GET
 
-- extra 5v psus for testing, all tools (cutters, iron, solder, multimeter, extra wire, extra copper, copper, wirings for all parts, spares, diodes, batteries)
+- extra 5v psu for testing, all tools (cutters, iron, solder,
+  multimeter, extra wire, extra copper, copper, wirings for all parts,
+  spares, diodes)
+
 - programmer and cable
+
 - wire, copper sheets for diy antennas and constructions
-- plasticene, glue, hotglue, any extras
-- all radios and all psu, 2x arduino, spare arduino?, cables, psu and radio receiver modules,
-- performance modules, tape batteries, tuning screwdrivers
-- for workshop: printouts, other circuits, extra batteries, 
+
+- plasticene, glue, any extras
+- all radios and all psu, cables, psu for arduino and radio receiver modules,
+- performance modules, tuning screwdrivers
+- for workshop: printouts, other circuits, 
 - laser, laser pickup, cable, older radio circuits
 - crocodile clips, older circuits, transistors etc.
 
@@ -341,6 +346,8 @@ TO GET:
 
 - 17 FM radios +open_call!
 - linghzi mushroom and tea
+- hotglue, batteries
+
 
 * museum plan
 
