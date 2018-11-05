@@ -1,6 +1,8 @@
 #include <Wire.h>
 #include "radio.h"
 
+// SDA is A4, SCL is A5
+
 Radio radio;
 
 float start_tune=87.0; // tune to 87

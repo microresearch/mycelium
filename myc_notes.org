@@ -8,6 +8,12 @@ range of both 04 and transistor is full FM 87-107 MHz
 
 POWER: +V *AT_TOP* (and now protection diode to put in!), white stripe is GND on all cables
 
+* for arduino/grive receiver
+
+- RDA5807.ino
+- SDA is A4, SCL is A5
+
+
 * TODO and type of mycel radio modules
 
 ** TODO
@@ -329,7 +335,7 @@ the mushroom.
 
 - extra 5v psu for testing, all tools (cutters, iron, solder,
   multimeter, extra wire, extra copper, copper, wirings for all parts,
-  spares, diodes)
+  diodes)
 
 - programmer and cable
 
@@ -338,9 +344,9 @@ the mushroom.
 - plasticene, glue, any extras
 - all radios and all psu, cables, psu for arduino and radio receiver modules,
 - performance modules, tuning screwdrivers
-- for workshop: printouts, other circuits, 
-- laser, laser pickup, cable, older radio circuits
-- crocodile clips, older circuits, transistors etc.
+*- laser, laser pickup, cable*
+- older radio circuits
+- crocodile clips, transistors
 
 TO GET:
 
