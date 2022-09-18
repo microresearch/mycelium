@@ -8,7 +8,7 @@ range of both 04 and transistor is full FM 87-107 MHz
 
 POWER: +V *AT_TOP* (and now protection diode to put in!), white stripe is GND on all cables
 
-* for arduino/grive receiver
+* for arduino/grove receiver
 
 - RDA5807.ino
 - SDA is A4, SCL is A5
@@ -19,10 +19,6 @@ POWER: +V *AT_TOP* (and now protection diode to put in!), white stripe is GND on
 ** TODO
 
 - plan for workshop and performance
-
-- workshop//perf email out
-
-- waterproofing
   
 ** done
 
@@ -185,18 +181,60 @@ and additional option to always just use micro to switch on/off transmitter eith
 
 [no light option...]
 
-* visual score to taipei and workshop should follow this
+* workshop/visual score to taipei and workshop should follow this
+
+opening lines:
 
 being in a forest
 being a forest
 mycelium beneath and above our heads
 a forest is connected through the earth
 
-- assign numbers 1-17
+- introduction - brew/drink tea, what is important for each person about mushroom, what they bring
+
+- mushroom concept - network, growth, connection, resilience, concepts and show mushrooms
+
+- performance context and concept
+
+- intro/demo transmission and reception: what kinds of transmitter:
+
+18- ADC1 in -micro trans -SOFT: *wormed voice with ADC1 as input and ADC2 as mode*  
+19- earthboot/620 in - replacement 10P -micro trans  -SOFT: *live code with ADC2 as cpu/plague, ADC3 as input*  
+20- 555 raw transmit -04 
+21- 555 raw transmit -04 
+22- replacement/parallel caps with op07 into trans no 3.3V 
+23- replacement caps with ADC in micro trans  -SOFT: *live code with ADC1 as input and ADC0 as mode select 
+24- theremin 04 no 3.3V 
+25- theremin 04 no 3.3V 
+
+- each person tries with radio, multiple transmitters
+
+- LUNCH
+
+- building, playing, modifying, copper, body connections
+
+- *rules - no tune, signals, respond*, overrule order
+
+- work through the visual score (drawn/collage/copper). think about workshop as score...
+
+-- mushroom words
+-- mushroom voice
+-- mushroom noise
+
+- *each person has an action. it can be unamplified*
+
+** score
+
+opening lines:
+
+being in a forest
+being a forest
+mycelium beneath and above our heads
+a forest is connected through the earth
 
 [not all 17 have radios, some have mushrooms to manipulate (say 7 mushroom)]
 
-- bare radio, no amp, one person goes in circle with radio
+- begin - bare radio, no amp, one person goes in circle with radio
 - others join movement in space, only one radio, how movement effects micro radio space, keeping a distance
 
 - slowly others very low volume switch on radios (tuned already only to one spot which is free, *never change tuning*)
@@ -207,9 +245,9 @@ a forest is connected through the earth
 
 - form group around mushroom setups
 
-- first performer paired with mushroom person, slow manipulations amplified
+[- first performer paired with mushroom person, slow manipulations amplified]
 
-[each person has an action. it can be unamplified]
+- *each person has an action. it can be unamplified*
 
 - other join to new score:
 -- mushroom words
@@ -323,13 +361,6 @@ the mushroom.
 
 
 
-
-* workshop plan taipei see above visual score
-
-- introduction and demonstrate slowly 
-- each person tries with radio
-- random number
-- work through the visual score (printed)
 
 * packing list and TO GET
 
